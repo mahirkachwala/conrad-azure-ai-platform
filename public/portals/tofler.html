@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tofler - Financial Intelligence & Business Analytics</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+    }
+    
+    .tofler-header {
+      background: #fff;
+      border-bottom: 3px solid #6366f1;
+      padding: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .header-flex {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .brand h1 {
+      font-size: 36px;
+      color: #6366f1;
+      font-weight: 800;
+    }
+    
+    .brand p {
+      font-size: 14px;
+      color: #6c757d;
+      margin-top: 4px;
+    }
+    
+    .top-nav {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .top-nav a {
+      color: #495057;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+    
+    .top-nav a:hover {
+      background: #e9ecef;
+      color: #6366f1;
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+    
+    .search-section {
+      background: white;
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 35px;
+    }
+    
+    .section-header {
+      color: #6366f1;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+    
+    .filter-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .field-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .field-wrapper label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 8px;
+    }
+    
+    .field-wrapper input, .field-wrapper select {
+      padding: 12px;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    .field-wrapper input:focus, .field-wrapper select:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+    
+    .btn-financial {
+      background: #6366f1;
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-financial:hover {
+      background: #4f46e5;
+    }
+    
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 25px;
+    }
+    
+    .financial-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-left: 5px solid #6366f1;
+      transition: all 0.3s;
+    }
+    
+    .financial-card:hover {
+      box-shadow: 0 4px 16px rgba(99,102,241,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .company-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    
+    .company-name-fin {
+      font-size: 22px;
+      font-weight: 700;
+      color: #212529;
+    }
+    
+    .fin-rating {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    
+    .financial-metrics {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 18px;
+    }
+    
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+    
+    .metric-key {
+      font-size: 14px;
+      color: #6c757d;
+      font-weight: 500;
+    }
+    
+    .metric-val {
+      font-size: 15px;
+      color: #212529;
+      font-weight: 700;
+    }
+    
+    .financial-flags {
+      margin-top: 15px;
+      padding: 12px;
+      background: #fff3cd;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #856404;
+    }
+    
+    .footer-tofler {
+      background: #212529;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px;
+    }
+    
+    .no-items {
+      text-align: center;
+      padding: 60px;
+      color: #adb5bd;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tofler-header">
+    <div class="header-flex">
+      <div class="brand">
+        <h1>💼 Tofler</h1>
+        <p>Financial Intelligence & Business Data Platform</p>
+      </div>
+      <div class="top-nav">
+        <a href="/">Home</a>
+        <a href="/chat.html">AI Chat</a>
+        <a href="/companies.html">Companies</a>
+        <a href="/portals/zauba.html">Zauba Analytics</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="search-section">
+      <h2 class="section-header">📊 Financial Data Search</h2>
+      <form id="search-form">
+        <div class="filter-row">
+          <div class="field-wrapper">
+            <label>Company Search</label>
+            <input type="text" id="company-search" placeholder="Company name...">
+          </div>
+          <div class="field-wrapper">
+            <label>Payment History</label>
+            <select id="payment-filter">
+              <option value="">All Payment Records</option>
+              <option value="good">Good (≥90%)</option>
+              <option value="average">Average (70-89%)</option>
+              <option value="poor">Poor (<70%)</option>
+            </select>
+          </div>
+          <div class="field-wrapper">
+            <label>Minimum Avg Tender Value (₹)</label>
+            <input type="number" id="min-tender-value" placeholder="e.g., 1000000">
+          </div>
+          <div class="field-wrapper">
+            <button type="submit" class="btn-financial">Search Financials</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="results">
+      <h2 style="color: #6366f1; margin-bottom: 25px; font-weight: 700;">Financial Records (<span id="record-count">0</span>)</h2>
+      <div class="results-grid" id="results-grid">
+        <p class="no-items">Search companies to view financial intelligence</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-tofler">
+    <p style="font-size: 16px; font-weight: 600;">Tofler - Financial Intelligence Platform</p>
+    <p style="margin-top: 8px; font-size: 13px; opacity: 0.85;">Powered by MCA & Financial Data | Demo Portal © 2025</p>
+  </div>
+
+  <script>
+    let companies = [];
+
+    fetch('/data/companies.json')
+      .then(res => res.json())
+      .then(data => {
+        companies = data;
+        renderResults(companies);
+      });
+
+    function renderResults(list) {
+      const grid = document.getElementById('results-grid');
+      const count = document.getElementById('record-count');
+      
+      count.textContent = list.length;
+
+      if (list.length === 0) {
+        grid.innerHTML = '<p class="no-items">No financial records found</p>';
+        return;
+      }
+
+      grid.innerHTML = list.map(company => {
+        const paymentPercent = parseInt(company.payment_history.replace('%', '')) || 0;
+        return `
+          <div class="financial-card">
+            <div class="company-top">
+              <div class="company-name-fin">${company.name}</div>
+              <div class="fin-rating">${company.financial_rating}</div>
+            </div>
+            <div class="financial-metrics">
+              <div class="metric-row">
+                <span class="metric-key">Average Tender Value</span>
+                <span class="metric-val">₹${company.average_tender_value.toLocaleString('en-IN')}</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-key">Payment History</span>
+                <span class="metric-val">${company.payment_history}</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-key">Typical Discount</span>
+                <span class="metric-val">${company.typical_discount_offered}%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-key">Completion Rate</span>
+                <span class="metric-val">${company.completion_rate}%</span>
+              </div>
+            </div>
+            ${company.red_flags.length > 0 ? `
+              <div class="financial-flags">
+                ⚠️ ${company.red_flags[0]}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const searchTerm = document.getElementById('company-search').value.toLowerCase();
+      const paymentFilter = document.getElementById('payment-filter').value;
+      const minValue = parseFloat(document.getElementById('min-tender-value').value) || 0;
+
+      const filtered = companies.filter(company => {
+        const matchesSearch = !searchTerm || company.name.toLowerCase().includes(searchTerm);
+        
+        const paymentPercent = parseInt(company.payment_history.replace('%', '')) || 0;
+        let matchesPayment = true;
+        if (paymentFilter === 'good') matchesPayment = paymentPercent >= 90;
+        if (paymentFilter === 'average') matchesPayment = paymentPercent >= 70 && paymentPercent < 90;
+        if (paymentFilter === 'poor') matchesPayment = paymentPercent < 70;
+        
+        const matchesValue = company.average_tender_value >= minValue;
+        
+        return matchesSearch && matchesPayment && matchesValue;
+      });
+
+      renderResults(filtered);
+    });
+  </script>
+</body>
+</html>

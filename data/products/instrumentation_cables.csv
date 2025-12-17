@@ -1,0 +1,8 @@
+SKU_ID,Product_Name,Type,Conductor_Material,Conductor_Area_mm2,Voltage_Rating_kV,Insulation,Armoured,No_of_Cores,Temperature_Range,Standard,Unit_Weight_kg_per_km,Unit_Price_per_km,Lead_Time_Days,Description
+CBL009,2C x 4 sqmm Instrumentation Cable,Instrumentation Cable,Copper,4,0.6,PVC,No,2,-10 to 70,IS 1554,45,18000,5,"2 core 4 sq mm copper instrumentation cable PVC insulated 600V for signal transmission"
+CBL020,2C x 10 sqmm Instrumentation Cable,Instrumentation Cable,Copper,10,0.6,PVC,Yes,2,-10 to 70,IS 1554,125,42000,7,"2 core 10 sq mm copper instrumentation cable PVC insulated shielded 600V industrial"
+CBL063,4C x 1 sqmm Instrumentation Cable,Instrumentation Cable,Copper,1,0.6,PVC,Yes,4,-10 to 70,IS 1554,65,24000,5,"4 core 1 sq mm copper instrumentation cable PVC insulated shielded 600V process control"
+CBL073,2C x 6 sqmm Instrumentation Cable,Instrumentation Cable,Copper,6,0.6,PVC,Yes,2,-10 to 70,IS 1554,95,35000,6,"2 core 6 sq mm copper instrumentation cable PVC insulated shielded 600V signal"
+
+
+

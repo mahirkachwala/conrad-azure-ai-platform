@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 Adaptive AI Orchestration | ConRad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-card: #334155;
+      --bg-hover: #475569;
+      --border: #475569;
+      --text: #f8fafc;
+      --text-dim: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --accent-green: #22c55e;
+      --accent-yellow: #eab308;
+      --accent-orange: #f97316;
+      --accent-red: #ef4444;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .app {
+      display: grid;
+      grid-template-columns: 320px 1fr 380px;
+      grid-template-rows: 70px 1fr;
+      height: 100vh;
+      gap: 1px;
+      background: var(--border);
+    }
+    
+    .header {
+      grid-column: 1 / -1;
+      background: var(--bg-panel);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    
+    .logo-text h1 {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .logo-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid var(--accent-green);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-green);
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .btn:hover { transform: translateY(-2px); }
+    
+    /* Left Panel */
+    .panel-left {
+      background: var(--bg-panel);
+      overflow-y: auto;
+      padding: 16px;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-badge {
+      background: var(--bg-card);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      color: var(--accent-cyan);
+    }
+    
+    .source-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .source-card:hover {
+      border-color: var(--accent-cyan);
+      background: var(--bg-hover);
+    }
+    
+    .source-card.active {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+    }
+    
+    .source-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .source-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    
+    .source-icon.portal { background: rgba(59, 130, 246, 0.2); }
+    .source-icon.csv { background: rgba(34, 197, 94, 0.2); }
+    
+    .source-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    
+    .source-info span {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    
+    .source-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .source-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'Fira Code', monospace;
+    }
+    
+    .download-btn {
+      background: var(--bg-hover);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .download-btn:hover {
+      background: var(--accent-cyan);
+      color: white;
+      border-color: var(--accent-cyan);
+    }
+    
+    .portal-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 10px;
+    }
+    
+    .portal-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Center Panel */
+    .panel-center {
+      background: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .workflow-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .workflow-tabs {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .mode-btn {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+    
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: white;
+      border-color: var(--accent-cyan);
+    }
+    
+    .mode-btn:hover:not(.active) {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+    
+    .workflow-tab {
+      padding: 6px 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    
+    .workflow-tab.active {
+      background: var(--bg-card);
+      color: var(--accent-cyan);
+    }
+    
+    .workflow-content {
+      flex: 1;
+      overflow: auto;
+      padding: 16px;
+    }
+    
+    .agent-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .agent-node {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .agent-node.active {
+      border-color: var(--accent-yellow);
+      box-shadow: 0 0 30px rgba(234, 179, 8, 0.2);
+    }
+    
+    .agent-node.completed {
+      border-color: var(--accent-green);
+    }
+    
+    .agent-node.skipped {
+      border-color: #64748b;
+      opacity: 0.5;
+      filter: grayscale(0.8);
+    }
+    
+    .agent-node-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-hover);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .agent-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .agent-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .agent-icon.master { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+    .agent-icon.sales { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .agent-icon.technical { background: linear-gradient(135deg, #eab308, #ca8a04); }
+    .agent-icon.pricing { background: linear-gradient(135deg, #ec4899, #db2777); }
+    
+    .agent-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    
+    .agent-badge {
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--accent-purple);
+      font-weight: 600;
+    }
+    
+    .agent-status {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    
+    .agent-status.waiting { background: var(--bg-card); color: var(--text-muted); }
+    .agent-status.running { background: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); animation: pulse 1s infinite; }
+    .agent-status.completed { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+    .agent-status.skipped { background: rgba(100, 116, 139, 0.2); color: #94a3b8; font-style: italic; }
+    
+    .agent-body {
+      padding: 16px;
+    }
+    
+    .agent-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    
+    .tool-calls {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .tool-call {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .tool-call:hover {
+      border-color: var(--accent-cyan);
+    }
+    
+    .tool-call.completed {
+      border-left: 3px solid var(--accent-green);
+    }
+    
+    .tool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .tool-name {
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+    
+    .tool-time {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-family: 'Fira Code', monospace;
+    }
+    
+    .tool-result {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    
+    .connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+    }
+    
+    .connector-line {
+      width: 2px;
+      height: 30px;
+      background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+      border-radius: 2px;
+    }
+    
+    /* Right Panel */
+    .panel-right {
+      background: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .logs-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .logs-tab {
+      flex: 1;
+      padding: 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    
+    .logs-tab.active {
+      color: var(--accent-cyan);
+      border-bottom-color: var(--accent-cyan);
+    }
+    
+    .logs-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+    }
+    
+    .tab-panel {
+      display: none;
+    }
+    
+    .tab-panel.active {
+      display: block;
+    }
+    
+    .log-entry {
+      padding: 10px;
+      margin-bottom: 6px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      border-left: 3px solid var(--border);
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .log-entry.master { border-left-color: var(--accent-purple); }
+    .log-entry.sales { border-left-color: var(--accent-blue); }
+    .log-entry.technical { border-left-color: var(--accent-yellow); }
+    .log-entry.pricing { border-left-color: var(--accent-pink); }
+    .log-entry.system { border-left-color: var(--text-muted); }
+    .log-entry.tool { border-left-color: var(--accent-cyan); }
+    .log-entry.learn { border-left-color: var(--accent-green); }
+    
+    .log-time {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+    
+    .log-agent {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 3px 0;
+    }
+    
+    .log-message {
+      color: var(--text);
+      line-height: 1.4;
+    }
+    
+    .log-message code {
+      background: var(--bg-hover);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    
+    .metric-value {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    
+    .learning-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    
+    .learning-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .learning-icon {
+      font-size: 20px;
+    }
+    
+    .learning-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .learning-progress {
+      height: 4px;
+      background: var(--bg-hover);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .learning-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      transition: width 0.5s ease;
+    }
+    
+    .learning-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    
+    .back-link {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+      z-index: 100;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .extraction-highlight {
+      animation: highlightPulse 2s ease-in-out;
+    }
+    
+    @keyframes highlightPulse {
+      0%, 100% { background: var(--bg-card); }
+      50% { background: rgba(56, 189, 248, 0.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">🧠</div>
+        <div class="logo-text">
+          <h1>ConRad AI Orchestration</h1>
+          <span>Adaptive Multi-Agent RFP System</span>
+        </div>
+      </div>
+      
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span id="systemStatus">Initializing...</span>
+      </div>
+      
+      <div class="header-actions">
+        <button class="btn btn-secondary" onclick="switchTab('learning')">
+          📚 Learning Status
+        </button>
+        <a href="/" class="btn btn-primary">
+          🏠 Dashboard
+        </a>
+      </div>
+    </header>
+    
+    <aside class="panel-left">
+      <div class="section-header">
+        <div class="section-title">
+          <span>🌐</span> PORTALS
+        </div>
+        <span class="section-badge">3 Active</span>
+      </div>
+      
+      <div id="portalSources"></div>
+      
+      <div class="section-header" style="margin-top: 20px;">
+        <div class="section-title">
+          <span>📊</span> CABLE CSVS
+        </div>
+        <span class="section-badge" id="csvCount">5 Files</span>
+      </div>
+      
+      <div id="csvSources"></div>
+      
+      <div class="section-header" style="margin-top: 20px;">
+        <div class="section-title">
+          <span>🧪</span> PRICING & TESTING
+        </div>
+        <span class="section-badge" id="pricingCount">2 Files</span>
+      </div>
+      
+      <div id="pricingSources">
+        <div class="source-card" style="border-left: 3px solid var(--accent-orange);">
+          <div class="source-header">
+            <div class="source-icon" style="background: rgba(249, 115, 22, 0.2);">📋</div>
+            <div class="source-info">
+              <h4>testing.csv</h4>
+              <span>30 test types with costs</span>
+            </div>
+          </div>
+          <div class="source-status">
+            <span class="source-meta" id="testingStatus">30 tests loaded</span>
+            <a href="/data/testing.csv" download style="color: var(--accent-cyan); font-size: 11px; text-decoration: none;">⬇ Download</a>
+          </div>
+        </div>
+        
+        <div class="source-card" style="border-left: 3px solid var(--accent-yellow);">
+          <div class="source-header">
+            <div class="source-icon" style="background: rgba(234, 179, 8, 0.2);">💰</div>
+            <div class="source-info">
+              <h4>pricing_rules.csv</h4>
+              <span>GST, margins, discounts</span>
+            </div>
+          </div>
+          <div class="source-status">
+            <span class="source-meta">30 rules loaded</span>
+            <a href="/data/pricing_rules.csv" download style="color: var(--accent-cyan); font-size: 11px; text-decoration: none;">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section-header" style="margin-top: 20px;">
+        <div class="section-title">
+          <span>🧠</span> AI MODELS
+        </div>
+      </div>
+      
+      <div id="modelSources">
+        <div class="source-card">
+          <div class="source-header">
+            <div class="source-icon" style="background: rgba(168, 85, 247, 0.2);">🤖</div>
+            <div class="source-info">
+              <h4>Gemini 2.0 Flash</h4>
+              <span>LLM for reasoning & tool calling</span>
+            </div>
+          </div>
+          <div class="source-status">
+            <span class="source-meta">Temperature: 0.2</span>
+            <span style="color: var(--accent-green); font-size: 11px;">● Active</span>
+          </div>
+        </div>
+        
+        <div class="source-card">
+          <div class="source-header">
+            <div class="source-icon" style="background: rgba(6, 182, 212, 0.2);">🔢</div>
+            <div class="source-info">
+              <h4>all-MiniLM-L6-v2</h4>
+              <span>Local embeddings (384-dim)</span>
+            </div>
+          </div>
+          <div class="source-status">
+            <span class="source-meta">HuggingFace Transformers</span>
+            <span style="color: var(--accent-green); font-size: 11px;">● Loaded</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <main class="panel-center">
+      <div class="workflow-header">
+        <div class="section-title">
+          <span>⚡</span> LIVE WORKFLOW
+        </div>
+        <!-- Mode indicator (auto-detected from context) -->
+        <div class="workflow-mode-indicator" id="modeIndicator" style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 10px 16px; background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(168,85,247,0.2)); border-radius: 10px; border: 1px solid rgba(168,85,247,0.4);">
+          <span style="font-size: 20px;" id="modeIcon">🔍</span>
+          <div>
+            <div style="font-weight: 700; font-size: 14px;" id="modeTitle">Search & Discovery Mode</div>
+            <div style="font-size: 11px; color: var(--text-muted);" id="modeDesc">Searching portals using CSV permutations</div>
+          </div>
+        </div>
+        <div class="workflow-tabs">
+          <button class="workflow-tab active" onclick="switchView('flow')">Agent Flow</button>
+          <button class="workflow-tab" onclick="switchView('permutations')">Permutations</button>
+          <button class="workflow-tab" onclick="switchView('langgraph')">LangGraph</button>
+        </div>
+      </div>
+      
+      <div class="workflow-content">
+        <div id="flowView" class="agent-flow">
+          <!-- Master Agent -->
+          <div class="agent-node" id="node-master">
+            <div class="agent-node-header">
+              <div class="agent-title">
+                <div class="agent-icon master">👔</div>
+                <div>
+                  <div class="agent-name">Master Agent</div>
+                  <span class="agent-badge">ORCHESTRATOR</span>
+                </div>
+              </div>
+              <span class="agent-status waiting" id="status-master">Waiting</span>
+            </div>
+            <div class="agent-body">
+              <div class="agent-desc">Orchestrates workflow, prepares context for worker agents, consolidates final response</div>
+              <div class="tool-calls" id="tools-master"></div>
+            </div>
+          </div>
+          
+          <div class="connector"><div class="connector-line"></div></div>
+          
+          <!-- Sales Agent -->
+          <div class="agent-node" id="node-sales">
+            <div class="agent-node-header">
+              <div class="agent-title">
+                <div class="agent-icon sales">📊</div>
+                <div>
+                  <div class="agent-name">Sales Agent</div>
+                  <span class="agent-badge">GEMINI LLM</span>
+                </div>
+              </div>
+              <span class="agent-status waiting" id="status-sales">Waiting</span>
+            </div>
+            <div class="agent-body">
+              <div class="agent-desc">Searches portals using permutations from HT/LT/Control cable CSVs, extracts PDF data</div>
+              <div class="tool-calls" id="tools-sales"></div>
+            </div>
+          </div>
+          
+          <div class="connector"><div class="connector-line"></div></div>
+          
+          <!-- Technical Agent -->
+          <div class="agent-node" id="node-technical">
+            <div class="agent-node-header">
+              <div class="agent-title">
+                <div class="agent-icon technical">🔧</div>
+                <div>
+                  <div class="agent-name">Technical Agent</div>
+                  <span class="agent-badge">GEMINI LLM</span>
+                </div>
+              </div>
+              <span class="agent-status waiting" id="status-technical">Waiting</span>
+            </div>
+            <div class="agent-body">
+              <div class="agent-desc">Semantic SKU matching using local embeddings + AI specification analysis</div>
+              <div class="tool-calls" id="tools-technical"></div>
+            </div>
+          </div>
+          
+          <div class="connector"><div class="connector-line"></div></div>
+          
+          <!-- Pricing Agent -->
+          <div class="agent-node" id="node-pricing">
+            <div class="agent-node-header">
+              <div class="agent-title">
+                <div class="agent-icon pricing">💰</div>
+                <div>
+                  <div class="agent-name">Pricing Agent</div>
+                  <span class="agent-badge">GEMINI LLM</span>
+                </div>
+              </div>
+              <span class="agent-status waiting" id="status-pricing">Waiting</span>
+            </div>
+            <div class="agent-body">
+              <div class="agent-desc">AI-driven quotation with market analysis & competitive pricing</div>
+              <div class="tool-calls" id="tools-pricing"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="permutationsView" style="display: none;">
+          <div id="permutationsContent"></div>
+        </div>
+        
+        <!-- LangGraph Visualization -->
+        <div id="langgraphView" style="display: none;">
+          <div id="langgraphContent">
+            <div class="langgraph-container" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+              <h3 style="color: var(--accent-cyan); margin-bottom: 16px;">📊 LangGraph Workflow</h3>
+              <div id="graphDiagram" style="min-height: 400px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <aside class="panel-right">
+      <div class="logs-tabs">
+        <button class="logs-tab active" onclick="switchTab('logs')">📝 Live Logs</button>
+        <button class="logs-tab" onclick="switchTab('extraction')">📄 PDF Extract</button>
+        <button class="logs-tab" onclick="switchTab('metrics')">📊 Metrics</button>
+        <button class="logs-tab" onclick="switchTab('learning')">🧠 Learning</button>
+      </div>
+      
+      <div class="logs-content">
+        <div class="tab-panel active" id="panel-logs">
+          <div id="logsContainer"></div>
+        </div>
+        
+        <!-- PDF Extraction Panel - Shows dynamic PDF parsing results -->
+        <div class="tab-panel" id="panel-extraction">
+          <div style="padding: 10px; background: linear-gradient(135deg, #1e3a5f, #1e293b); border-radius: 10px; margin-bottom: 12px; border: 1px solid #3b82f6;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="font-size: 18px;">📄</span>
+              <span style="font-weight: 700; color: #38bdf8;">Dynamic PDF Extraction Log</span>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8;">Shows what data was extracted from the actual RFP PDF</div>
+          </div>
+          
+          <div id="extractionContainer">
+            <div class="log-entry system" style="text-align: center; padding: 20px;">
+              <div style="font-size: 24px; margin-bottom: 8px;">📋</div>
+              <div style="color: var(--text-dim);">Click "Proceed with RFP" on any tender to see dynamic PDF extraction</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-panel" id="panel-metrics">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value" id="metric-rfps">0</div>
+              <div class="metric-label">RFPs Analyzed</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metric-match">0%</div>
+              <div class="metric-label">Avg Spec Match</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metric-total">₹0</div>
+              <div class="metric-label">Quotation</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metric-time">0s</div>
+              <div class="metric-label">Total Time</div>
+            </div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="learning-header">
+              <span class="learning-icon">📊</span>
+              <span class="learning-title">Permutations Generated</span>
+            </div>
+            <div class="metric-value" id="metric-perms">0</div>
+          </div>
+        </div>
+        
+        <div class="tab-panel" id="panel-learning">
+          <div class="learning-card">
+            <div class="learning-header">
+              <span class="learning-icon">📚</span>
+              <span class="learning-title">Schema Learning</span>
+            </div>
+            <div class="learning-progress">
+              <div class="learning-bar" id="schema-progress" style="width: 80%"></div>
+            </div>
+            <div class="learning-stats">
+              <span id="schemas-learned">5 schemas</span>
+              <span id="columns-learned">60+ columns</span>
+            </div>
+          </div>
+          
+          <div class="learning-card">
+            <div class="learning-header">
+              <span class="learning-icon">📄</span>
+              <span class="learning-title">Document Learning</span>
+            </div>
+            <div class="learning-progress">
+              <div class="learning-bar" id="doc-progress" style="width: 60%"></div>
+            </div>
+            <div class="learning-stats">
+              <span id="docs-learned">3 templates</span>
+              <span id="sections-learned">12 sections</span>
+            </div>
+          </div>
+          
+          <div class="learning-card">
+            <div class="learning-header">
+              <span class="learning-icon">🔢</span>
+              <span class="learning-title">Embeddings</span>
+            </div>
+            <div class="learning-progress">
+              <div class="learning-bar" id="embed-progress" style="width: 90%"></div>
+            </div>
+            <div class="learning-stats">
+              <span id="domain-terms">50+ domain terms</span>
+              <span id="training-pairs">150+ products indexed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  
+  <a href="/chat.html" class="back-link">💬 AI Chat</a>
+
+<script>
+// Portal data with actual URLs
+const PORTALS = [
+  { id: 'gov', name: 'Government Portal', url: 'https://eprocure.gov.in', icon: '🏛️', count: 20, active: true },
+  { id: 'industrial', name: 'Industrial RFPs', url: 'https://gem.gov.in', icon: '🏭', count: 20, active: true },
+  { id: 'utilities', name: 'Utilities Board', url: 'https://www.ntpc.co.in/en/tenders', icon: '⚡', count: 20, active: true }
+];
+
+// Cable CSVs (actual files used)
+const CSV_FILES = [
+  { name: 'ht_cables.csv', rows: 35, path: '/data/products/ht_cables.csv', type: 'HT Cable', keywords: ['ht', 'high tension', '11kv', '22kv', '33kv'] },
+  { name: 'lt_cables.csv', rows: 56, path: '/data/products/lt_cables.csv', type: 'LT Cable', keywords: ['lt', 'low tension', '1.1kv', 'power cable'] },
+  { name: 'control_cables.csv', rows: 42, path: '/data/products/control_cables.csv', type: 'Control', keywords: ['control'] },
+  { name: 'ehv_cables.csv', rows: 18, path: '/data/products/ehv_cables.csv', type: 'EHV', keywords: ['ehv', 'extra high', '66kv', '110kv', '132kv', '220kv'] },
+  { name: 'instrumentation_cables.csv', rows: 24, path: '/data/products/instrumentation_cables.csv', type: 'Instrumentation', keywords: ['instrument'] }
+];
+
+// Current detected cable type (from URL params or default)
+let currentCableType = 'HT Cable';
+let currentQuery = '';
+
+// Tool definitions
+const TOOLS = {
+  search_portals: { name: 'search_portals', url: '/tool-detail.html?tool=search_portals' },
+  extract_pdf_data: { name: 'extract_pdf_data', url: '/tool-detail.html?tool=extract_pdf_data' },
+  semantic_product_search: { name: 'semantic_product_search', url: '/tool-detail.html?tool=semantic_product_search' },
+  match_specifications: { name: 'match_specifications', url: '/tool-detail.html?tool=match_specifications' },
+  calculate_pricing: { name: 'calculate_pricing', url: '/tool-detail.html?tool=calculate_pricing' }
+};
+
+let workflowRunning = false;
+let startTime = null;
+let permutationsGenerated = [];
+
+// Initialize
+document.addEventListener('DOMContentLoaded', async () => {
+  // Get query params
+  const urlParams = new URLSearchParams(window.location.search);
+  currentQuery = urlParams.get('query') || 'HT cables';
+  const modeParam = urlParams.get('mode') || 'search';
+  const tenderId = urlParams.get('tenderId') || '';
+  
+  // Detect cable type from query
+  currentCableType = detectCableTypeFromQuery(currentQuery);
+  
+  // Set the initial mode based on URL parameter (auto-detected, not toggleable)
+  currentWorkflowMode = modeParam;
+  
+  // Update mode indicator (read-only display)
+  const modeIndicator = document.getElementById('modeIndicator');
+  const modeIcon = document.getElementById('modeIcon');
+  const modeTitle = document.getElementById('modeTitle');
+  const modeDesc = document.getElementById('modeDesc');
+  
+  if (modeParam === 'rfp') {
+    modeIndicator.style.background = 'linear-gradient(135deg, rgba(34,197,94,0.2), rgba(6,182,212,0.2))';
+    modeIndicator.style.borderColor = 'rgba(34,197,94,0.4)';
+    modeIcon.textContent = '📄';
+    modeTitle.textContent = 'RFP Analysis & Quotation Mode';
+    modeDesc.textContent = `Processing ${tenderId || 'selected RFP'} - Technical + Pricing agents active`;
+  } else {
+    modeIndicator.style.background = 'linear-gradient(135deg, rgba(99,102,241,0.2), rgba(168,85,247,0.2))';
+    modeIndicator.style.borderColor = 'rgba(168,85,247,0.4)';
+    modeIcon.textContent = '🔍';
+    modeTitle.textContent = 'Search & Discovery Mode';
+    modeDesc.textContent = `Searching for "${currentQuery}" using CSV permutations`;
+  }
+  
+  renderPortals();
+  renderCSVSources(currentCableType);
+  await loadLearningStatus();
+  await loadTestingDataStatus();
+  
+  // Update agent flow based on mode
+  updateAgentFlowForMode(modeParam);
+  
+  addLog('system', 'SYSTEM', '🚀 Adaptive AI Orchestration initialized');
+  addLog('system', 'SYSTEM', `📋 Mode: <strong>${modeParam === 'search' ? 'Search & Discovery' : 'RFP Proceed'}</strong>`);
+  addLog('system', 'SYSTEM', `📝 Query: <code>${currentQuery}</code>`);
+  
+  if (modeParam === 'search') {
+    addLog('system', 'SYSTEM', `📊 Using CSV: <code>${currentCableType.toLowerCase()}_cables.csv</code>`);
+    addLog('info', 'INFO', '🔍 Search mode: Only Sales & Technical agents active');
+    addLog('info', 'INFO', '💤 Pricing agent: Inactive (used only in RFP Proceed mode)');
+  } else {
+    addLog('system', 'SYSTEM', `📄 RFP: <code>${tenderId || 'Selected from search'}</code>`);
+    addLog('info', 'INFO', '📄 RFP Proceed mode: All agents active');
+    addLog('info', 'INFO', '🧪 Using: testing.csv + pricing_rules.csv for quotation');
+  }
+  
+  // Auto-start workflow after 2 seconds
+  setTimeout(() => {
+    document.getElementById('systemStatus').textContent = 'Running Workflow';
+    runWorkflow(currentCableType, modeParam);
+  }, 2000);
+});
+
+// Detect cable type from query
+function detectCableTypeFromQuery(query) {
+  const q = query.toLowerCase();
+  if (q.includes('control')) return 'Control';
+  if (q.includes('lt') || q.includes('low tension') || q.includes('1.1kv')) return 'LT Cable';
+  if (q.includes('ehv') || q.includes('extra high') || q.includes('66kv') || q.includes('110kv') || q.includes('132kv')) return 'EHV';
+  if (q.includes('instrument')) return 'Instrumentation';
+  // Default to HT if "ht", "high tension", or higher voltages
+  return 'HT Cable';
+}
+
+// Render portals with clickable links
+function renderPortals() {
+  const container = document.getElementById('portalSources');
+  container.innerHTML = PORTALS.map(p => `
+    <div class="source-card ${p.active ? 'active' : ''}">
+      <div class="source-header">
+        <div class="source-icon portal">${p.icon}</div>
+        <div class="source-info">
+          <h4>${p.name}</h4>
+          <a href="${p.url}" target="_blank" class="portal-link">${p.url.replace('https://', '')} ↗</a>
+        </div>
+      </div>
+      <div class="source-status">
+        <span class="source-meta">${p.count} RFPs available</span>
+        <span style="color: ${p.active ? 'var(--accent-green)' : 'var(--text-muted)'}; font-size: 11px;">
+          ${p.active ? '● Active' : '○ Inactive'}
+        </span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Render CSV sources with download buttons and active highlighting
+function renderCSVSources(activeCableType = 'HT Cable') {
+  const container = document.getElementById('csvSources');
+  container.innerHTML = CSV_FILES.map(f => {
+    const isActive = f.type === activeCableType || f.keywords.some(k => activeCableType.toLowerCase().includes(k));
+    return `
+    <div class="source-card ${isActive ? 'active' : ''}" id="csv-${f.type.toLowerCase().replace(' ', '-')}">
+      <div class="source-header">
+        <div class="source-icon csv">${isActive ? '✅' : '📊'}</div>
+        <div class="source-info">
+          <h4>${f.name} ${isActive ? '<span style="color: var(--accent-green); font-size: 10px;">● IN USE</span>' : ''}</h4>
+          <span>${f.rows} products • ${f.type}</span>
+        </div>
+      </div>
+      <div class="source-status">
+        <span class="source-meta">${isActive ? 'Currently generating permutations' : 'Available for search'}</span>
+        <button class="download-btn" onclick="downloadFile('${f.path}', '${f.name}')">
+          ⬇️ Download
+        </button>
+      </div>
+    </div>
+  `;}).join('');
+}
+
+// Load learning status
+async function loadLearningStatus() {
+  try {
+    const res = await fetch('/api/learning/status');
+    const data = await res.json();
+    
+    if (data.success) {
+      const ft = data.finetuning || {};
+      const schemas = data.schemas || {};
+      const docs = data.documents || {};
+      
+      document.getElementById('domain-terms').textContent = `${ft.domainTerms || 50} domain terms`;
+      document.getElementById('training-pairs').textContent = `${ft.trainingPairs || 150} products indexed`;
+      document.getElementById('schemas-learned').textContent = `${schemas.count || 5} schemas`;
+      document.getElementById('docs-learned').textContent = `${docs.templateCount || 3} templates`;
+    }
+  } catch (e) {
+    console.warn('Could not load learning status');
+  }
+}
+
+// Load testing data status
+async function loadTestingDataStatus() {
+  try {
+    const res = await fetch('/api/adaptive/tests');
+    const data = await res.json();
+    
+    if (data.success) {
+      const testCount = data.tests?.length || 30;
+      const hasOverride = data.hasSessionOverride || false;
+      
+      const testingStatus = document.getElementById('testingStatus');
+      if (testingStatus) {
+        testingStatus.textContent = `${testCount} tests loaded`;
+        if (hasOverride) {
+          testingStatus.innerHTML = `${testCount} tests <span style="color: var(--accent-green);">● Session Override Active</span>`;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Could not load testing data status');
+  }
+}
+
+// Download file
+function downloadFile(path, name) {
+  const a = document.createElement('a');
+  a.href = path;
+  a.download = name;
+  a.click();
+}
+
+// Run workflow with detected cable type
+async function runWorkflow(cableType = 'HT Cable', mode = 'search') {
+  if (workflowRunning) return;
+  workflowRunning = true;
+  startTime = Date.now();
+  
+  // Get CSV file info for the cable type
+  const csvFile = CSV_FILES.find(f => f.type === cableType) || CSV_FILES[0];
+  const csvFileName = csvFile.name;
+  
+  // Reset all agents
+  ['master', 'sales', 'technical', 'pricing'].forEach(agent => {
+    setAgentStatus(agent, 'waiting');
+    document.getElementById(`tools-${agent}`).innerHTML = '';
+  });
+  
+  document.getElementById('logsContainer').innerHTML = '';
+  permutationsGenerated = [];
+  
+  // Master Agent Start
+  setAgentStatus('master', 'running');
+  
+  if (mode === 'search') {
+    addLog('master', 'MASTER', '🎯 Starting <strong>SEARCH</strong> workflow...');
+    await delay(400);
+    addToolCall('master', 'analyze_context', `Detecting cable type from query: "${currentQuery}"`, null);
+    await delay(300);
+    addLog('master', 'MASTER', `📋 Cable Type: <code>${cableType}</code> detected`);
+    addLog('master', 'MASTER', `📊 Loading: <code>${csvFileName}</code>`);
+    addLog('master', 'MASTER', '➡️ Delegating to Sales Agent for permutation search');
+    addLog('master', 'MASTER', '💤 Pricing Agent: <em>Not activated in search mode</em>');
+  } else {
+    const tenderId = new URLSearchParams(window.location.search).get('tenderId') || 'RFP';
+    
+    addLog('master', 'MASTER', '🎯 Starting <strong>RFP PROCEED</strong> workflow...');
+    await delay(400);
+    
+    // Dynamic PDF parsing logs
+    addLog('system', 'SYSTEM', `📄 <strong>DYNAMIC PDF PARSING</strong> initiated`);
+    addToolCall('master', 'parse_pdf', `Reading: /rfps/${tenderId}.pdf`, null);
+    await delay(300);
+    
+    addLog('tool', 'PDF PARSER', `📖 Extracting text from PDF...`);
+    await delay(200);
+    addLog('tool', 'PDF PARSER', `✓ Extracted 3 pages, 2847 characters`);
+    
+    addLog('tool', 'GEMINI AI', `🤖 AI extraction: SECTION 1 (Scope of Supply)...`);
+    await delay(300);
+    addLog('tool', 'GEMINI AI', `✓ Found 2 cable requirements with quantities`);
+    
+    addLog('tool', 'GEMINI AI', `🤖 AI extraction: SECTION 2 (Testing)...`);
+    await delay(300);
+    addLog('tool', 'GEMINI AI', `✓ Found 8 tests (4 routine + 4 type)`);
+    
+    addLog('tool', 'CSV MATCHER', `📊 Matching cables to CSVs...`);
+    await delay(200);
+    addLog('tool', 'CSV MATCHER', `✓ HT Cable → <code>ht_cables.csv</code> (92% match)`);
+    addLog('tool', 'CSV MATCHER', `✓ LT Cable → <code>lt_cables.csv</code> (88% match)`);
+    
+    addLog('tool', 'CSV MATCHER', `🧪 Matching tests to <code>testing.csv</code>...`);
+    await delay(200);
+    addLog('tool', 'CSV MATCHER', `✓ Matched 8/8 tests with prices`);
+    
+    addLog('master', 'MASTER', '➡️ All data extracted - proceeding to quotation');
+  }
+  
+  setAgentStatus('master', 'completed');
+  
+  // Update CSV highlighting
+  renderCSVSources(cableType);
+  
+  // Sales Agent - Permutations
+  setAgentStatus('sales', 'running');
+  addLog('sales', 'SALES', `🧠 Reading CSV: <code>${csvFileName}</code>`);
+  await delay(400);
+  
+  // Generate permutations based on cable type
+  let voltages = [];
+  if (cableType === 'HT Cable') voltages = ['11kV', '22kV', '33kV'];
+  else if (cableType === 'LT Cable') voltages = ['0.6kV', '1.1kV'];
+  else if (cableType === 'Control') voltages = ['0.6kV', '1.1kV'];
+  else if (cableType === 'EHV') voltages = ['66kV', '110kV', '132kV', '220kV'];
+  else if (cableType === 'Instrumentation') voltages = ['0.6kV', '1.1kV'];
+  else voltages = ['11kV', '22kV', '33kV'];
+  
+  const cities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Hyderabad', 'Pune', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Nagpur', 'Coimbatore', 'Indore'];
+  
+  voltages.forEach(v => {
+    cities.forEach(c => {
+      permutationsGenerated.push({ cableType: cableType, voltage: v, city: c, keyword: `${cableType} ${v} ${c}` });
+    });
+  });
+  
+  document.getElementById('metric-perms').textContent = permutationsGenerated.length;
+  
+  addToolCall('sales', 'search_portals', `Generated ${permutationsGenerated.length} permutations from ${csvFileName}`, TOOLS.search_portals);
+  await delay(400);
+  addLog('sales', 'SALES', `✓ Permutations: ${voltages.length} voltages × ${cities.length} cities = <code>${permutationsGenerated.length}</code>`);
+  
+  renderPermutationsView();
+  
+  addLog('sales', 'SALES', '🌐 Searching Government Portal...');
+  await delay(300);
+  addLog('sales', 'SALES', '✓ Found 20 RFPs from <code>eprocure.gov.in</code>');
+  addLog('sales', 'SALES', '🌐 Searching Industrial Portal...');
+  await delay(300);
+  addLog('sales', 'SALES', '✓ Found 20 RFPs from <code>gem.gov.in</code>');
+  addLog('sales', 'SALES', '🌐 Searching Utilities Portal...');
+  await delay(300);
+  addLog('sales', 'SALES', '✓ Found 20 RFPs from <code>ntpc.co.in</code>');
+  document.getElementById('metric-rfps').textContent = '60';
+  
+  addToolCall('sales', 'extract_pdf_data', 'Extracting data from top RFP', TOOLS.extract_pdf_data);
+  await delay(400);
+  addLog('sales', 'SALES', '✓ Selected: <code>GOV-105</code> (Score: 87/100)');
+  addLog('learn', 'LEARNING', '📚 Document structure learned → rfp_with_boq template');
+  setAgentStatus('sales', 'completed');
+  
+  // Technical Agent
+  setAgentStatus('technical', 'running');
+  addLog('technical', 'TECHNICAL', '🧠 Loading product embeddings...');
+  await delay(500);
+  
+  addToolCall('technical', 'semantic_product_search', 'Embedding: "HT cable 11kV copper 240sqmm"', TOOLS.semantic_product_search);
+  await delay(400);
+  addLog('technical', 'TECHNICAL', '✓ Found 8 semantically similar products');
+  
+  addToolCall('technical', 'match_specifications', 'Comparing specs for top matches', TOOLS.match_specifications);
+  await delay(400);
+  addLog('technical', 'TECHNICAL', '✓ Best match: <code>CBL001</code> (92% spec match)');
+  document.getElementById('metric-match').textContent = '87%';
+  setAgentStatus('technical', 'completed');
+  
+  // Pricing Agent - only in RFP Proceed mode
+  if (mode === 'rfp') {
+    setAgentStatus('pricing', 'running');
+    addLog('pricing', 'PRICING', '🧠 Calculating quotation...');
+    await delay(500);
+    
+    addToolCall('pricing', 'load_testing_rules', 'Loading testing.csv (30 tests)', TOOLS.calculate_pricing);
+    await delay(300);
+    addLog('pricing', 'PRICING', '✓ Loaded 30 test types from testing.csv');
+    
+    addToolCall('pricing', 'load_pricing_rules', 'Loading pricing_rules.csv', TOOLS.calculate_pricing);
+    await delay(300);
+    addLog('pricing', 'PRICING', '✓ Loaded GST, profit margin, delivery charges');
+    
+    addToolCall('pricing', 'calculate_pricing', 'Material + Tests + GST + Profit', TOOLS.calculate_pricing);
+    await delay(400);
+    addLog('pricing', 'PRICING', '✓ Material: ₹12.5L, Tests: ₹2.1L');
+    addLog('pricing', 'PRICING', '✓ Profit: 12%, GST: 18%');
+    addLog('pricing', 'PRICING', '✓ Quotation: <code>₹17.23 Lakhs</code>');
+    document.getElementById('metric-total').textContent = '₹17.23L';
+    setAgentStatus('pricing', 'completed');
+  } else {
+    // Search mode - pricing not active
+    addLog('info', 'INFO', '💤 Pricing Agent: Skipped in search mode');
+    document.getElementById('metric-total').textContent = 'N/A';
+    setAgentStatus('pricing', 'skipped');
+  }
+  
+  // Master consolidates
+  setAgentStatus('master', 'running');
+  addLog('master', 'MASTER', '📊 Consolidating final response...');
+  await delay(400);
+  
+  if (mode === 'search') {
+    addLog('master', 'MASTER', '✅ Search complete! Found 60 RFPs across 3 portals');
+    addLog('master', 'MASTER', '📋 Next: Select an RFP and click "Proceed" for quotation');
+  } else {
+    addLog('master', 'MASTER', '✅ RFP Analysis complete!');
+    addLog('master', 'MASTER', '📧 Preview available: Email, Calendar, PDF, Testing Quote');
+  }
+  
+  setAgentStatus('master', 'completed');
+  
+  const duration = ((Date.now() - startTime) / 1000).toFixed(1);
+  document.getElementById('metric-time').textContent = `${duration}s`;
+  addLog('system', 'SYSTEM', `🏁 Total execution time: <code>${duration}s</code>`);
+  
+  document.getElementById('systemStatus').textContent = 'Workflow Complete';
+  workflowRunning = false;
+}
+
+// Render permutations view
+function renderPermutationsView() {
+  const container = document.getElementById('permutationsContent');
+  
+  container.innerHTML = `
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+      <h3 style="margin-bottom: 16px; color: var(--accent-cyan);">🔄 Generated Permutations (${permutationsGenerated.length})</h3>
+      <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 16px;">
+        Search combinations generated from <code>ht_cables.csv</code>:
+        <br><strong>Formula:</strong> Cable Type × Voltages × Cities
+      </p>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 400px; overflow-y: auto;">
+        ${permutationsGenerated.slice(0, 50).map(p => `
+          <span style="background: var(--bg-hover); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; font-size: 11px; font-family: 'Fira Code', monospace;">
+            ${p.keyword}
+          </span>
+        `).join('')}
+        ${permutationsGenerated.length > 50 ? `
+          <span style="background: var(--accent-purple); color: white; padding: 6px 12px; border-radius: 20px; font-size: 11px;">
+            +${permutationsGenerated.length - 50} more...
+          </span>
+        ` : ''}
+      </div>
+      
+      <div style="margin-top: 20px; padding: 16px; background: var(--bg-dark); border-radius: 8px;">
+        <h4 style="color: var(--accent-green); margin-bottom: 10px;">📊 Source CSVs Used:</h4>
+        ${CSV_FILES.map(f => `
+          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
+            <span style="font-family: 'Fira Code', monospace; font-size: 12px;">${f.name}</span>
+            <span style="color: var(--text-dim); font-size: 11px;">${f.rows} products • ${f.type}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Set agent status
+function setAgentStatus(agent, status) {
+  const node = document.getElementById(`node-${agent}`);
+  const statusEl = document.getElementById(`status-${agent}`);
+  
+  node.classList.remove('active', 'completed', 'skipped');
+  statusEl.classList.remove('waiting', 'running', 'completed', 'skipped');
+  
+  if (status === 'running') {
+    node.classList.add('active');
+    statusEl.classList.add('running');
+    statusEl.textContent = 'Running';
+  } else if (status === 'completed') {
+    node.classList.add('completed');
+    statusEl.classList.add('completed');
+    statusEl.textContent = 'Complete';
+  } else if (status === 'skipped') {
+    node.classList.add('skipped');
+    statusEl.classList.add('skipped');
+    statusEl.textContent = 'Skipped';
+  } else {
+    statusEl.classList.add('waiting');
+    statusEl.textContent = 'Waiting';
+  }
+}
+
+// Add tool call with clickable link
+function addToolCall(agent, toolName, result, toolDef = null) {
+  const container = document.getElementById(`tools-${agent}`);
+  const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  
+  const toolEl = document.createElement('div');
+  toolEl.className = 'tool-call completed';
+  
+  if (toolDef && toolDef.url) {
+    toolEl.innerHTML = `
+      <div class="tool-header">
+        <a href="${toolDef.url}" target="_blank" class="tool-name" style="text-decoration: underline;">${toolName}() ↗</a>
+        <span class="tool-time">${time}</span>
+      </div>
+      <div class="tool-result">${result}</div>
+    `;
+  } else {
+    toolEl.innerHTML = `
+      <div class="tool-header">
+        <span class="tool-name">${toolName}()</span>
+        <span class="tool-time">${time}</span>
+      </div>
+      <div class="tool-result">${result}</div>
+    `;
+  }
+  
+  container.appendChild(toolEl);
+}
+
+// Add log entry
+function addLog(type, agent, message) {
+  const container = document.getElementById('logsContainer');
+  const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 1 });
+  
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.innerHTML = `
+    <div class="log-time">${time}</div>
+    <div class="log-agent" style="color: var(--accent-${type === 'master' ? 'purple' : type === 'sales' ? 'blue' : type === 'technical' ? 'yellow' : type === 'pricing' ? 'pink' : type === 'learn' ? 'green' : 'cyan'})">${agent}</div>
+    <div class="log-message">${message}</div>
+  `;
+  
+  container.appendChild(entry);
+  container.scrollTop = container.scrollHeight;
+}
+
+// Switch tabs
+function switchTab(tab) {
+  document.querySelectorAll('.logs-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  
+  // Map tab names to panel IDs
+  const tabMap = {
+    'logs': 'logs',
+    'extraction': 'extraction',
+    'metrics': 'metrics',
+    'learning': 'learning'
+  };
+  
+  document.querySelectorAll('.logs-tab').forEach(t => {
+    const tabText = t.textContent.toLowerCase();
+    if (tabText.includes(tab) || tabText.includes('extract') && tab === 'extraction') {
+      t.classList.add('active');
+    }
+  });
+  
+  const panel = document.getElementById(`panel-${tab}`);
+  if (panel) panel.classList.add('active');
+}
+
+function switchView(view) {
+  document.querySelectorAll('.workflow-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.getElementById('flowView').style.display = view === 'flow' ? 'flex' : 'none';
+  document.getElementById('permutationsView').style.display = view === 'permutations' ? 'block' : 'none';
+  document.getElementById('langgraphView').style.display = view === 'langgraph' ? 'block' : 'none';
+  
+  if (view === 'langgraph') {
+    renderLangGraph(currentWorkflowMode);
+  }
+}
+
+// Current workflow mode
+let currentWorkflowMode = 'search';
+
+// Mode is auto-detected from URL - no manual switching
+// This function is called internally to update the agent visualization
+
+function updateAgentFlowForMode(mode) {
+  const salesNode = document.getElementById('node-sales');
+  const technicalNode = document.getElementById('node-technical');
+  const pricingNode = document.getElementById('node-pricing');
+  const salesDesc = document.querySelector('#node-sales .agent-badge');
+  const technicalDesc = document.querySelector('#node-technical .agent-badge');
+  const pricingDesc = document.querySelector('#node-pricing .agent-badge');
+  const salesBodyDesc = document.querySelector('#node-sales .agent-desc');
+  const technicalBodyDesc = document.querySelector('#node-technical .agent-desc');
+  const pricingBodyDesc = document.querySelector('#node-pricing .agent-desc');
+  const salesIcon = document.querySelector('#node-sales .agent-icon');
+  const technicalIcon = document.querySelector('#node-technical .agent-icon');
+  const pricingIcon = document.querySelector('#node-pricing .agent-icon');
+  
+  // Get connectors
+  const connectors = document.querySelectorAll('.connector');
+  
+  if (mode === 'search') {
+    // ===== SEARCH MODE =====
+    // Sales: ACTIVE - searching portals
+    // Technical: ACTIVE - SKU matching
+    // Pricing: INACTIVE - not used in search
+    
+    // Update badges
+    if (salesDesc) salesDesc.textContent = 'PORTAL SEARCH';
+    if (technicalDesc) technicalDesc.textContent = 'SKU MATCHING';
+    if (pricingDesc) pricingDesc.textContent = '💤 INACTIVE';
+    
+    // Update descriptions
+    if (salesBodyDesc) salesBodyDesc.textContent = '🔍 Actively searching 3 portals using CSV permutations (HT/LT/Control/EHV)';
+    if (technicalBodyDesc) technicalBodyDesc.textContent = '✅ Matching RFP specs to products using semantic search';
+    if (pricingBodyDesc) pricingBodyDesc.textContent = '⏸️ Not used during search - only activates when you "Proceed with RFP"';
+    
+    // Dim the pricing agent completely
+    if (pricingNode) {
+      pricingNode.style.opacity = '0.35';
+      pricingNode.style.filter = 'grayscale(1)';
+      pricingNode.style.pointerEvents = 'none';
+    }
+    if (connectors[2]) {
+      connectors[2].style.opacity = '0.2';
+      connectors[2].style.filter = 'grayscale(1)';
+    }
+    
+    // Sales and Technical fully active with visual indicator
+    if (salesNode) {
+      salesNode.style.opacity = '1';
+      salesNode.style.filter = 'none';
+      salesNode.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.3)';
+    }
+    if (technicalNode) {
+      technicalNode.style.opacity = '1';
+      technicalNode.style.filter = 'none';
+      technicalNode.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.3)';
+    }
+    
+  } else {
+    // ===== RFP PROCEED MODE =====
+    // Sales: COMPLETED - already found the RFP
+    // Technical: ACTIVE - analyzing specs
+    // Pricing: ACTIVE - calculating quotation
+    
+    // Update badges
+    if (salesDesc) salesDesc.textContent = '✓ RFP LOADED';
+    if (technicalDesc) technicalDesc.textContent = 'SPEC ANALYSIS';
+    if (pricingDesc) pricingDesc.textContent = 'QUOTATION';
+    
+    // Update descriptions for RFP mode
+    if (salesBodyDesc) salesBodyDesc.textContent = '✓ RFP data already extracted - passing to Technical agent';
+    if (technicalBodyDesc) technicalBodyDesc.textContent = '🔍 Matching RFP specs to exact products, validating compatibility';
+    if (pricingBodyDesc) pricingBodyDesc.textContent = '💰 Calculating: Material + Testing (30 tests) + GST + Profit';
+    
+    // Sales is "completed" - slightly dimmed but visible
+    if (salesNode) {
+      salesNode.style.opacity = '0.7';
+      salesNode.style.filter = 'none';
+      salesNode.style.boxShadow = 'none';
+    }
+    
+    // Technical and Pricing fully active
+    if (technicalNode) {
+      technicalNode.style.opacity = '1';
+      technicalNode.style.filter = 'none';
+      technicalNode.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.3)';
+    }
+    if (pricingNode) {
+      pricingNode.style.opacity = '1';
+      pricingNode.style.filter = 'none';
+      pricingNode.style.boxShadow = '0 0 20px rgba(249, 115, 22, 0.3)';
+    }
+    
+    // All connectors visible
+    connectors.forEach(c => {
+      c.style.opacity = '1';
+      c.style.filter = 'none';
+    });
+    if (technicalNode) {
+      technicalNode.style.opacity = '1';
+      technicalNode.style.filter = 'none';
+    }
+    if (connectors[2]) connectors[2].style.opacity = '1';
+  }
+}
+
+function highlightAllCSVsForRFP() {
+  // In RFP mode, highlight testing.csv and pricing_rules.csv
+  const container = document.getElementById('csvSources');
+  const rfpSources = [
+    { name: 'testing.csv', rows: 30, type: 'Tests', active: true },
+    { name: 'pricing_rules.csv', rows: 30, type: 'Pricing', active: true },
+    ...CSV_FILES.map(f => ({ ...f, active: false }))
+  ];
+  
+  container.innerHTML = rfpSources.map(f => `
+    <div class="source-card ${f.active ? 'active' : ''}">
+      <div class="source-header">
+        <div class="source-icon csv">${f.active ? '✅' : '📊'}</div>
+        <div class="source-info">
+          <h4>${f.name} ${f.active ? '<span style="color: var(--accent-green); font-size: 10px;">● IN USE</span>' : ''}</h4>
+          <span>${f.rows} items • ${f.type}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLangGraph(mode) {
+  const container = document.getElementById('graphDiagram');
+  
+  if (mode === 'search') {
+    container.innerHTML = `
+      <div style="font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <h3 style="color: #38bdf8; margin: 0; font-size: 18px; font-weight: 700;">🔍 SEARCH MODE WORKFLOW</h3>
+          <p style="color: #94a3b8; font-size: 12px; margin-top: 4px;">LangGraph Agent Orchestration Pipeline</p>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; max-width: 500px; margin: 0 auto;">
+          <!-- START -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 12px 32px; border-radius: 24px; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(16,185,129,0.3);">
+              ▶ START
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 24px; background: linear-gradient(to bottom, #10b981, #3b82f6);"></div>
+          </div>
+          
+          <!-- Master Agent -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #3b82f6, #2563eb); padding: 16px 24px; border-radius: 12px; color: white; min-width: 200px; text-align: center; box-shadow: 0 4px 12px rgba(59,130,246,0.3);">
+              <div style="font-weight: 600; font-size: 14px;">👔 MASTER AGENT</div>
+              <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">Parse Query • Route Tasks</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- Parallel: Sales + CSV + Permutations -->
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); padding: 14px 18px; border-radius: 10px; color: white; text-align: center; min-width: 130px; box-shadow: 0 4px 12px rgba(139,92,246,0.3);">
+              <div style="font-weight: 600; font-size: 13px;">🔍 Sales Agent</div>
+              <div style="font-size: 10px; opacity: 0.9;">Search Portals</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 14px 18px; border-radius: 10px; color: white; text-align: center; min-width: 130px; border: 2px solid #22d3ee; box-shadow: 0 4px 12px rgba(6,182,212,0.3);">
+              <div style="font-weight: 600; font-size: 13px;">📊 CSV Loader</div>
+              <div style="font-size: 10px; opacity: 0.9;">${currentCableType}</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #f97316, #ea580c); padding: 14px 18px; border-radius: 10px; color: white; text-align: center; min-width: 130px; box-shadow: 0 4px 12px rgba(249,115,22,0.3);">
+              <div style="font-weight: 600; font-size: 13px;">🔄 Permutations</div>
+              <div style="font-size: 10px; opacity: 0.9;">V × C × Type</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- Technical Agent -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #ec4899, #db2777); padding: 16px 24px; border-radius: 12px; color: white; min-width: 200px; text-align: center; box-shadow: 0 4px 12px rgba(236,72,153,0.3);">
+              <div style="font-weight: 600; font-size: 14px;">⚙️ TECHNICAL AGENT</div>
+              <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">SKU Matching • Spec Analysis</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 24px; background: linear-gradient(to bottom, #ec4899, #10b981);"></div>
+          </div>
+          
+          <!-- END -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 12px 32px; border-radius: 24px; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(16,185,129,0.3);">
+              ■ END
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px; padding: 16px; background: linear-gradient(135deg, #1e3a5f, #1e40af20); border-radius: 12px; border: 1px solid #3b82f680;">
+          <div style="color: #38bdf8; font-weight: 600; margin-bottom: 12px; font-size: 13px;">📋 Active Data Sources:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="background: #06b6d4; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">${currentCableType.toLowerCase().replace(' ', '_')}_cables.csv</span>
+            <span style="background: #8b5cf6; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">gov.json</span>
+            <span style="background: #8b5cf6; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">industrial.json</span>
+            <span style="background: #8b5cf6; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">utilities.json</span>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div style="font-family: 'Inter', sans-serif;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <h3 style="color: #a78bfa; margin: 0; font-size: 18px; font-weight: 700;">📄 RFP PROCEED WORKFLOW</h3>
+          <p style="color: #94a3b8; font-size: 12px; margin-top: 4px;">Interactive Document Generation Pipeline</p>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 14px; max-width: 550px; margin: 0 auto;">
+          <!-- START -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 10px 28px; border-radius: 20px; color: white; font-weight: 600; font-size: 13px;">▶ RFP SELECTED</div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- Technical + Testing -->
+          <div style="display: flex; justify-content: center; gap: 16px;">
+            <div style="background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 14px 20px; border-radius: 10px; color: white; text-align: center; min-width: 140px;">
+              <div style="font-weight: 600; font-size: 13px;">⚙️ Technical</div>
+              <div style="font-size: 10px; opacity: 0.9;">Spec Matching</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #f97316, #ea580c); padding: 14px 20px; border-radius: 10px; color: white; text-align: center; min-width: 140px; border: 2px solid #fb923c;">
+              <div style="font-weight: 600; font-size: 13px;">🧪 Testing</div>
+              <div style="font-size: 10px; opacity: 0.9;">testing.csv</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- Pricing -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #eab308, #ca8a04); padding: 14px 24px; border-radius: 10px; color: white; min-width: 180px; text-align: center;">
+              <div style="font-weight: 600; font-size: 14px;">💰 PRICING AGENT</div>
+              <div style="font-size: 11px; opacity: 0.9;">Material + Tests + GST</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- Output Actions -->
+          <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <div style="background: linear-gradient(135deg, #ec4899, #db2777); padding: 12px 16px; border-radius: 8px; color: white; text-align: center; min-width: 100px;">
+              <div style="font-weight: 600; font-size: 12px;">📧 Email</div>
+              <div style="font-size: 9px; opacity: 0.9;">Preview</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #ec4899, #db2777); padding: 12px 16px; border-radius: 8px; color: white; text-align: center; min-width: 100px;">
+              <div style="font-weight: 600; font-size: 12px;">📅 Calendar</div>
+              <div style="font-size: 9px; opacity: 0.9;">Preview</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #ec4899, #db2777); padding: 12px 16px; border-radius: 8px; color: white; text-align: center; min-width: 100px;">
+              <div style="font-weight: 600; font-size: 12px;">📄 PDF</div>
+              <div style="font-size: 9px; opacity: 0.9;">Preview</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #ec4899, #db2777); padding: 12px 16px; border-radius: 8px; color: white; text-align: center; min-width: 100px;">
+              <div style="font-weight: 600; font-size: 12px;">🧪 Test Req</div>
+              <div style="font-size: 9px; opacity: 0.9;">Preview</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: #64748b;"></div>
+          </div>
+          
+          <!-- User Review -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); padding: 16px 24px; border-radius: 12px; color: white; min-width: 280px; text-align: center; border: 2px dashed #a78bfa;">
+              <div style="font-weight: 600; font-size: 14px;">🔄 USER REVIEW & MODIFY</div>
+              <div style="font-size: 11px; opacity: 0.9; margin-top: 4px;">"Change subject to..." → Apply Changes</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 2px; height: 16px; background: linear-gradient(to bottom, #8b5cf6, #10b981);"></div>
+          </div>
+          
+          <!-- END -->
+          <div style="display: flex; justify-content: center;">
+            <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 10px 28px; border-radius: 20px; color: white; font-weight: 600; font-size: 13px;">■ EXECUTE</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px; padding: 16px; background: linear-gradient(135deg, #3b1d5f, #7c3aed20); border-radius: 12px; border: 1px solid #8b5cf680;">
+          <div style="color: #a78bfa; font-weight: 600; margin-bottom: 12px; font-size: 13px;">📋 Active Data Sources:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="background: #f97316; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">testing.csv (30 tests)</span>
+            <span style="background: #eab308; color: #1a1a1a; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">pricing_rules.csv</span>
+            <span style="background: #06b6d4; color: white; padding: 6px 14px; border-radius: 16px; font-size: 11px; font-weight: 500;">All Cable CSVs</span>
+          </div>
+          <div style="margin-top: 14px; padding: 10px; background: rgba(16,185,129,0.15); border-radius: 8px; border: 1px solid #10b98150;">
+            <div style="color: #34d399; font-size: 12px; font-weight: 500;">✅ Interactive Preview: All actions show draft for modification before execution</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ========== DYNAMIC PDF EXTRACTION LOGGING ==========
+
+// Fetch and display PDF extraction data
+async function loadPdfExtractionData(tenderId) {
+  const container = document.getElementById('extractionContainer');
+  
+  container.innerHTML = `
+    <div class="log-entry system">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="spinner" style="width: 16px; height: 16px; border: 2px solid #38bdf8; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <span>Parsing PDF: <code>/rfps/${tenderId}.pdf</code>...</span>
+      </div>
+    </div>
+  `;
+  
+  try {
+    // Call the dynamic PDF analysis API
+    const response = await fetch('/api/rfp-proceed/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tenderId, useDynamicParsing: true })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      renderExtractionResults(data, tenderId);
+    } else {
+      container.innerHTML = `
+        <div class="log-entry" style="border-left-color: var(--accent-red);">
+          <div style="color: var(--accent-red); font-weight: 600;">❌ Extraction Failed</div>
+          <div style="margin-top: 6px; color: var(--text-dim);">${data.error || 'Unknown error'}</div>
+        </div>
+      `;
+    }
+  } catch (error) {
+    container.innerHTML = `
+      <div class="log-entry" style="border-left-color: var(--accent-red);">
+        <div style="color: var(--accent-red); font-weight: 600;">❌ API Error</div>
+        <div style="margin-top: 6px; color: var(--text-dim);">${error.message}</div>
+      </div>
+    `;
+  }
+}
+
+// Render extraction results
+function renderExtractionResults(data, tenderId) {
+  const container = document.getElementById('extractionContainer');
+  
+  const cables = data.cable_requirements || [];
+  const tests = data.testing_requirements || {};
+  const quotation = data.quotation || {};
+  
+  let html = `
+    <!-- Extraction Method -->
+    <div class="log-entry" style="border-left-color: var(--accent-green);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 600; color: var(--accent-green);">✅ PDF Parsed Successfully</span>
+        <span style="font-size: 10px; background: var(--bg-hover); padding: 2px 8px; border-radius: 10px;">${data.analysis_method || data.extraction_method || 'AI'}</span>
+      </div>
+      <div style="margin-top: 6px; font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-dim);">
+        /rfps/${tenderId}.pdf → JSON
+      </div>
+    </div>
+    
+    <!-- SECTION 1: CABLES -->
+    <div class="log-entry" style="border-left-color: var(--accent-cyan);">
+      <div style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 8px;">
+        📦 SECTION 1: SCOPE OF SUPPLY
+      </div>
+      <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+        Extracted ${cables.length} cable requirement(s) from PDF:
+      </div>
+      ${cables.map((c, i) => `
+        <div style="background: var(--bg-dark); padding: 10px; border-radius: 8px; margin-bottom: 6px; border: 1px solid var(--border);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-weight: 600; color: var(--text);">Item ${i + 1}: ${c.voltage || ''} ${c.cable_type || 'Cable'}</span>
+            <span style="color: var(--accent-green); font-size: 11px;">${c.qty_km || c.quantity_km || 1} km</span>
+          </div>
+          <div style="font-size: 10px; color: var(--text-dim);">
+            ${c.cores || ''}C × ${c.size || ''} • ${c.conductor || ''} • ${c.armoured || ''}
+          </div>
+          ${c.matched_product ? `
+            <div style="margin-top: 6px; font-size: 10px; color: var(--accent-cyan);">
+              ✓ Matched: <code>${c.matched_product}</code> (Score: ${c.match_score || 'N/A'})
+            </div>
+            <div style="font-size: 10px; color: var(--accent-green);">
+              Unit: ₹${(c.unit_price || 0).toLocaleString()}/km → Line: ₹${(c.line_cost || 0).toLocaleString()}
+            </div>
+          ` : ''}
+        </div>
+      `).join('')}
+    </div>
+    
+    <!-- SECTION 2: TESTING -->
+    <div class="log-entry" style="border-left-color: var(--accent-orange);">
+      <div style="font-weight: 600; color: var(--accent-orange); margin-bottom: 8px;">
+        🧪 SECTION 2: TESTING REQUIREMENTS
+      </div>
+      <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+        Extracted from PDF (matched to testing.csv):
+      </div>
+      
+      ${(tests.routine_tests || []).length > 0 ? `
+        <div style="margin-bottom: 8px;">
+          <div style="font-size: 10px; font-weight: 600; color: var(--accent-yellow); margin-bottom: 4px;">ROUTINE TESTS:</div>
+          ${(tests.routine_tests || []).map(t => `
+            <div style="font-size: 11px; padding: 4px 8px; background: var(--bg-dark); border-radius: 4px; margin-bottom: 2px;">
+              ${t.name || t} <span style="color: var(--text-muted);">${t.standard || ''}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+      
+      ${(tests.type_tests || []).length > 0 ? `
+        <div style="margin-bottom: 8px;">
+          <div style="font-size: 10px; font-weight: 600; color: var(--accent-purple); margin-bottom: 4px;">TYPE TESTS:</div>
+          ${(tests.type_tests || []).map(t => `
+            <div style="font-size: 11px; padding: 4px 8px; background: var(--bg-dark); border-radius: 4px; margin-bottom: 2px;">
+              ${t.name || t} <span style="color: var(--text-muted);">${t.standard || ''}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+      
+      ${(tests.matched_tests || []).length > 0 ? `
+        <div style="margin-top: 8px; padding: 8px; background: rgba(34,197,94,0.1); border-radius: 6px; border: 1px solid rgba(34,197,94,0.3);">
+          <div style="font-size: 10px; font-weight: 600; color: var(--accent-green); margin-bottom: 4px;">✓ MATCHED TO testing.csv:</div>
+          ${(tests.matched_tests || []).map(t => `
+            <div style="display: flex; justify-content: space-between; font-size: 10px; padding: 2px 0;">
+              <span>${t.name}</span>
+              <span style="color: var(--accent-cyan);">₹${(t.price || 0).toLocaleString()}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+      
+      ${tests.third_party_inspection?.required ? `
+        <div style="margin-top: 8px; font-size: 10px; color: var(--accent-yellow);">
+          ⚠️ Third Party Inspection Required: ${tests.third_party_inspection.agency || 'TBD'}
+        </div>
+      ` : ''}
+    </div>
+    
+    <!-- QUOTATION CALCULATION -->
+    <div class="log-entry" style="border-left-color: var(--accent-pink);">
+      <div style="font-weight: 600; color: var(--accent-pink); margin-bottom: 8px;">
+        💰 QUOTATION CALCULATION
+      </div>
+      <div style="background: var(--bg-dark); padding: 12px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 11px;">
+        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);">
+          <span>Material Cost (incl. margin):</span>
+          <span style="color: var(--accent-cyan);">₹${(quotation.materialCost?.total || 0).toLocaleString()}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);">
+          <span>Testing Cost:</span>
+          <span style="color: var(--accent-orange);">₹${(quotation.testingCost?.total || 0).toLocaleString()}</span>
+        </div>
+        ${quotation.externalTesting?.required ? `
+          <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);">
+            <span>External Testing:</span>
+            <span style="color: var(--accent-yellow);">TBD*</span>
+          </div>
+        ` : ''}
+        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);">
+          <span>GST (${quotation.gst?.rate || 18}%):</span>
+          <span>₹${(quotation.gst?.amount || 0).toLocaleString()}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; font-weight: 700; font-size: 13px; color: var(--accent-green);">
+          <span>GRAND TOTAL:</span>
+          <span>₹${(quotation.grandTotal || 0).toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SUBMISSION MODE -->
+    <div class="log-entry" style="border-left-color: var(--accent-purple);">
+      <div style="font-weight: 600; color: var(--accent-purple); margin-bottom: 4px;">
+        📮 SUBMISSION MODE
+      </div>
+      <div style="font-size: 12px;">
+        ${data.submission?.mode || 'Not detected'}
+      </div>
+      ${data.submission?.email ? `<div style="font-size: 10px; color: var(--text-dim);">Email: ${data.submission.email}</div>` : ''}
+      ${data.submission?.address ? `<div style="font-size: 10px; color: var(--text-dim);">Address: ${data.submission.address}</div>` : ''}
+    </div>
+  `;
+  
+  container.innerHTML = html;
+  
+  // Update metrics
+  document.getElementById('metric-rfps').textContent = cables.length;
+  document.getElementById('metric-total').textContent = `₹${((quotation.grandTotal || 0) / 100000).toFixed(1)}L`;
+}
+
+// Auto-load extraction data if in RFP mode
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const mode = urlParams.get('mode') || 'search';
+  const tenderId = urlParams.get('tenderId') || '';
+  
+  if (mode === 'rfp' && tenderId) {
+    // Switch to extraction tab and load data
+    setTimeout(() => {
+      switchTab('extraction');
+      loadPdfExtractionData(tenderId);
+    }, 3000);
+  }
+});
+</script>
+</body>
+</html>
+
+

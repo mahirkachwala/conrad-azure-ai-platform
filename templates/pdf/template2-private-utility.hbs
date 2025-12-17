@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 35px;
+      color: #1a1a1a;
+    }
+    .watermark {
+      position: fixed;
+      top: 45%;
+      left: 15%;
+      font-size: 72px;
+      color: #f0f0f0;
+      transform: rotate(-35deg);
+      font-weight: bold;
+      z-index: -1;
+    }
+    .logo-area {
+      text-align: right;
+      font-size: 10px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 18px;
+      color: #003366;
+      border-bottom: 3px solid #003366;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .rfp-code {
+      background: #003366;
+      color: white;
+      padding: 8px 15px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 8px;
+      margin: 15px 0;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #003366;
+    }
+    .section {
+      margin: 25px 0;
+    }
+    .section h3 {
+      font-size: 14px;
+      color: #003366;
+      border-left: 5px solid #0066cc;
+      padding-left: 10px;
+      margin: 15px 0 10px 0;
+    }
+    ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+    ul li {
+      margin: 6px 0;
+    }
+    .highlight-box {
+      background: #e6f2ff;
+      border-left: 4px solid #0066cc;
+      padding: 12px;
+      margin: 15px 0;
+    }
+    .footer-note {
+      position: fixed;
+      bottom: 25px;
+      left: 35px;
+      right: 35px;
+      font-size: 9px;
+      color: #888;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="watermark">CONFIDENTIAL</div>
+  
+  <div class="logo-area">
+    {{organisation}}<br>
+    Corporate Procurement Division
+  </div>
+
+  <h1>Request for Proposal (RFP)</h1>
+
+  <div class="rfp-code">RFP Code: {{tender_id}}</div>
+
+  <div class="info-grid">
+    <div class="info-label">RFP Title:</div>
+    <div>{{title}}</div>
+    
+    <div class="info-label">Issue Date:</div>
+    <div>{{publish_date}}</div>
+    
+    <div class="info-label">Proposal Due Date:</div>
+    <div>{{due_date}} (5:00 PM Local Time)</div>
+    
+    <div class="info-label">Project Location:</div>
+    <div>{{city}}</div>
+    
+    <div class="info-label">Budget Estimate:</div>
+    <div>INR {{formatCurrency estimated_cost_inr}}</div>
+  </div>
+
+  <div class="section">
+    <h3>Executive Summary</h3>
+    <p>{{organisation}} is seeking qualified vendors to submit proposals for the supply and delivery of <strong>{{material}}</strong> for our {{city}} facility. This procurement is part of our infrastructure modernization initiative.</p>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Material Category:</strong> {{product_category}}<br>
+    <strong>Delivery Timeline:</strong> 8-10 weeks from PO issuance<br>
+    <strong>Inspection Requirements:</strong> Third-party inspection at manufacturer's works
+  </div>
+
+  <div class="section">
+    <h3>Scope of Supply</h3>
+    <p>The selected vendor shall provide:</p>
+    <ul>
+      <li>Supply of {{material}} conforming to latest IS/IEC standards</li>
+      <li>Factory acceptance testing (FAT) with third-party witness</li>
+      <li>Packaging suitable for long-distance transportation</li>
+      <li>Delivery to {{city}} location with unloading assistance</li>
+      <li>Comprehensive warranty coverage for 24 months</li>
+      <li>Technical documentation and test certificates</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Technical Requirements</h3>
+    <ul>
+      <li><strong>Material Specification:</strong> {{material}}</li>
+      <li><strong>Conductor:</strong> Electrolytic grade copper (EC Grade), Class 2 stranded as per IS 8130</li>
+      <li><strong>Insulation Type:</strong> XLPE (Cross-linked Polyethylene), thermosetting compound</li>
+      <li><strong>Voltage Class:</strong> 1.1 kV / 11 kV grade (as applicable)</li>
+      <li><strong>Standards:</strong> IS 7098 Part 1 & 2, IEC 60502-1, BIS certification mandatory</li>
+      <li><strong>Testing:</strong> Routine and type test reports from NABL labs required</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Vendor Qualification Criteria</h3>
+    <p>To be eligible, vendors must demonstrate:</p>
+    <ol>
+      <li>Minimum 3 years of experience in manufacturing similar products</li>
+      <li>At least THREE reference orders from utilities/industrial clients (value &gt; ₹5 Cr each)</li>
+      <li>Manufacturing capacity: Minimum 300 MT per month</li>
+      <li>Quality certifications: ISO 9001:2015 (mandatory), ISO 14001 (preferred)</li>
+      <li>Financial soundness: Average turnover ≥ ₹25 Crores in last 3 years</li>
+      <li>Technical capability: In-house testing laboratory with calibrated equipment</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h3>Commercial Terms</h3>
+    <div class="info-grid">
+      <div class="info-label">Price Basis:</div>
+      <div>Firm, non-escalable for 180 days</div>
+      
+      <div class="info-label">Payment Terms:</div>
+      <div>70% against dispatch, 20% after receipt & inspection, 10% after 90 days</div>
+      
+      <div class="info-label">Security Deposit:</div>
+      <div>3% of order value (as bank guarantee)</div>
+      
+      <div class="info-label">Liquidated Damages:</div>
+      <div>0.5% per week of delay, max 10% of order value</div>
+      
+      <div class="info-label">Warranty Period:</div>
+      <div>24 months from commissioning or 30 months from supply, whichever is earlier</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Contact for Clarifications</h3>
+    <p>
+      <strong>Name:</strong> {{contact_person}}<br>
+      <strong>Designation:</strong> General Manager - Procurement<br>
+      <strong>Email:</strong> {{contact_email}}<br>
+      <strong>Phone:</strong> {{contact_phone}}<br>
+      <strong>Office Address:</strong> {{organisation}}, {{city}}
+    </p>
+  </div>
+
+  <div class="footer-note">
+    Confidential Document | RFP {{tender_id}} | Authorized vendors only | Auto-generated for demonstration purposes
+  </div>
+</body>
+</html>

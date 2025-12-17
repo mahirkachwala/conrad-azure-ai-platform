@@ -1,0 +1,1136 @@
+[
+  {
+    "tender_id": "IND-200",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Tata Steel Ltd",
+    "title": "LT Power Cable 4C x 50mm² Cu XLPE - Mumbai Plant",
+    "material": "4 Core 50 sqmm Copper XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Mumbai",
+    "publish_date": "2025-11-17",
+    "due_date": "2026-01-13T12:00:00.000Z",
+    "estimated_cost_inr": 544000,
+    "contact_email": "cables.procurement@tatasteel.com",
+    "contact_phone": "+91-657-2147474",
+    "documents": [
+      "/docs/200.pdf"
+    ],
+    "detail_url": "/rfp/IND-200.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables.procurement@tatasteel.com",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/IND-200.pdf"
+    },
+    "pdf_url": "/rfps/IND-200.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Copper 70 sqmm 3C",
+    "combined_title": "1.1kV LT Cable 3C x 70 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Routine Test",
+      "standard": "IS 10810",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹50K-1.5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "IND-201",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Reliance Industries Ltd",
+    "title": "11kV HT XLPE Cable 3C x 150mm² Al - Delhi NCR",
+    "material": "3 Core 150 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Delhi",
+    "publish_date": "2025-12-08",
+    "due_date": "2026-01-14T12:00:00.000Z",
+    "estimated_cost_inr": 2958400,
+    "contact_email": "cables@ril.com",
+    "contact_phone": "+91-22-35553000",
+    "documents": [
+      "/docs/201.pdf"
+    ],
+    "detail_url": "/rfp/IND-201.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_40",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@ril.com",
+      "meeting_subject": "Pre-bid Meeting Request - IND-201 - [Your Company Name]",
+      "meeting_venue": "Reliance Industries Ltd, Delhi",
+      "pdf_url": "/rfps/IND-201.pdf"
+    },
+    "pdf_url": "/rfps/IND-201.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "6.6kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 6.6kV Copper 70 sqmm 3C Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "6.6kV HT Cable 3C x 70 sqmm + 1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-202",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "JSW Steel Ltd",
+    "title": "LT Power Cable 4C x 70mm² Cu XLPE - Bangalore Tech Park",
+    "material": "4 Core 70 sqmm Copper XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Bangalore",
+    "publish_date": "2025-12-26",
+    "due_date": "2026-02-01T12:00:00.000Z",
+    "estimated_cost_inr": 500000,
+    "contact_email": "procurement@jsw.in",
+    "contact_phone": "+91-22-43212121",
+    "documents": [
+      "/docs/202.pdf"
+    ],
+    "detail_url": "/rfp/IND-202.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nJSW Steel Ltd,\nProcurement Department,\nBangalore, India - 400001",
+      "envelope_marking": "BID FOR IND-202 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/IND-202.pdf"
+    },
+    "pdf_url": "/rfps/IND-202.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "25 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 0.6kV Copper 25 sqmm 4C",
+    "combined_title": "0.6kV LT Cable 4C x 25 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-203",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Larsen & Toubro (L&T) - Power Division",
+    "title": "Control Cable 12C x 2.5mm² Cu PVC - Chennai Plant",
+    "material": "12 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Chennai",
+    "publish_date": "2026-01-03",
+    "due_date": "2026-02-02T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "cables@lntpower.com",
+    "contact_phone": "+91-44-26812345",
+    "documents": [
+      "/docs/203.pdf"
+    ],
+    "detail_url": "/rfp/IND-203.html",
+    "status": "active",
+    "pricing_tier": "SIGNIFICANTLY_OVERPRICED_50",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/IND-203",
+      "registration_opens": "19 December 2025",
+      "registration_closes": "26 January 2026",
+      "pdf_url": "/rfps/IND-203.pdf"
+    },
+    "pdf_url": "/rfps/IND-203.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "13",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 1.5 sqmm 13C",
+    "combined_title": "1.1kV Control Cable 13C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-204",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Adani Power Ltd",
+    "title": "22kV HT XLPE Cable 3C x 240mm² Al - Pune Industrial",
+    "material": "3 Core 240 sqmm Aluminium XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Pune",
+    "publish_date": "2025-12-06",
+    "due_date": "2026-01-20T12:00:00.000Z",
+    "estimated_cost_inr": 4207600,
+    "contact_email": "cables@adanipower.com",
+    "contact_phone": "+91-79-26562000",
+    "documents": [
+      "/docs/204.pdf"
+    ],
+    "detail_url": "/rfp/IND-204.html",
+    "status": "active",
+    "pricing_tier": "GOOD_10",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@adanipower.com",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/IND-204.pdf"
+    },
+    "pdf_url": "/rfps/IND-204.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "22kV",
+        "conductor": "Aluminium",
+        "size": "185 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "4 sqmm",
+        "cores": "14",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 22kV Aluminium 185 sqmm 1C Control Cable 1.1kV Copper 4 sqmm 14C",
+    "combined_title": "22kV HT Cable 1C x 185 sqmm + 1.1kV Control Cable 14C x 4 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "IND-205",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Jindal Steel & Power Ltd",
+    "title": "LT Power Cable 4C x 150mm² Al XLPE - Ahmedabad Factory",
+    "material": "4 Core 150 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Ahmedabad",
+    "publish_date": "2026-01-12",
+    "due_date": "2026-02-26T12:00:00.000Z",
+    "estimated_cost_inr": 800000,
+    "contact_email": "procurement@jindalsteel.com",
+    "contact_phone": "+91-11-26188345",
+    "documents": [
+      "/docs/205.pdf"
+    ],
+    "detail_url": "/rfp/IND-205.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_35",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "procurement@jindalsteel.com",
+      "meeting_subject": "Pre-bid Meeting Request - IND-205 - [Your Company Name]",
+      "meeting_venue": "Jindal Steel & Power Ltd, Ahmedabad",
+      "pdf_url": "/rfps/IND-205.pdf"
+    },
+    "pdf_url": "/rfps/IND-205.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "100 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 100 sqmm 4C",
+    "combined_title": "1.1kV LT Cable 4C x 100 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-206",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Hindalco Industries Ltd",
+    "title": "Control Cable 19C x 1.5mm² Cu PVC - Hyderabad IT",
+    "material": "19 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Hyderabad",
+    "publish_date": "2026-01-04",
+    "due_date": "2026-02-27T12:00:00.000Z",
+    "estimated_cost_inr": 171600,
+    "contact_email": "cables@hindalco.com",
+    "contact_phone": "+91-22-66627500",
+    "documents": [
+      "/docs/206.pdf"
+    ],
+    "detail_url": "/rfp/IND-206.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_15",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nHindalco Industries Ltd,\nProcurement Department,\nHyderabad, India - 400001",
+      "envelope_marking": "BID FOR IND-206 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/IND-206.pdf"
+    },
+    "pdf_url": "/rfps/IND-206.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "6 sqmm",
+        "cores": "10",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 6 sqmm 10C",
+    "combined_title": "1.1kV Control Cable 10C x 6 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-207",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "UltraTech Cement Ltd",
+    "title": "EHV Cable 66kV 1C x 400mm² Al - Kolkata Steel",
+    "material": "1 Core 400 sqmm Aluminium XLPE 66kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Kolkata",
+    "publish_date": "2026-01-13",
+    "due_date": "2026-03-02T12:00:00.000Z",
+    "estimated_cost_inr": 32193600,
+    "contact_email": "procurement@ultratech.in",
+    "contact_phone": "+91-22-66917800",
+    "documents": [
+      "/docs/207.pdf"
+    ],
+    "detail_url": "/rfp/IND-207.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 8,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/IND-207",
+      "registration_opens": "16 January 2026",
+      "registration_closes": "23 February 2026",
+      "pdf_url": "/rfps/IND-207.pdf"
+    },
+    "pdf_url": "/rfps/IND-207.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "66kV",
+        "conductor": "Aluminium",
+        "size": "630 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 8,
+        "standard": "IEC 60840"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "EHV Cable 66kV Aluminium 630 sqmm 1C Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "66kV EHV Cable 1C x 630 sqmm + 0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-208",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Vedanta Ltd - Aluminium Division",
+    "title": "11kV HT XLPE Cable 3C x 95mm² Al - Jaipur Industrial",
+    "material": "3 Core 95 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Jaipur",
+    "publish_date": "2026-01-26",
+    "due_date": "2026-02-27T12:00:00.000Z",
+    "estimated_cost_inr": 2640000,
+    "contact_email": "cables@vedanta.co.in",
+    "contact_phone": "+91-80-67259000",
+    "documents": [
+      "/docs/208.pdf"
+    ],
+    "detail_url": "/rfp/IND-208.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_15",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@vedanta.co.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/IND-208.pdf"
+    },
+    "pdf_url": "/rfps/IND-208.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "6.6kV",
+        "conductor": "Copper",
+        "size": "50 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 6.6kV Copper 50 sqmm 3C",
+    "combined_title": "6.6kV HT Cable 3C x 50 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "IND-209",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "SAIL - Bhilai Steel Plant",
+    "title": "LT Power Cable 4C x 95mm² Cu XLPE - Lucknow Plant",
+    "material": "4 Core 95 sqmm Copper XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Lucknow",
+    "publish_date": "2026-01-02",
+    "due_date": "2026-02-18T12:00:00.000Z",
+    "estimated_cost_inr": 1200000,
+    "contact_email": "mm.cables@sail-bhilai.com",
+    "contact_phone": "+91-788-2228800",
+    "documents": [
+      "/docs/209.pdf"
+    ],
+    "detail_url": "/rfp/IND-209.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "mm.cables@sail-bhilai.com",
+      "meeting_subject": "Pre-bid Meeting Request - IND-209 - [Your Company Name]",
+      "meeting_venue": "SAIL - Bhilai Steel Plant, Lucknow",
+      "pdf_url": "/rfps/IND-209.pdf"
+    },
+    "pdf_url": "/rfps/IND-209.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "200 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 200 sqmm 4C",
+    "combined_title": "1.1kV LT Cable 4C x 200 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-210",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Mahindra & Mahindra - Auto Division",
+    "title": "Control Cable 7C x 4mm² Cu PVC - Nagpur Manufacturing",
+    "material": "7 Core 4 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Nagpur",
+    "publish_date": "2026-02-03",
+    "due_date": "2026-03-08T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "cables.supply@mahindra.com",
+    "contact_phone": "+91-22-24901441",
+    "documents": [
+      "/docs/210.pdf"
+    ],
+    "detail_url": "/rfp/IND-210.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_20",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nMahindra & Mahindra - Auto Division,\nProcurement Department,\nNagpur, India - 400001",
+      "envelope_marking": "BID FOR IND-210 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/IND-210.pdf"
+    },
+    "pdf_url": "/rfps/IND-210.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "7",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 1.5 sqmm 7C",
+    "combined_title": "1.1kV Control Cable 7C x 1.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Routine Test",
+      "standard": "IS 10810",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹50K-1.5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "IND-211",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Maruti Suzuki India Ltd",
+    "title": "Control Cable 19C x 1.5mm² Cu PVC - Mumbai Factory",
+    "material": "19 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-05",
+    "due_date": "2026-03-13T12:00:00.000Z",
+    "estimated_cost_inr": 164400,
+    "contact_email": "procurement@maruti.co.in",
+    "contact_phone": "+91-124-4884000",
+    "documents": [
+      "/docs/211.pdf"
+    ],
+    "detail_url": "/rfp/IND-211.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_45",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/IND-211",
+      "registration_opens": "27 January 2026",
+      "registration_closes": "06 March 2026",
+      "pdf_url": "/rfps/IND-211.pdf"
+    },
+    "pdf_url": "/rfps/IND-211.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "4 sqmm",
+        "cores": "14",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 4 sqmm 14C",
+    "combined_title": "1.1kV Control Cable 14C x 4 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-212",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Hero MotoCorp Ltd",
+    "title": "11kV HT XLPE Cable 3C x 150mm² Al - Mumbai Industrial",
+    "material": "3 Core 150 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-07",
+    "due_date": "2026-03-25T12:00:00.000Z",
+    "estimated_cost_inr": 4692000,
+    "contact_email": "cables@heromotocorp.com",
+    "contact_phone": "+91-11-26122244",
+    "documents": [
+      "/docs/212.pdf"
+    ],
+    "detail_url": "/rfp/IND-212.html",
+    "status": "active",
+    "pricing_tier": "GOOD_10",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@heromotocorp.com",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/IND-212.pdf"
+    },
+    "pdf_url": "/rfps/IND-212.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "33kV",
+        "conductor": "Aluminium",
+        "size": "240 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 33kV Aluminium 240 sqmm 1C",
+    "combined_title": "33kV HT Cable 1C x 240 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "IND-213",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Indian Oil Corporation Ltd (IOCL)",
+    "title": "LT Power Cable 4C x 35mm² Cu PVC - Coimbatore Factory",
+    "material": "4 Core 35 sqmm Copper PVC 1.1kV LT Power Cable Non-Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Coimbatore",
+    "publish_date": "2026-02-22",
+    "due_date": "2026-03-26T12:00:00.000Z",
+    "estimated_cost_inr": 824800,
+    "contact_email": "cables@iocl.co.in",
+    "contact_phone": "+91-11-26262000",
+    "documents": [
+      "/docs/213.pdf"
+    ],
+    "detail_url": "/rfp/IND-213.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_20",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@iocl.co.in",
+      "meeting_subject": "Pre-bid Meeting Request - IND-213 - [Your Company Name]",
+      "meeting_venue": "Indian Oil Corporation Ltd (IOCL), Coimbatore",
+      "pdf_url": "/rfps/IND-213.pdf"
+    },
+    "pdf_url": "/rfps/IND-213.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "80 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 80 sqmm 4C Control Cable 1.1kV Copper 2.5 sqmm 12C",
+    "combined_title": "1.1kV LT Cable 4C x 80 sqmm + 1.1kV Control Cable 12C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-214",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Bharat Petroleum Corporation Ltd (BPCL)",
+    "title": "Control Cable 24C x 1.5mm² Cu PVC - Indore Plant",
+    "material": "24 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Indore",
+    "publish_date": "2026-02-18",
+    "due_date": "2026-03-31T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "procurement@bharatpetroleum.in",
+    "contact_phone": "+91-22-22714000",
+    "documents": [
+      "/docs/214.pdf"
+    ],
+    "detail_url": "/rfp/IND-214.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nBharat Petroleum Corporation Ltd (BPCL),\nProcurement Department,\nIndore, India - 400001",
+      "envelope_marking": "BID FOR IND-214 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/IND-214.pdf"
+    },
+    "pdf_url": "/rfps/IND-214.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-215",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Oil & Natural Gas Corporation (ONGC)",
+    "title": "Instrumentation Cable 8P x 1.5mm² Cu - Pune Automation",
+    "material": "8 Pair 1.5 sqmm Copper PVC Instrumentation Cable Screened",
+    "product_category": "wires-cables",
+    "cable_type": "Instrumentation Cable",
+    "city": "Pune",
+    "publish_date": "2026-02-22",
+    "due_date": "2026-04-21T12:00:00.000Z",
+    "estimated_cost_inr": 123000,
+    "contact_email": "cables@ongc.co.in",
+    "contact_phone": "+91-11-23357000",
+    "documents": [
+      "/docs/215.pdf"
+    ],
+    "detail_url": "/rfp/IND-215.html",
+    "status": "active",
+    "pricing_tier": "SUSPICIOUSLY_LOW_35",
+    "market_qty_km": 2,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/IND-215",
+      "registration_opens": "07 March 2026",
+      "registration_closes": "14 April 2026",
+      "pdf_url": "/rfps/IND-215.pdf"
+    },
+    "pdf_url": "/rfps/IND-215.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Instrumentation Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "8",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Instrumentation Cable 0.6kV Copper 1.5 sqmm 8C",
+    "combined_title": "0.6kV Instrumentation Cable 8C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-216",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "GAIL India Ltd",
+    "title": "LT Power Cable 4C x 240mm² Al XLPE - Chennai Heavy Industry",
+    "material": "4 Core 240 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Chennai",
+    "publish_date": "2026-03-22",
+    "due_date": "2026-05-02T12:00:00.000Z",
+    "estimated_cost_inr": 982400,
+    "contact_email": "procurement@gail.co.in",
+    "contact_phone": "+91-11-26197000",
+    "documents": [
+      "/docs/216.pdf"
+    ],
+    "detail_url": "/rfp/IND-216.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_18",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "procurement@gail.co.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/IND-216.pdf"
+    },
+    "pdf_url": "/rfps/IND-216.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "120 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Copper 120 sqmm 3C Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "1.1kV LT Cable 3C x 120 sqmm + 1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-217",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Coal India Ltd",
+    "title": "33kV HT XLPE Cable 3C x 185mm² Cu - Bangalore Steel Plant",
+    "material": "3 Core 185 sqmm Copper XLPE 33kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Bangalore",
+    "publish_date": "2026-03-04",
+    "due_date": "2026-04-25T12:00:00.000Z",
+    "estimated_cost_inr": 3864000,
+    "contact_email": "cables@coalindia.in",
+    "contact_phone": "+91-33-23240090",
+    "documents": [
+      "/docs/217.pdf"
+    ],
+    "detail_url": "/rfp/IND-217.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_30",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@coalindia.in",
+      "meeting_subject": "Pre-bid Meeting Request - IND-217 - [Your Company Name]",
+      "meeting_venue": "Coal India Ltd, Bangalore",
+      "pdf_url": "/rfps/IND-217.pdf"
+    },
+    "pdf_url": "/rfps/IND-217.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "11kV",
+        "conductor": "Copper",
+        "size": "120 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "95 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 11kV Copper 120 sqmm 3C LT Cable 1.1kV Copper 95 sqmm 3C",
+    "combined_title": "11kV HT Cable 3C x 120 sqmm + 1.1kV LT Cable 3C x 95 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-218",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "National Mineral Development Corp (NMDC)",
+    "title": "Control Cable 37C x 2.5mm² Cu PVC - Hyderabad Pharma",
+    "material": "37 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Hyderabad",
+    "publish_date": "2026-03-29",
+    "due_date": "2026-05-07T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "procurement@nmdc.co.in",
+    "contact_phone": "+91-40-23538713",
+    "documents": [
+      "/docs/218.pdf"
+    ],
+    "detail_url": "/rfp/IND-218.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nNational Mineral Development Corp (NMDC),\nProcurement Department,\nHyderabad, India - 400001",
+      "envelope_marking": "BID FOR IND-218 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/IND-218.pdf"
+    },
+    "pdf_url": "/rfps/IND-218.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "13",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 1.5 sqmm 13C",
+    "combined_title": "1.1kV Control Cable 13C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "IND-219",
+    "source_type": "industrial",
+    "portal_name": "Industrial Supply Network",
+    "organisation": "Hindustan Zinc Ltd",
+    "title": "LT Power Cable 4C x 16mm² Cu PVC - Mumbai Workshop",
+    "material": "4 Core 16 sqmm Copper PVC 1.1kV LT Power Cable Non-Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-04-12",
+    "due_date": "2026-05-15T12:00:00.000Z",
+    "estimated_cost_inr": 789600,
+    "contact_email": "cables@hzlindia.com",
+    "contact_phone": "+91-294-2425000",
+    "documents": [
+      "/docs/219.pdf"
+    ],
+    "detail_url": "/rfp/IND-219.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_40",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/IND-219",
+      "registration_opens": "31 March 2026",
+      "registration_closes": "08 May 2026",
+      "pdf_url": "/rfps/IND-219.pdf"
+    },
+    "pdf_url": "/rfps/IND-219.pdf",
+    "buyer_type": "Industrial/Corporate",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "4 sqmm",
+        "cores": "10",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 0.75kV Copper 70 sqmm 3C Control Cable 1.1kV Copper 4 sqmm 10C",
+    "combined_title": "0.75kV LT Cable 3C x 70 sqmm + 1.1kV Control Cable 10C x 4 sqmm",
+    "external_testing_required": false
+  }
+]

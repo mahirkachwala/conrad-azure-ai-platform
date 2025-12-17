@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      margin: 30px;
+      color: #222;
+    }
+    h1 {
+      font-size: 16px;
+      background: #2c3e50;
+      color: white;
+      padding: 10px 15px;
+      margin: -30px -30px 20px -30px;
+    }
+    .tender-ref {
+      background: #34495e;
+      color: white;
+      padding: 8px 15px;
+      margin: -20px -30px 20px -30px;
+      font-size: 11px;
+    }
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 9px;
+    }
+    table.spec-table th {
+      background: #34495e;
+      color: white;
+      padding: 8px;
+      text-align: left;
+      font-weight: bold;
+    }
+    table.spec-table td {
+      border: 1px solid #bdc3c7;
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+    table.spec-table tr:nth-child(even) {
+      background: #ecf0f1;
+    }
+    .section-header {
+      background: #95a5a6;
+      color: white;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+    }
+    .note-box {
+      border-left: 4px solid #e74c3c;
+      background: #fadbd8;
+      padding: 10px;
+      margin: 15px 0;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TECHNICAL SPECIFICATION DOCUMENT</h1>
+  <div class="tender-ref">
+    Tender ID: {{tender_id}} | Issued by: {{organisation}} | Category: {{product_category}}
+  </div>
+
+  <div class="section-header">TENDER OVERVIEW</div>
+  <table class="spec-table">
+    <tr>
+      <th style="width: 180px;">Parameter</th>
+      <th>Details</th>
+    </tr>
+    <tr>
+      <td><strong>Tender Title</strong></td>
+      <td>{{title}}</td>
+    </tr>
+    <tr>
+      <td><strong>Material Required</strong></td>
+      <td>{{material}}</td>
+    </tr>
+    <tr>
+      <td><strong>Product Category</strong></td>
+      <td>{{product_category}}</td>
+    </tr>
+    <tr>
+      <td><strong>Issuing Authority</strong></td>
+      <td>{{organisation}}, {{city}}</td>
+    </tr>
+    <tr>
+      <td><strong>Tender Value (Estimated)</strong></td>
+      <td>INR {{formatCurrency estimated_cost_inr}}</td>
+    </tr>
+    <tr>
+      <td><strong>Issue Date</strong></td>
+      <td>{{publish_date}}</td>
+    </tr>
+    <tr>
+      <td><strong>Submission Deadline</strong></td>
+      <td>{{due_date}}, 14:00 hrs IST</td>
+    </tr>
+  </table>
+
+  <div class="section-header">TECHNICAL SPECIFICATIONS - DETAILED</div>
+  <table class="spec-table">
+    <tr>
+      <th>S.No</th>
+      <th>Specification Parameter</th>
+      <th>Requirement/Standard</th>
+      <th>Testing/Verification</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Conductor Material</td>
+      <td>Electrolytic Copper (EC Grade), 99.9% purity minimum</td>
+      <td>Chemical analysis certificate required</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Conductor Construction</td>
+      <td>Stranded, Class 2 as per IS 8130</td>
+      <td>Physical verification during inspection</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Conductor Annealing</td>
+      <td>Soft annealed, conductivity ≥ 97% IACS</td>
+      <td>Conductivity test report from NABL lab</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Insulation Material</td>
+      <td>XLPE (Cross-linked Polyethylene), thermosetting type</td>
+      <td>Material test certificate + type test</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Insulation Thickness</td>
+      <td>As per IS 7098 Table 2 (based on conductor size)</td>
+      <td>Physical measurement during testing</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Voltage Classification</td>
+      <td>1.1 kV / 11 kV grade (as applicable)</td>
+      <td>High voltage test per IS specification</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Indian Standards</td>
+      <td>IS 7098 Part 1 & Part 2 latest edition</td>
+      <td>Declaration of conformity required</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>International Standards</td>
+      <td>IEC 60502-1 compliance</td>
+      <td>Type test report from IEC accredited lab</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>BIS Certification</td>
+      <td>Valid BIS license (CM/L number) for specific cable</td>
+      <td>Copy of BIS license to be submitted</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>ISI Marking</td>
+      <td>ISI mark on cable sheath at 1m intervals</td>
+      <td>Visual inspection</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Routine Tests</td>
+      <td>As per IS 7098: Conductor resistance, HV test, insulation resistance</td>
+      <td>Test certificates for every drum/coil</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Type Tests</td>
+      <td>Complete type tests as per IS 7098 clause 8</td>
+      <td>Valid type test report (&lt;3 years old)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Packaging</td>
+      <td>Wooden/MS drums suitable for outdoor storage</td>
+      <td>Physical inspection at delivery</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Drum Marking</td>
+      <td>Cable details, length, drum weight, direction of rotation</td>
+      <td>Visual check</td>
+    </tr>
+  </table>
+
+  <div class="note-box">
+    <strong>IMPORTANT:</strong> All test certificates must be from NABL accredited laboratories. Self-certified test reports will NOT be accepted. Any deviation from specified standards must be explicitly mentioned in technical bid with justification.
+  </div>
+
+  <div class="section-header">QUALIFICATION & COMMERCIAL REQUIREMENTS</div>
+  <table class="spec-table">
+    <tr>
+      <th style="width: 200px;">Criterion</th>
+      <th>Requirement</th>
+      <th>Documentary Proof</th>
+    </tr>
+    <tr>
+      <td>BIS License</td>
+      <td>Valid for specified cable type</td>
+      <td>Attested copy of BIS license</td>
+    </tr>
+    <tr>
+      <td>Manufacturing Experience</td>
+      <td>Minimum 3 years in cable manufacturing</td>
+      <td>Company registration documents</td>
+    </tr>
+    <tr>
+      <td>Past Orders</td>
+      <td>Min 3 similar orders (each &gt; ₹3 Cr) in last 5 years</td>
+      <td>Copies of POs + completion certificates</td>
+    </tr>
+    <tr>
+      <td>ISO Certification</td>
+      <td>ISO 9001:2015 valid certification</td>
+      <td>Certified copy of ISO certificate</td>
+    </tr>
+    <tr>
+      <td>Annual Turnover</td>
+      <td>Average ≥ ₹15 Crores in last 3 FY</td>
+      <td>Audited balance sheets + CA certificate</td>
+    </tr>
+    <tr>
+      <td>Production Capacity</td>
+      <td>Minimum 200 MT per month</td>
+      <td>Capacity certificate from statutory auditor</td>
+    </tr>
+    <tr>
+      <td>EMD</td>
+      <td>₹ {{calculateEMD estimated_cost_inr}}</td>
+      <td>DD/BG in favor of {{organisation}}</td>
+    </tr>
+    <tr>
+      <td>Tender Fee</td>
+      <td>₹ 2,500 + GST</td>
+      <td>DD/Online payment receipt</td>
+    </tr>
+  </table>
+
+  <div class="section-header">CONTACT FOR TECHNICAL CLARIFICATIONS</div>
+  <table class="spec-table">
+    <tr>
+      <td style="width: 150px;"><strong>Contact Person</strong></td>
+      <td>{{contact_person}}</td>
+    </tr>
+    <tr>
+      <td><strong>Designation</strong></td>
+      <td>Technical Specification Manager</td>
+    </tr>
+    <tr>
+      <td><strong>Email</strong></td>
+      <td>{{contact_email}}</td>
+    </tr>
+    <tr>
+      <td><strong>Phone</strong></td>
+      <td>{{contact_phone}}</td>
+    </tr>
+    <tr>
+      <td><strong>Office</strong></td>
+      <td>{{organisation}}, {{city}}</td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 20px; text-align: center; font-size: 9px; color: #7f8c8d;">
+    Technical Specification Document | {{tender_id}} | Page 1 of 1 | Auto-generated
+  </div>
+</body>
+</html>

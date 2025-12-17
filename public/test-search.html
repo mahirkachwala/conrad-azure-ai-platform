@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Search</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #1a1a2e; color: white; }
+    .card { background: #16213e; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    input, select, button { padding: 10px; margin: 5px; }
+    button { background: #0f3460; color: white; border: none; cursor: pointer; }
+    #results { margin-top: 20px; }
+    .tender { background: #0f3460; padding: 10px; margin: 5px 0; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Test Tender Search</h1>
+  
+  <div class="card">
+    <h3>Status: <span id="status">Loading...</span></h3>
+    <p>Tenders Loaded: <strong id="count">0</strong></p>
+  </div>
+
+  <div class="card">
+    <input type="text" id="keyword" placeholder="Keyword (e.g., cable)" value="cable">
+    <select id="category">
+      <option value="">All Categories</option>
+      <option value="wires-cables" selected>Wires & Cables</option>
+      <option value="transformers">Transformers</option>
+      <option value="fmcg-packaging">FMCG Packaging</option>
+    </select>
+    <input type="text" id="city" placeholder="City" value="Mumbai">
+    <button onclick="doSearch()">Search</button>
+  </div>
+
+  <div id="results"></div>
+
+  <script>
+    let allData = { gov: [], industrial: [], utilities: [] };
+
+    // Load all data
+    Promise.all([
+      fetch('/data/portals/gov.json').then(r => r.json()),
+      fetch('/data/portals/industrial.json').then(r => r.json()),
+      fetch('/data/portals/utilities.json').then(r => r.json())
+    ]).then(([gov, ind, utl]) => {
+      allData.gov = gov;
+      allData.industrial = ind;
+      allData.utilities = utl;
+      
+      const total = gov.length + ind.length + utl.length;
+      document.getElementById('status').textContent = '✅ Ready';
+      document.getElementById('status').style.color = '#4ade80';
+      document.getElementById('count').textContent = total;
+      
+      console.log('Loaded:', { gov: gov.length, industrial: ind.length, utilities: utl.length });
+    }).catch(err => {
+      document.getElementById('status').textContent = '❌ Error: ' + err.message;
+      document.getElementById('status').style.color = '#f87171';
+      console.error(err);
+    });
+
+    function doSearch() {
+      let keyword = document.getElementById('keyword').value.toLowerCase().trim();
+      const category = document.getElementById('category').value.toLowerCase();
+      const city = document.getElementById('city').value.toLowerCase().trim();
+      
+      // Handle singular/plural - remove trailing 's' for matching
+      const keywordBase = keyword.endsWith('s') && keyword.length > 3 ? keyword.slice(0, -1) : keyword;
+      
+      let results = [];
+      
+      // Search all portals
+      ['gov', 'industrial', 'utilities'].forEach(portal => {
+        allData[portal].forEach(t => {
+          const text = (t.title + ' ' + t.material).toLowerCase();
+          
+          // Match keyword or its singular form
+          const matchKeyword = !keyword || text.includes(keyword) || text.includes(keywordBase);
+          
+          // Match category (case-insensitive)
+          const matchCategory = !category || t.product_category.toLowerCase() === category;
+          
+          // Match city
+          const matchCity = !city || t.city.toLowerCase().includes(city);
+          
+          if (matchKeyword && matchCategory && matchCity) {
+            results.push({ ...t, portal });
+          }
+        });
+      });
+      
+      console.log('Search:', { keyword, keywordBase, category, city }, '-> Found:', results.length);
+      
+      document.getElementById('results').innerHTML = 
+        `<h3>Found ${results.length} results:</h3>` +
+        results.map(t => `
+          <div class="tender">
+            <strong>${t.tender_id}</strong> (${t.portal})<br>
+            ${t.title}<br>
+            <small>City: ${t.city} | Category: ${t.product_category} | ₹${t.estimated_cost_inr.toLocaleString()}</small>
+          </div>
+        `).join('');
+    }
+  </script>
+</body>
+</html>
+

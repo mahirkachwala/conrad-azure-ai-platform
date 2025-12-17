@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tender247 - Complete Tender Intelligence & Bidding Platform</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fafbfc;
+      color: #1a202c;
+    }
+    
+    .tender247-header {
+      background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo h1 {
+      font-size: 34px;
+      font-weight: 900;
+    }
+    
+    .logo p {
+      font-size: 14px;
+      margin-top: 4px;
+      opacity: 0.95;
+    }
+    
+    .header-nav {
+      display: flex;
+      gap: 22px;
+    }
+    
+    .header-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    
+    .header-nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+    
+    .filter-panel {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    
+    .filter-title {
+      color: #d97706;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+    
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 15px;
+    }
+    
+    .input-control {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .input-control label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 7px;
+    }
+    
+    .input-control input, .input-control select {
+      padding: 11px;
+      border: 2px solid #e2e8f0;
+      border-radius: 7px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+    
+    .input-control input:focus, .input-control select:focus {
+      outline: none;
+      border-color: #f59e0b;
+    }
+    
+    .btn-aggregate {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: white;
+      border: none;
+      padding: 13px 35px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-aggregate:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(217,119,6,0.3);
+    }
+    
+    .tender-results {
+      display: grid;
+      gap: 18px;
+    }
+    
+    .tender-card-247 {
+      background: white;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      border-left: 5px solid #f59e0b;
+      transition: all 0.3s;
+    }
+    
+    .tender-card-247:hover {
+      box-shadow: 0 4px 14px rgba(217,119,6,0.15);
+      transform: translateX(3px);
+    }
+    
+    .tender-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 15px;
+    }
+    
+    .tender-id-247 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #d97706;
+    }
+    
+    .portal-source {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .tender-title-247 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 12px;
+    }
+    
+    .tender-org-247 {
+      font-size: 15px;
+      color: #718096;
+      margin-bottom: 18px;
+    }
+    
+    .tender-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    
+    .info-box {
+      background: #f7fafc;
+      padding: 12px;
+      border-radius: 7px;
+    }
+    
+    .info-label {
+      font-size: 12px;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .info-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-top: 4px;
+    }
+    
+    .footer-247 {
+      background: #1a202c;
+      color: white;
+      text-align: center;
+      padding: 28px;
+      margin-top: 55px;
+    }
+    
+    .no-tender {
+      text-align: center;
+      padding: 70px;
+      color: #a0aec0;
+      font-size: 18px;
+    }
+    
+    .stats-bar {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 24px;
+      font-weight: 800;
+      color: #d97706;
+    }
+    
+    .stat-label {
+      font-size: 13px;
+      color: #92400e;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tender247-header">
+    <div class="header-container">
+      <div class="logo">
+        <h1>📑 Tender247</h1>
+        <p>Complete Tender Intelligence & Bidding Platform</p>
+      </div>
+      <div class="header-nav">
+        <a href="/">Home</a>
+        <a href="/chat.html">AI Chat</a>
+        <a href="/companies.html">Companies</a>
+        <a href="/portals/gem.html">GeM</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="filter-panel">
+      <h2 class="filter-title">🔎 Aggregate Tender Search</h2>
+      <form id="search-form">
+        <div class="filter-grid">
+          <div class="input-control">
+            <label>Keywords</label>
+            <input type="text" id="keyword-search" placeholder="Search tenders...">
+          </div>
+          <div class="input-control">
+            <label>Category</label>
+            <select id="category-select">
+              <option value="">All Categories</option>
+              <option value="wires-cables">Wires & Cables</option>
+              <option value="transformers">Transformers</option>
+              <option value="fmcg-packaging">FMCG Packaging</option>
+            </select>
+          </div>
+          <div class="input-control">
+            <label>Location</label>
+            <input type="text" id="location-input" placeholder="City...">
+          </div>
+          <div class="input-control">
+            <label>Max Budget (₹)</label>
+            <input type="number" id="max-budget" placeholder="e.g., 10000000">
+          </div>
+          <div class="input-control">
+            <button type="submit" class="btn-aggregate">Search All Tenders</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="stats-bar" id="stats-bar" style="display: none;">
+      <div class="stat-item">
+        <div class="stat-number" id="total-count">0</div>
+        <div class="stat-label">Total Tenders</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="total-value">₹0</div>
+        <div class="stat-label">Total Value</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="portal-count">0</div>
+        <div class="stat-label">Portals</div>
+      </div>
+    </div>
+
+    <div id="results">
+      <h2 style="color: #d97706; margin-bottom: 20px; font-weight: 800;">Aggregated Results (<span id="result-count">0</span>)</h2>
+      <div class="tender-results" id="tender-list">
+        <p class="no-tender">Search across all portals to find tenders</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-247">
+    <p style="font-size: 18px; font-weight: 700;">Tender247 - Your Complete Tender Intelligence Platform</p>
+    <p style="margin-top: 10px; font-size: 13px; opacity: 0.9;">Aggregating tenders from Government, Industrial & Utilities portals | Demo © 2025</p>
+  </div>
+
+  <script>
+    let allTenders = [];
+
+    fetch('/data/all-portals.json')
+      .then(res => res.json())
+      .then(data => {
+        allTenders = data.map(tender => ({
+          ...tender,
+          portal_name: tender.tender_id.startsWith('GOV') ? 'Government' :
+                      tender.tender_id.startsWith('IND') ? 'Industrial' : 'Utilities'
+        }));
+        renderTenders(allTenders.slice(0, 15));
+      });
+
+    function renderTenders(list) {
+      const container = document.getElementById('tender-list');
+      const count = document.getElementById('result-count');
+      const statsBar = document.getElementById('stats-bar');
+      
+      count.textContent = list.length;
+
+      if (list.length === 0) {
+        container.innerHTML = '<p class="no-tender">No tenders found</p>';
+        statsBar.style.display = 'none';
+        return;
+      }
+
+      const totalValue = list.reduce((sum, t) => sum + t.estimated_cost_inr, 0);
+      const portals = [...new Set(list.map(t => t.portal_name))];
+
+      document.getElementById('total-count').textContent = list.length;
+      document.getElementById('total-value').textContent = '₹' + (totalValue / 10000000).toFixed(1) + 'Cr';
+      document.getElementById('portal-count').textContent = portals.length;
+      statsBar.style.display = 'flex';
+
+      container.innerHTML = list.map(tender => `
+        <div class="tender-card-247">
+          <div class="tender-top">
+            <div class="tender-id-247">${tender.tender_id}</div>
+            <div class="portal-source">${tender.portal_name}</div>
+          </div>
+          <div class="tender-title-247">${tender.title}</div>
+          <div class="tender-org-247">🏢 ${tender.organisation}</div>
+          <div class="tender-info-grid">
+            <div class="info-box">
+              <div class="info-label">Location</div>
+              <div class="info-value">${tender.city}</div>
+            </div>
+            <div class="info-box">
+              <div class="info-label">Value</div>
+              <div class="info-value">₹${(tender.estimated_cost_inr / 100000).toFixed(1)}L</div>
+            </div>
+            <div class="info-box">
+              <div class="info-label">Deadline</div>
+              <div class="info-value">${new Date(tender.due_date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}</div>
+            </div>
+            <div class="info-box">
+              <div class="info-label">Category</div>
+              <div class="info-value">${tender.product_category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const keyword = document.getElementById('keyword-search').value.toLowerCase();
+      const category = document.getElementById('category-select').value;
+      const location = document.getElementById('location-input').value.toLowerCase();
+      const maxBudget = parseFloat(document.getElementById('max-budget').value) || Infinity;
+
+      const filtered = allTenders.filter(tender => {
+        const matchesKeyword = !keyword || 
+          tender.title.toLowerCase().includes(keyword) ||
+          tender.material.toLowerCase().includes(keyword);
+        
+        const matchesCategory = !category || tender.product_category === category;
+        const matchesLocation = !location || tender.city.toLowerCase().includes(location);
+        const matchesBudget = tender.estimated_cost_inr <= maxBudget;
+        
+        return matchesKeyword && matchesCategory && matchesLocation && matchesBudget;
+      });
+
+      renderTenders(filtered);
+    });
+  </script>
+</body>
+</html>

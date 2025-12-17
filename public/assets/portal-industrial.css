@@ -1,0 +1,351 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica Neue', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+.industrial-header {
+  background: linear-gradient(90deg, #334155 0%, #1e293b 100%);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 3px solid #f97316;
+}
+
+.logo {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
+.header-text h1 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.header-text p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  background: #1e293b;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #f97316;
+}
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.search-panel {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.search-panel h2 {
+  color: #f97316;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.industrial-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  color: #cbd5e1;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group select {
+  background: #0f172a;
+  border: 1px solid #475569;
+  color: #e2e8f0;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: #f97316;
+}
+
+.btn-industrial {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-industrial:hover {
+  transform: scale(1.05);
+}
+
+.results-section {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #334155;
+}
+
+.results-header h3 {
+  color: #f97316;
+  font-size: 1.4rem;
+}
+
+.count-badge {
+  background: #f97316;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.tender-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.tender-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.tender-card:hover {
+  border-color: #f97316;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+}
+
+.t-id {
+  background: #334155;
+  color: #f97316;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.t-title {
+  color: #f1f5f9;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.tender-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.meta-item {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.meta-label {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.t-cost {
+  color: #f97316;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.tender-actions {
+  margin-top: 1rem;
+}
+
+.btn-detail {
+  background: #f97316;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.btn-detail:hover {
+  background: #ea580c;
+}
+
+/* Buyer-Centric Styles */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.buyer-type-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.buyer-type-badge.industrial {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+  color: white;
+}
+
+.buyer-info-box {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid #f97316;
+  border-left: 4px solid #f97316;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.buyer-label {
+  font-size: 0.8rem;
+  color: #f97316;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.buyer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.requirement-box {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #475569;
+  border-left: 4px solid #94a3b8;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.req-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.req-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.t-status.active {
+  color: #22c55e;
+}
+
+.t-status.closing-soon {
+  color: #f59e0b;
+}
+
+.tender-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-download:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  transform: translateY(-1px);
+}
+
+.placeholder {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.industrial-footer {
+  background: #0f172a;
+  border-top: 1px solid #334155;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  color: #64748b;
+}

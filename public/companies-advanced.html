@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Company Credibility Analysis - AI Tender Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    .content {
+      padding: 30px;
+    }
+    .search-box {
+      margin-bottom: 30px;
+      display: flex;
+      gap: 10px;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .search-box button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .search-box button:hover {
+      opacity: 0.9;
+    }
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .company-card {
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .company-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+      transform: translateY(-2px);
+    }
+    .company-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .score-badge.excellent {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .score-badge.good {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+    .score-badge.fair {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+    .score-badge.poor {
+      background: #ffebee;
+      color: #c62828;
+    }
+    .confidence {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .chip {
+      background: #f5f5f5;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: #666;
+    }
+    .chip strong {
+      color: #333;
+    }
+    .signals-preview {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .signals-preview li {
+      margin-bottom: 4px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 30px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #999;
+    }
+    .signal-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .signal-row:last-child {
+      border-bottom: none;
+    }
+    .signal-name {
+      font-weight: 600;
+      color: #333;
+    }
+    .signal-score {
+      color: #667eea;
+      font-weight: 600;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    .nav-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔍 Advanced Company Credibility Analysis</h1>
+      <p>Data-backed credibility scoring with explainable signals</p>
+    </div>
+    
+    <div class="content">
+      <a href="/" class="nav-link">← Back to Home</a>
+      
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search company by name...">
+        <button onclick="searchCompany()">Search</button>
+        <button onclick="loadAllCompanies()">Show All</button>
+      </div>
+      
+      <div id="loading" class="loading" style="display: none;">
+        Loading credibility scores...
+      </div>
+      
+      <div id="companyGrid" class="company-grid"></div>
+    </div>
+  </div>
+  
+  <div id="detailModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalCompanyName">Company Details</h2>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  
+  <script>
+    let allCompanies = [];
+    
+    function getScoreClass(score) {
+      if (score >= 85) return 'excellent';
+      if (score >= 70) return 'good';
+      if (score >= 50) return 'fair';
+      return 'poor';
+    }
+    
+    function getScoreLabel(score) {
+      if (score >= 85) return 'Excellent';
+      if (score >= 70) return 'Good';
+      if (score >= 50) return 'Fair';
+      return 'Needs Improvement';
+    }
+    
+    function renderCompanyCard(data) {
+      const scoreClass = getScoreClass(data.score);
+      const scoreLabel = getScoreLabel(data.score);
+      
+      return `
+        <div class="company-card" onclick='showDetail(${JSON.stringify(data).replace(/'/g, "&apos;")})'>
+          <div class="company-name">${data.company}</div>
+          <div class="score-badge ${scoreClass}">
+            <span>${scoreLabel}</span>
+            <span style="font-size: 18px;">${data.score}/100</span>
+          </div>
+          <div class="confidence">Confidence: ${data.confidence}% • Updated: ${data.lastUpdated}</div>
+          <div class="chips">
+            <div class="chip"><strong>${data.signals.delivery.onTimePct}%</strong> on-time</div>
+            <div class="chip"><strong>${data.signals.payments.disputesPct.toFixed(1)}%</strong> disputes</div>
+            <div class="chip">${data.signals.certs.iso9001 ? '✔' : '✘'} ISO</div>
+            <div class="chip">${data.signals.certs.bis ? '✔' : '✘'} BIS</div>
+          </div>
+          <ul class="signals-preview">
+            ${data.explain.slice(0, 3).map(e => `<li>${e}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+    
+    function showDetail(data) {
+      document.getElementById('modalCompanyName').textContent = data.company;
+      
+      const content = `
+        <div class="score-badge ${getScoreClass(data.score)}" style="margin-bottom: 20px;">
+          <span>${getScoreLabel(data.score)}</span>
+          <span style="font-size: 20px;">${data.score}/100</span>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <strong>Confidence:</strong> ${data.confidence}% | <strong>Last Updated:</strong> ${data.lastUpdated}
+        </div>
+        
+        <h3 style="margin-bottom: 12px;">Signal Breakdown</h3>
+        <div style="background: #f9f9f9; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
+          <div class="signal-row">
+            <span class="signal-name">Compliance (15%)</span>
+            <span class="signal-score">${data.signals.compliance.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Delivery Performance (25%)</span>
+            <span class="signal-score">${data.signals.delivery.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Contract History (15%)</span>
+            <span class="signal-score">${data.signals.history.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Financial Health (20%)</span>
+            <span class="signal-score">${data.signals.financial.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Payment Behavior (10%)</span>
+            <span class="signal-score">${data.signals.payments.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Certifications (5%)</span>
+            <span class="signal-score">${data.signals.certs.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Organization Stability (5%)</span>
+            <span class="signal-score">${data.signals.org.score}/100</span>
+          </div>
+          <div class="signal-row">
+            <span class="signal-name">Risk Assessment (5%)</span>
+            <span class="signal-score">${data.signals.risk.score}/100</span>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 12px;">Detailed Explanation</h3>
+        <ul style="line-height: 1.8; color: #666;">
+          ${data.explain.map(e => `<li>${e}</li>`).join('')}
+        </ul>
+      `;
+      
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('detailModal').classList.add('active');
+    }
+    
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+    
+    async function loadAllCompanies() {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('companyGrid').innerHTML = '';
+      
+      try {
+        const response = await fetch('/api/credibility/all');
+        const data = await response.json();
+        allCompanies = data;
+        
+        document.getElementById('companyGrid').innerHTML = data.map(renderCompanyCard).join('');
+      } catch (error) {
+        console.error('Error loading companies:', error);
+        document.getElementById('companyGrid').innerHTML = '<p style="color: red;">Failed to load companies</p>';
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    }
+    
+    function searchCompany() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if (!query) {
+        loadAllCompanies();
+        return;
+      }
+      
+      const filtered = allCompanies.filter(c => c.company.toLowerCase().includes(query));
+      document.getElementById('companyGrid').innerHTML = filtered.map(renderCompanyCard).join('');
+    }
+    
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') searchCompany();
+    });
+    
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target.id === 'detailModal') closeModal();
+    });
+    
+    loadAllCompanies();
+  </script>
+</body>
+</html>

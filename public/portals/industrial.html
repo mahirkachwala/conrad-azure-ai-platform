@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Supply Network - B2B RFPs</title>
+  <link rel="stylesheet" href="/assets/portal-industrial.css">
+</head>
+<body>
+<header class="industrial-header">
+  <div class="logo">⚙️ <span>ISN</span></div>
+  <div class="header-text">
+    <h1>Industrial Supply Network</h1>
+    <p>B2B Procurement & Supply Chain</p>
+  </div>
+</header>
+
+<nav class="nav-links">
+  <a href="/">Main Search</a>
+  <a href="/chat.html">AI Chat Analysis</a>
+  <a href="/portals/industrial.html" class="active">Industrial Portal</a>
+</nav>
+
+<main class="main-content">
+  <div class="search-panel">
+    <h2>Find RFPs & Procurement Opportunities</h2>
+    <form id="search-form" class="industrial-form">
+      <div class="input-group">
+        <label>Keywords <span class="required">*</span></label>
+        <input type="text" id="keyword" name="keyword" placeholder="e.g., control cable, HT cable" required>
+      </div>
+      <div class="input-group">
+        <label>Category <span class="required">*</span></label>
+        <select id="category" name="category" required>
+          <option value="">-- Select Category --</option>
+          <option value="wires-cables">Wires & Cables</option>
+          <option value="transformers">Transformers</option>
+          <option value="fmcg-packaging">FMCG Packaging</option>
+        </select>
+      </div>
+      
+      <!-- Cable-Specific Filters -->
+      <div class="cable-filters" id="cable-filters" style="display: none;">
+        <div class="input-group">
+          <label>Cable Type <span class="required">*</span></label>
+          <select id="cable-type" name="cable-type">
+            <option value="">-- Any Cable Type --</option>
+            <option value="ht-cable">HT Cable (High Tension)</option>
+            <option value="lt-cable">LT Cable (Low Tension)</option>
+            <option value="control-cable">Control Cable</option>
+            <option value="ehv-cable">EHV Cable (Extra High Voltage)</option>
+            <option value="instrumentation-cable">Instrumentation Cable</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Voltage Rating</label>
+          <select id="voltage" name="voltage">
+            <option value="">-- Any Voltage --</option>
+            <option value="1.1kv">1.1 kV (LT)</option>
+            <option value="3.3kv">3.3 kV</option>
+            <option value="6.6kv">6.6 kV</option>
+            <option value="11kv">11 kV</option>
+            <option value="22kv">22 kV</option>
+            <option value="33kv">33 kV</option>
+            <option value="66kv">66 kV (EHV)</option>
+            <option value="110kv">110 kV (EHV)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <label>Location <span class="required">*</span></label>
+        <input type="text" id="city" name="city" placeholder="e.g., Mumbai, Delhi" required>
+      </div>
+      <div class="input-group">
+        <label>Due Date (Before) <span class="required">*</span></label>
+        <input type="date" id="due-date" name="due-date" required>
+      </div>
+      <p class="required-note">* All fields are required</p>
+      <button type="submit" class="btn-industrial">Search RFPs</button>
+    </form>
+  </div>
+
+  <div class="results-section">
+    <div class="results-header">
+      <h3>RFP Listings</h3>
+      <span class="count-badge" id="result-count">0</span>
+    </div>
+    <div class="tender-list" id="tender-list">
+      <p class="placeholder">Loading tenders...</p>
+    </div>
+  </div>
+</main>
+
+<footer class="industrial-footer">
+  Industrial Supply Network © 2025 | Powered by B2B Solutions
+</footer>
+
+<script src="/assets/portal-industrial.js"></script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFP Dashboard - AI-Ready Tender Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+    }
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    .nav-link {
+      display: inline-block;
+      margin: 20px 30px 0 30px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .tabs {
+      display: flex;
+      background: #f8f9fa;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .tab {
+      flex: 1;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      font-weight: 600;
+      color: #666;
+    }
+    .tab.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+      background: white;
+    }
+    .tab:hover {
+      background: #f0f0f0;
+    }
+    .tab-content {
+      display: none;
+      padding: 30px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .messages {
+      height: 400px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: #f9f9f9;
+    }
+    .message {
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+    .message.user {
+      background: #e3f2fd;
+      text-align: right;
+    }
+    .message.assistant {
+      background: white;
+      border: 1px solid #e0e0e0;
+    }
+    .message strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+      color: #666;
+    }
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+    .input-group input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+    .btn-secondary:hover {
+      background: #eeeeee;
+    }
+    .card {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .reminder-list {
+      list-style: none;
+    }
+    .reminder-item {
+      padding: 10px;
+      background: white;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 4px solid #667eea;
+    }
+    .feasibility-score {
+      text-align: center;
+      padding: 30px;
+    }
+    .score-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+    }
+    .score-high { background: linear-gradient(135deg, #43a047, #66bb6a); }
+    .score-medium { background: linear-gradient(135deg, #fb8c00, #ffa726); }
+    .score-low { background: linear-gradient(135deg, #e53935, #ef5350); }
+    .reasons-list {
+      text-align: left;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.8;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .rfp-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .rfp-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+    .rfp-card h4 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .rfp-meta {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+    .countdown {
+      font-size: 24px;
+      font-weight: 700;
+      color: #667eea;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 RFP Dashboard</h1>
+      <p>Intelligent tender analysis with AI-powered Q&A, reminders, and feasibility scoring</p>
+    </div>
+    
+    <a href="/" class="nav-link">← Back to Home</a>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('ask')">💬 Ask the RFP</div>
+      <div class="tab" onclick="switchTab('reminders')">⏰ Reminders</div>
+      <div class="tab" onclick="switchTab('feasibility')">📈 Feasibility</div>
+      <div class="tab" onclick="switchTab('compare')">🔍 Compare RFPs</div>
+    </div>
+    
+    <div id="askTab" class="tab-content active">
+      <div class="chat-container">
+        <h2 style="margin-bottom: 20px;">Ask Questions About Your RFP</h2>
+        <div id="messages" class="messages">
+          <div class="empty-state">
+            <p>💡 Upload a tender document and ask questions about it!</p>
+            <p style="margin-top: 10px; font-size: 14px;">Example: "What is the deadline?" or "What certifications are required?"</p>
+          </div>
+        </div>
+        <div class="input-group">
+          <input type="text" id="questionInput" placeholder="Ask a question about the RFP..." onkeypress="if(event.key==='Enter') askQuestion()">
+          <button class="btn" onclick="askQuestion()">Send</button>
+          <button class="btn btn-secondary" onclick="clearChat()">Clear</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="remindersTab" class="tab-content">
+      <div class="card">
+        <h3>⏰ Deadline Tracking & Reminders</h3>
+        <div id="deadline-info" class="loading">Select an RFP to view deadline information</div>
+        <div id="reminder-controls" style="margin-top: 20px; display: none;">
+          <button class="btn" onclick="setReminder(60)">Remind in 1 hour</button>
+          <button class="btn" onclick="setReminder(120)">Remind in 2 hours</button>
+          <button class="btn" onclick="setReminder(1440)">Remind in 1 day</button>
+          <button class="btn btn-secondary" onclick="downloadCalendar()">📅 Add to Calendar</button>
+          <button class="btn btn-secondary" onclick="openGmailCompose()">✉️ Email Reminder</button>
+        </div>
+        <ul id="reminderList" class="reminder-list" style="margin-top: 20px;"></ul>
+      </div>
+    </div>
+    
+    <div id="feasibilityTab" class="tab-content">
+      <div class="card">
+        <h3>📈 Bid Feasibility Analysis</h3>
+        <div id="feasibility-result" class="loading">Loading feasibility analysis...</div>
+      </div>
+    </div>
+    
+    <div id="compareTab" class="tab-content">
+      <div class="card">
+        <h3>🔍 Smart RFP Comparison</h3>
+        <div style="margin-bottom: 20px;">
+          <button class="btn btn-secondary" onclick="loadComparison('cost')">Sort by Cost</button>
+          <button class="btn btn-secondary" onclick="loadComparison('urgency')">Sort by Urgency</button>
+          <button class="btn btn-secondary" onclick="loadComparison('risk')">Sort by Risk</button>
+        </div>
+        <div id="comparison-grid" class="comparison-grid loading">Loading RFPs...</div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let currentRfpId = null;
+    
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`.tab:nth-child(${['ask','reminders','feasibility','compare'].indexOf(tab)+1})`).classList.add('active');
+      document.getElementById(tab + 'Tab').classList.add('active');
+      
+      if (tab === 'reminders' && currentRfpId) loadReminders();
+      if (tab === 'feasibility' && currentRfpId) loadFeasibility();
+      if (tab === 'compare') loadComparison();
+    }
+    
+    async function askQuestion() {
+      const input = document.getElementById('questionInput');
+      const question = input.value.trim();
+      if (!question) return;
+      
+      if (!currentRfpId) {
+        alert('Please upload an RFP document first');
+        return;
+      }
+      
+      addMessage('user', question);
+      input.value = '';
+      input.disabled = true;
+      
+      try {
+        const response = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rfpId: currentRfpId, question })
+        });
+        
+        const data = await response.json();
+        addMessage('assistant', data.answer || 'No response');
+      } catch (error) {
+        addMessage('assistant', 'Error: ' + error.message);
+      } finally {
+        input.disabled = false;
+        input.focus();
+      }
+    }
+    
+    function addMessage(role, text) {
+      const messagesDiv = document.getElementById('messages');
+      if (messagesDiv.querySelector('.empty-state')) {
+        messagesDiv.innerHTML = '';
+      }
+      
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+      messageDiv.innerHTML = `<strong>${role === 'user' ? 'You' : 'AI Assistant'}</strong>${text}`;
+      messagesDiv.appendChild(messageDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    async function clearChat() {
+      if (!currentRfpId || !confirm('Clear conversation history?')) return;
+      
+      try {
+        await fetch(`/api/ask/history/${currentRfpId}`, { method: 'DELETE' });
+        document.getElementById('messages').innerHTML = '<div class="empty-state"><p>Conversation cleared</p></div>';
+      } catch (error) {
+        alert('Failed to clear conversation');
+      }
+    }
+    
+    async function setReminder(minutes) {
+      if (!currentRfpId) return;
+      
+      try {
+        const response = await fetch('/api/reminders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rfpId: currentRfpId, minutesBefore: minutes })
+        });
+        
+        const data = await response.json();
+        alert(data.message || 'Reminder set!');
+        loadReminders();
+      } catch (error) {
+        alert('Failed to set reminder');
+      }
+    }
+    
+    async function loadReminders() {
+      if (!currentRfpId) return;
+      
+      document.getElementById('reminder-controls').style.display = 'block';
+      
+      try {
+        const response = await fetch(`/api/reminders/${currentRfpId}`);
+        const data = await response.json();
+        
+        const list = document.getElementById('reminderList');
+        if (data.reminders?.length) {
+          list.innerHTML = data.reminders.map(r => `
+            <li class="reminder-item">
+              <strong>${r.channel.toUpperCase()}</strong> at ${new Date(r.remindAt).toLocaleString()}
+              <span style="color: ${r.status === 'scheduled' ? '#667eea' : '#999'}"> (${r.status})</span>
+            </li>
+          `).join('');
+        } else {
+          list.innerHTML = '<li style="color: #999;">No reminders set</li>';
+        }
+      } catch (error) {
+        console.error('Failed to load reminders', error);
+      }
+    }
+    
+    function downloadCalendar() {
+      if (!currentRfpId) return;
+      window.open(`/api/reminders/ics/${currentRfpId}`, '_blank');
+    }
+    
+    function openGmailCompose() {
+      const subject = `RFP Reminder: ${currentRfpId}`;
+      const body = `Don't forget to submit your bid for ${currentRfpId}`;
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+    }
+    
+    async function loadFeasibility() {
+      if (!currentRfpId) return;
+      
+      const resultDiv = document.getElementById('feasibility-result');
+      resultDiv.innerHTML = '<div class="loading">Analyzing feasibility...</div>';
+      
+      try {
+        const response = await fetch(`/api/feasibility/${currentRfpId}`);
+        const data = await response.json();
+        
+        const scoreClass = data.label === 'High' ? 'score-high' : data.label === 'Medium' ? 'score-medium' : 'score-low';
+        
+        resultDiv.innerHTML = `
+          <div class="feasibility-score">
+            <div class="score-circle ${scoreClass}">${data.score}</div>
+            <h2>${data.label} Feasibility</h2>
+            <p style="color: #666; margin-bottom: 20px;">${data.rfpTitle || currentRfpId}</p>
+            <ul class="reasons-list">
+              ${data.reasons.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = '<p style="color: red;">Failed to load feasibility analysis</p>';
+      }
+    }
+    
+    async function loadComparison(sortBy = 'urgency') {
+      const grid = document.getElementById('comparison-grid');
+      grid.innerHTML = '<div class="loading">Loading RFPs...</div>';
+      
+      try {
+        const response = await fetch(`/api/compare?sortBy=${sortBy}`);
+        const data = await response.json();
+        
+        if (data.items?.length) {
+          grid.className = 'comparison-grid';
+          grid.innerHTML = data.items.map(rfp => `
+            <div class="rfp-card" onclick="selectRfp('${rfp.id}')">
+              <h4>${rfp.title}</h4>
+              <div class="rfp-meta">📍 ${rfp.buyerName} • ${rfp.city}</div>
+              <div class="rfp-meta">💰 ${rfp.estCost ? '₹' + rfp.estCost.toLocaleString() : 'N/A'}</div>
+              <div class="rfp-meta">📅 ${rfp.daysLeft >= 0 ? rfp.daysLeft + ' days left' : 'Overdue'}</div>
+              <div class="rfp-meta">
+                Risk: <strong style="color: ${rfp.risk >= 70 ? '#e53935' : rfp.risk >= 40 ? '#fb8c00' : '#43a047'}">${rfp.risk}%</strong>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          grid.innerHTML = '<div class="empty-state"><p>No RFPs in database. Upload documents to get started!</p></div>';
+        }
+      } catch (error) {
+        grid.innerHTML = '<p style="color: red;">Failed to load comparison data</p>';
+      }
+    }
+    
+    function selectRfp(rfpId) {
+      currentRfpId = rfpId;
+      alert(`Selected RFP: ${rfpId}\nNow you can use Ask, Reminders, and Feasibility features!`);
+      switchTab('ask');
+    }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('rfpId')) {
+      currentRfpId = urlParams.get('rfpId');
+      loadFeasibility();
+      loadComparison();
+    } else {
+      loadComparison();
+    }
+  </script>
+</body>
+</html>

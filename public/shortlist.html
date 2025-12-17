@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opportunity Radar - Multi-RFP Comparison</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #1a202c;
+      padding: 24px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 {
+      font-size: 36px;
+      color: white;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .subtitle {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .comparison-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .comparison-table td {
+      padding: 14px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 14px;
+    }
+    .comparison-table tr:hover {
+      background: #f7fafc;
+    }
+    .comparison-table input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .win-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      color: white;
+    }
+    .win-high { background: #10b981; }
+    .win-medium { background: #f59e0b; }
+    .win-low { background: #ef4444; }
+    .spec-match {
+      font-weight: 600;
+      color: #667eea;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+    .spinner {
+      border: 3px solid #e2e8f0;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .recommendation {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 24px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Opportunity Radar</h1>
+    <p class="subtitle">Compare multiple RFPs side-by-side to identify the best bidding opportunities</p>
+    
+    <div class="card">
+      <div class="controls">
+        <button onclick="loadOpportunities()">🔍 Scan RFPs</button>
+        <button onclick="compareSelected()" id="compareBtn" disabled>📊 Compare Selected</button>
+        <button onclick="pickBest()" id="pickBtn" style="display: none; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          ⭐ Pick Best Opportunity
+        </button>
+      </div>
+      
+      <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p style="text-align: center; color: #64748b;">Analyzing RFPs...</p>
+      </div>
+      
+      <div id="emptyState" class="empty-state">
+        <p style="font-size: 18px; margin-bottom: 12px;">📋 No opportunities loaded</p>
+        <p>Click "Scan RFPs" to load and analyze available tenders</p>
+      </div>
+      
+      <div id="tableContainer" style="display: none;">
+        <table class="comparison-table" id="comparisonTable">
+          <thead>
+            <tr>
+              <th style="width: 50px;">Select</th>
+              <th>RFP ID</th>
+              <th>Organization</th>
+              <th>Title</th>
+              <th>Value (Cr)</th>
+              <th>Days Left</th>
+              <th>Win %</th>
+              <th>Spec Match</th>
+              <th>Risk Level</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      
+      <div id="recommendation" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    let opportunities = [];
+    let selectedRfps = [];
+    let bestRfp = null;
+    
+    async function loadOpportunities() {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('tableContainer').style.display = 'none';
+      
+      try {
+        // Load all tenders
+        const response = await fetch('/data/all-portals.json');
+        const tenders = await response.json();
+        
+        // Filter to active tenders (due in next 90 days)
+        const today = new Date();
+        const activeTenders = tenders.filter(t => {
+          const dueDate = new Date(t.due_date);
+          const daysLeft = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+          return daysLeft > 0 && daysLeft <= 90;
+        }).slice(0, 10); // Top 10 for demo
+        
+        // Simulate analysis results (in real system, would call API)
+        opportunities = activeTenders.map(t => {
+          const dueDate = new Date(t.due_date);
+          const daysLeft = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+          
+          // Simulate scores
+          const specMatch = Math.floor(Math.random() * 30) + 70; // 70-100%
+          const winProb = Math.floor((specMatch * 0.45) + (Math.random() * 30) + 20); // Weighted
+          const riskLevel = winProb >= 75 ? 'LOW' : winProb >= 50 ? 'MEDIUM' : 'HIGH';
+          
+          return {
+            ...t,
+            daysLeft,
+            winProb,
+            specMatch,
+            riskLevel
+          };
+        });
+        
+        displayOpportunities();
+      } catch (error) {
+        alert('Error loading opportunities: ' + error.message);
+        document.getElementById('emptyState').style.display = 'block';
+      } finally {
+        document.getElementById('loading').style.display = 'none';
+      }
+    }
+    
+    function displayOpportunities() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      
+      opportunities.forEach((opp, idx) => {
+        const winClass = opp.winProb >= 75 ? 'win-high' : opp.winProb >= 50 ? 'win-medium' : 'win-low';
+        const winLabel = opp.winProb >= 75 ? 'HIGH' : opp.winProb >= 50 ? 'MEDIUM' : 'LOW';
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><input type="checkbox" onchange="toggleSelection('${opp.tender_id}')" id="chk_${idx}"></td>
+          <td><strong>${opp.tender_id}</strong></td>
+          <td>${opp.organisation}</td>
+          <td>${opp.title}</td>
+          <td>₹${(opp.estimated_cost_inr / 10000000).toFixed(2)}</td>
+          <td>${opp.daysLeft} days</td>
+          <td><span class="win-badge ${winClass}">${opp.winProb}% ${winLabel}</span></td>
+          <td><span class="spec-match">${opp.specMatch}%</span></td>
+          <td>${opp.riskLevel}</td>
+        `;
+        tbody.appendChild(row);
+      });
+      
+      document.getElementById('tableContainer').style.display = 'block';
+    }
+    
+    function toggleSelection(tenderId) {
+      const idx = selectedRfps.indexOf(tenderId);
+      if (idx === -1) {
+        selectedRfps.push(tenderId);
+      } else {
+        selectedRfps.splice(idx, 1);
+      }
+      
+      document.getElementById('compareBtn').disabled = selectedRfps.length < 2;
+    }
+    
+    function compareSelected() {
+      if (selectedRfps.length < 2) {
+        alert('Please select at least 2 RFPs to compare');
+        return;
+      }
+      
+      const selected = opportunities.filter(o => selectedRfps.includes(o.tender_id));
+      
+      // Find best opportunity (highest win prob)
+      bestRfp = selected.reduce((best, curr) => 
+        curr.winProb > best.winProb ? curr : best
+      );
+      
+      const recDiv = document.getElementById('recommendation');
+      recDiv.innerHTML = `
+        ✨ <strong>Recommended Best Opportunity:</strong> ${bestRfp.tender_id} - ${bestRfp.organisation}<br>
+        <small>Win Probability: ${bestRfp.winProb}% | Spec Match: ${bestRfp.specMatch}% | Value: ₹${(bestRfp.estimated_cost_inr / 10000000).toFixed(2)} Cr</small>
+      `;
+      recDiv.style.display = 'block';
+      document.getElementById('pickBtn').style.display = 'inline-block';
+    }
+    
+    function pickBest() {
+      if (!bestRfp) {
+        alert('No best opportunity selected');
+        return;
+      }
+      
+      // Redirect to RFP automation with selected tender
+      window.location.href = `/rfp-automation.html?rfp=${bestRfp.tender_id}`;
+    }
+  </script>
+</body>
+</html>

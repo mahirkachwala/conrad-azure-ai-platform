@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Verification - AI Tender Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .back-link {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .company-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 10px;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 10px;
+      background: #48bb78;
+      color: white;
+    }
+
+    .credibility-badge {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 20px;
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+
+    .label-well-established { background: #48bb78; color: white; }
+    .label-moderate { background: #ed8936; color: white; }
+    .label-risky { background: #f56565; color: white; }
+    .label-unknown { background: #a0aec0; color: white; }
+
+    .oc-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background: #3182ce;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .oc-link:hover {
+      background: #2c5282;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f7fafc;
+    }
+
+    .info-label {
+      color: #718096;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .info-value {
+      color: #1a202c;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: right;
+      max-width: 60%;
+    }
+
+    .status-active {
+      color: #48bb78;
+      font-weight: 700;
+    }
+
+    .status-inactive {
+      color: #f56565;
+      font-weight: 700;
+    }
+
+    .flags {
+      list-style: none;
+    }
+
+    .flag-item {
+      padding: 10px 14px;
+      margin: 8px 0;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .green-flag {
+      background: #c6f6d5;
+      color: #276749;
+      border-left: 4px solid #48bb78;
+    }
+
+    .score-breakdown {
+      background: #f7fafc;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .score-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .score-item-label {
+      color: #4a5568;
+    }
+
+    .score-item-value {
+      font-weight: 600;
+      color: #1a202c;
+    }
+
+    .score-visual {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="/chat.html" class="back-link">← Back to Chat</a>
+      <h1 class="company-name" id="companyName">Loading...</h1>
+      <span class="verified-badge">
+        ✓ Verified by OpenCorporates
+      </span>
+      <div id="credibilityBadges"></div>
+      <a id="ocLink" href="#" target="_blank" class="oc-link">
+        🔗 View Full Analysis on OpenCorporates
+      </a>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 class="card-title">🏢 Company Registration</h2>
+        <div class="info-row">
+          <span class="info-label">Jurisdiction</span>
+          <span class="info-value" id="jurisdiction">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Company Type</span>
+          <span class="info-value" id="companyType">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status</span>
+          <span class="info-value" id="status">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Incorporation Date</span>
+          <span class="info-value" id="incorporationDate">-</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Company Age</span>
+          <span class="info-value" id="ageYears">-</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">📊 Credibility Assessment</h2>
+        <div class="score-visual">
+          <div class="score-circle" id="scoreCircle">-</div>
+          <div style="font-size: 18px; font-weight: 600; color: #2d3748;" id="scoreLabel">-</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">🔍 Verification Signals</h2>
+        <div class="score-breakdown">
+          <div class="score-item">
+            <span class="score-item-label">Status</span>
+            <span class="score-item-value" id="signalStatus">-</span>
+          </div>
+          <div class="score-item">
+            <span class="score-item-label">Age (years)</span>
+            <span class="score-item-value" id="signalAge">-</span>
+          </div>
+          <div class="score-item">
+            <span class="score-item-label">Address on File</span>
+            <span class="score-item-value" id="signalAddress">-</span>
+          </div>
+          <div class="score-item">
+            <span class="score-item-label">Previous Names</span>
+            <span class="score-item-value" id="signalPreviousNames">-</span>
+          </div>
+          <div class="score-item">
+            <span class="score-item-label">Branch/Subsidiary</span>
+            <span class="score-item-value" id="signalBranch">-</span>
+          </div>
+          <div class="score-item">
+            <span class="score-item-label">Filings Count</span>
+            <span class="score-item-value" id="signalFilings">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">✅ Verification Summary</h2>
+      <ul class="flags" id="greenFlags">
+        <li class="flag-item">Loading...</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const companyName = urlParams.get('name');
+
+    if (!companyName) {
+      alert('Company name not provided');
+      window.location.href = '/chat.html';
+    }
+
+    fetch('/data/companies.json')
+      .then(res => res.json())
+      .then(companies => {
+        const company = companies.find(c => c.name === companyName);
+        
+        if (!company) {
+          alert('Company not found');
+          window.location.href = '/chat.html';
+          return;
+        }
+
+        document.getElementById('companyName').textContent = company.name;
+        
+        const labelClass = {
+          'WELL_ESTABLISHED': 'label-well-established',
+          'MODERATE': 'label-moderate',
+          'RISKY': 'label-risky',
+          'UNKNOWN': 'label-unknown'
+        }[company.credibility_label] || 'label-unknown';
+        
+        const labelText = {
+          'WELL_ESTABLISHED': 'Well Established',
+          'MODERATE': 'Moderate Risk',
+          'RISKY': 'High Risk',
+          'UNKNOWN': 'Unverified'
+        }[company.credibility_label] || 'Unknown';
+
+        document.getElementById('credibilityBadges').innerHTML = `
+          <span class="credibility-badge ${labelClass}">
+            ${labelText}
+          </span>
+        `;
+
+        document.getElementById('ocLink').href = company.oc_url || '#';
+        
+        document.getElementById('jurisdiction').textContent = company.jurisdiction || '-';
+        document.getElementById('companyType').textContent = company.company_type || '-';
+        
+        const statusEl = document.getElementById('status');
+        statusEl.textContent = company.status || 'Unknown';
+        statusEl.className = 'info-value ' + (company.status === 'Active' ? 'status-active' : 'status-inactive');
+        
+        document.getElementById('incorporationDate').textContent = company.incorporation_date || '-';
+        document.getElementById('ageYears').textContent = company.age_years ? `${company.age_years.toFixed(1)} years` : '-';
+
+        const score = company.raw_score || 0;
+        const scoreCircle = document.getElementById('scoreCircle');
+        scoreCircle.textContent = score;
+        
+        let circleColor = '#a0aec0';
+        if (score >= 60) circleColor = '#48bb78';
+        else if (score >= 30) circleColor = '#ed8936';
+        else circleColor = '#f56565';
+        scoreCircle.style.background = circleColor;
+        
+        document.getElementById('scoreLabel').textContent = `Credibility Score: ${score}/100`;
+
+        const signals = company.signals || {};
+        document.getElementById('signalStatus').textContent = signals.status || '-';
+        document.getElementById('signalAge').textContent = signals.ageYears ? signals.ageYears.toFixed(1) : '-';
+        document.getElementById('signalAddress').textContent = signals.hasAddress ? '✓ Yes' : '✗ No';
+        document.getElementById('signalPreviousNames').textContent = signals.hasPreviousNames ? '⚠ Yes' : '✓ No';
+        document.getElementById('signalBranch').textContent = signals.isBranch ? 'Yes' : 'No';
+        document.getElementById('signalFilings').textContent = signals.filingsCount !== null ? signals.filingsCount : 'N/A';
+
+        const greenFlagsList = document.getElementById('greenFlags');
+        if (company.green_flags && company.green_flags.length > 0) {
+          greenFlagsList.innerHTML = company.green_flags.map(flag => 
+            `<li class="flag-item green-flag">✓ ${flag}</li>`
+          ).join('');
+        } else {
+          greenFlagsList.innerHTML = '<li class="flag-item green-flag">✓ Company verified via OpenCorporates global registry</li>';
+        }
+      })
+      .catch(err => {
+        console.error('Error loading company data:', err);
+        alert('Failed to load company information');
+      });
+  </script>
+</body>
+</html>

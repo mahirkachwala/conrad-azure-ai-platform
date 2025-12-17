@@ -1,0 +1,22 @@
+SKU_ID,Product_Name,Type,Conductor_Material,Conductor_Area_mm2,Voltage_Rating_kV,Insulation,Armoured,No_of_Cores,Temperature_Range,Standard,Unit_Weight_kg_per_km,Unit_Price_per_km,Lead_Time_Days,Description
+CBL004,3C x 10 sqmm Control Cable,Control Cable,Copper,10,1.1,PVC,No,3,-10 to 70,IS 1554,120,45000,7,"3 core 10 sq mm copper control cable PVC insulated unarmoured 1.1kV IS 1554 compliant"
+CBL010,7C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,7,-10 to 70,IS 1554,180,62000,8,"7 core 2.5 sq mm copper control cable PVC insulated armoured 1.1kV multicore"
+CBL017,12C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,12,-10 to 70,IS 1554,220,78000,10,"12 core 1.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL024,6C x 4 sqmm Control Cable,Control Cable,Copper,4,1.1,PVC,Yes,6,-10 to 70,IS 1554,165,58000,8,"6 core 4 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554 compliant"
+CBL029,19C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,19,-10 to 70,IS 1554,350,125000,12,"19 core 2.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL035,10C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,10,-10 to 70,IS 1554,195,68000,9,"10 core 1.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL044,5C x 6 sqmm Control Cable,Control Cable,Copper,6,1.1,PVC,Yes,5,-10 to 70,IS 1554,145,52000,8,"5 core 6 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL047,8C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,8,-10 to 70,IS 1554,200,72000,9,"8 core 2.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554 multicore"
+CBL053,14C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,14,-10 to 70,IS 1554,265,92000,10,"14 core 1.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL060,24C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,24,-10 to 70,IS 1554,420,155000,14,"24 core 1.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL066,6C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,6,-10 to 70,IS 1554,155,55000,8,"6 core 2.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL070,16C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,16,-10 to 70,IS 1554,320,115000,11,"16 core 2.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL075,4C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,4,-10 to 70,IS 1554,105,38000,6,"4 core 2.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL078,8C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,8,-10 to 70,IS 1554,165,58000,8,"8 core 1.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL080,37C x 2.5 sqmm Control Cable,Control Cable,Copper,2.5,1.1,PVC,Yes,37,-10 to 70,IS 1554,580,215000,16,"37 core 2.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL083,6C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,6,-10 to 70,IS 1554,135,48000,7,"6 core 1.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+CBL093,30C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,30,-10 to 70,IS 1554,485,178000,15,"30 core 1.5 sq mm copper multicore control cable PVC insulated armoured 1.1kV IS 1554"
+CBL097,4C x 1.5 sqmm Control Cable,Control Cable,Copper,1.5,1.1,PVC,Yes,4,-10 to 70,IS 1554,85,32000,5,"4 core 1.5 sq mm copper control cable PVC insulated armoured 1.1kV IS 1554"
+
+
+

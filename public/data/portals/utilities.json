@@ -1,0 +1,1194 @@
+[
+  {
+    "tender_id": "UTL-300",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Tata Power Company Ltd",
+    "title": "11kV HT XLPE Cable 3C x 95mm² Al - Mumbai Network",
+    "material": "3 Core 95 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Mumbai",
+    "publish_date": "2025-11-26",
+    "due_date": "2026-01-12T12:00:00.000Z",
+    "estimated_cost_inr": 5612800,
+    "contact_email": "cables@tatapower.com",
+    "contact_phone": "+91-22-66657373",
+    "documents": [
+      "/docs/300.pdf"
+    ],
+    "detail_url": "/rfp/UTL-300.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_35",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@tatapower.com",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/UTL-300.pdf"
+    },
+    "pdf_url": "/rfps/UTL-300.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "45kV",
+        "conductor": "Aluminium",
+        "size": "300 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "20",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      },
+      {
+        "item_no": 3,
+        "cable_type": "Instrumentation Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "16 sqmm",
+        "cores": "4",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 45kV Aluminium 300 sqmm 1C Control Cable 1.1kV Copper 2.5 sqmm 20C Instrumentation Cable 0.6kV Copper 16 sqmm 4C",
+    "combined_title": "45kV HT Cable 1C x 300 sqmm + 1.1kV Control Cable 20C x 2.5 sqmm + 0.6kV Instrumentation Cable 4C x 16 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-301",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Adani Electricity Mumbai Ltd",
+    "title": "LT Power Cable 4C x 120mm² Al XLPE - Delhi Power",
+    "material": "4 Core 120 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Delhi",
+    "publish_date": "2025-12-03",
+    "due_date": "2026-01-07T12:00:00.000Z",
+    "estimated_cost_inr": 640000,
+    "contact_email": "procurement@adanielectricity.com",
+    "contact_phone": "+91-22-61696169",
+    "documents": [
+      "/docs/301.pdf"
+    ],
+    "detail_url": "/rfp/UTL-301.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_50",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "procurement@adanielectricity.com",
+      "meeting_subject": "Pre-bid Meeting Request - UTL-301 - [Your Company Name]",
+      "meeting_venue": "Adani Electricity Mumbai Ltd, Delhi",
+      "pdf_url": "/rfps/UTL-301.pdf"
+    },
+    "pdf_url": "/rfps/UTL-301.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "100 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 100 sqmm 4C",
+    "combined_title": "1.1kV LT Cable 4C x 100 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-302",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "CESC Ltd (Kolkata)",
+    "title": "EHV Cable 66kV 1C x 500mm² Al - Bangalore Transmission",
+    "material": "1 Core 500 sqmm Aluminium XLPE 66kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Bangalore",
+    "publish_date": "2025-12-25",
+    "due_date": "2026-01-31T12:00:00.000Z",
+    "estimated_cost_inr": 32040000,
+    "contact_email": "cables@cesc.co.in",
+    "contact_phone": "+91-33-22253535",
+    "documents": [
+      "/docs/302.pdf"
+    ],
+    "detail_url": "/rfp/UTL-302.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 8,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nCESC Ltd (Kolkata),\nProcurement Department,\nBangalore, India - 400001",
+      "envelope_marking": "BID FOR UTL-302 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/UTL-302.pdf"
+    },
+    "pdf_url": "/rfps/UTL-302.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "110kV",
+        "conductor": "Aluminium",
+        "size": "630 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 8,
+        "standard": "IEC 60840"
+      }
+    ],
+    "search_index": "EHV Cable 110kV Aluminium 630 sqmm 1C",
+    "combined_title": "110kV EHV Cable 1C x 630 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-303",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Torrent Power Ltd",
+    "title": "22kV HT XLPE Cable 3C x 240mm² Al - Chennai Distribution",
+    "material": "3 Core 240 sqmm Aluminium XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Chennai",
+    "publish_date": "2025-12-12",
+    "due_date": "2026-01-27T12:00:00.000Z",
+    "estimated_cost_inr": 7604800,
+    "contact_email": "cables@torrentpower.com",
+    "contact_phone": "+91-79-26446000",
+    "documents": [
+      "/docs/303.pdf"
+    ],
+    "detail_url": "/rfp/UTL-303.html",
+    "status": "active",
+    "pricing_tier": "GOOD_5",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/UTL-303",
+      "registration_opens": "13 December 2025",
+      "registration_closes": "20 January 2026",
+      "pdf_url": "/rfps/UTL-303.pdf"
+    },
+    "pdf_url": "/rfps/UTL-303.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "33kV",
+        "conductor": "Aluminium",
+        "size": "500 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 33kV Aluminium 500 sqmm 3C Control Cable 1.1kV Copper 2.5 sqmm 12C",
+    "combined_title": "33kV HT Cable 3C x 500 sqmm + 1.1kV Control Cable 12C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-304",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "BSES Rajdhani Power Ltd",
+    "title": "Control Cable 19C x 2.5mm² Cu PVC - Pune Utility",
+    "material": "19 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Pune",
+    "publish_date": "2025-12-11",
+    "due_date": "2026-01-26T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "procurement@bsesdelhi.com",
+    "contact_phone": "+91-11-39999707",
+    "documents": [
+      "/docs/304.pdf"
+    ],
+    "detail_url": "/rfp/UTL-304.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_20",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "procurement@bsesdelhi.com",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/UTL-304.pdf"
+    },
+    "pdf_url": "/rfps/UTL-304.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-305",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "BSES Yamuna Power Ltd",
+    "title": "33kV HT XLPE Cable 3C x 300mm² Al - Hyderabad Grid",
+    "material": "3 Core 300 sqmm Aluminium XLPE 33kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Hyderabad",
+    "publish_date": "2025-12-27",
+    "due_date": "2026-02-05T12:00:00.000Z",
+    "estimated_cost_inr": 4938000,
+    "contact_email": "cables@bsesdelhi.com",
+    "contact_phone": "+91-11-39999707",
+    "documents": [
+      "/docs/305.pdf"
+    ],
+    "detail_url": "/rfp/UTL-305.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@bsesdelhi.com",
+      "meeting_subject": "Pre-bid Meeting Request - UTL-305 - [Your Company Name]",
+      "meeting_venue": "BSES Yamuna Power Ltd, Hyderabad",
+      "pdf_url": "/rfps/UTL-305.pdf"
+    },
+    "pdf_url": "/rfps/UTL-305.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "22kV",
+        "conductor": "Copper",
+        "size": "250 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Instrumentation Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "6 sqmm",
+        "cores": "2",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 22kV Copper 250 sqmm 3C Instrumentation Cable 0.6kV Copper 6 sqmm 2C",
+    "combined_title": "22kV HT Cable 3C x 250 sqmm + 0.6kV Instrumentation Cable 2C x 6 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-306",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Noida Power Company Ltd",
+    "title": "LT Power Cable 4C x 185mm² Al XLPE - Kolkata Electricity",
+    "material": "4 Core 185 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Kolkata",
+    "publish_date": "2025-12-11",
+    "due_date": "2026-02-05T12:00:00.000Z",
+    "estimated_cost_inr": 502400,
+    "contact_email": "cables@noidapower.com",
+    "contact_phone": "+91-120-2514100",
+    "documents": [
+      "/docs/306.pdf"
+    ],
+    "detail_url": "/rfp/UTL-306.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_20",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nNoida Power Company Ltd,\nProcurement Department,\nKolkata, India - 400001",
+      "envelope_marking": "BID FOR UTL-306 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/UTL-306.pdf"
+    },
+    "pdf_url": "/rfps/UTL-306.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "25 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 0.6kV Copper 25 sqmm 4C Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "0.6kV LT Cable 4C x 25 sqmm + 1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-307",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Punjab State Power Corp Ltd (PSPCL)",
+    "title": "EHV Cable 110kV 1C x 800mm² Al - Ahmedabad Power",
+    "material": "1 Core 800 sqmm Aluminium XLPE 110kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Ahmedabad",
+    "publish_date": "2026-01-28",
+    "due_date": "2026-02-28T12:00:00.000Z",
+    "estimated_cost_inr": 60000000,
+    "contact_email": "se.cables@pspcl.in",
+    "contact_phone": "+91-172-2915200",
+    "documents": [
+      "/docs/307.pdf"
+    ],
+    "detail_url": "/rfp/UTL-307.html",
+    "status": "active",
+    "pricing_tier": "SIGNIFICANTLY_OVERPRICED_55",
+    "market_qty_km": 10,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/UTL-307",
+      "registration_opens": "14 January 2026",
+      "registration_closes": "21 February 2026",
+      "pdf_url": "/rfps/UTL-307.pdf"
+    },
+    "pdf_url": "/rfps/UTL-307.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "275kV",
+        "conductor": "Aluminium",
+        "size": "1200 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 10,
+        "standard": "IEC 60840"
+      }
+    ],
+    "search_index": "EHV Cable 275kV Aluminium 1200 sqmm 1C",
+    "combined_title": "275kV EHV Cable 1C x 1200 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-308",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Haryana Vidyut Prasaran Nigam Ltd (HVPNL)",
+    "title": "11kV HT XLPE Cable 3C x 120mm² Al - Jaipur Utility",
+    "material": "3 Core 120 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Jaipur",
+    "publish_date": "2025-12-19",
+    "due_date": "2026-02-10T12:00:00.000Z",
+    "estimated_cost_inr": 4128000,
+    "contact_email": "cables@hvpnl.org.in",
+    "contact_phone": "+91-172-2585700",
+    "documents": [
+      "/docs/308.pdf"
+    ],
+    "detail_url": "/rfp/UTL-308.html",
+    "status": "active",
+    "pricing_tier": "GOOD_8",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@hvpnl.org.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/UTL-308.pdf"
+    },
+    "pdf_url": "/rfps/UTL-308.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "11kV",
+        "conductor": "Aluminium",
+        "size": "150 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 11kV Aluminium 150 sqmm 1C LT Cable 0.75kV Copper 70 sqmm 3C",
+    "combined_title": "11kV HT Cable 1C x 150 sqmm + 0.75kV LT Cable 3C x 70 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-309",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Jharkhand Urja Vikas Nigam Ltd (JUVNL)",
+    "title": "LT Power Cable 4C x 240mm² Al XLPE - Lucknow Power",
+    "material": "4 Core 240 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Lucknow",
+    "publish_date": "2026-01-12",
+    "due_date": "2026-02-12T12:00:00.000Z",
+    "estimated_cost_inr": 829600,
+    "contact_email": "cables@juvnl.in",
+    "contact_phone": "+91-651-2201010",
+    "documents": [
+      "/docs/309.pdf"
+    ],
+    "detail_url": "/rfp/UTL-309.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_40",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@juvnl.in",
+      "meeting_subject": "Pre-bid Meeting Request - UTL-309 - [Your Company Name]",
+      "meeting_venue": "Jharkhand Urja Vikas Nigam Ltd (JUVNL), Lucknow",
+      "pdf_url": "/rfps/UTL-309.pdf"
+    },
+    "pdf_url": "/rfps/UTL-309.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "80 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "4 sqmm",
+        "cores": "6",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 80 sqmm 4C Control Cable 1.1kV Copper 4 sqmm 6C",
+    "combined_title": "1.1kV LT Cable 4C x 80 sqmm + 1.1kV Control Cable 6C x 4 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-310",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Bihar State Power Transmission Corp (BSPTCL)",
+    "title": "Control Cable 7C x 1.5mm² Cu PVC - Nagpur Substation",
+    "material": "7 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Nagpur",
+    "publish_date": "2026-02-19",
+    "due_date": "2026-03-24T12:00:00.000Z",
+    "estimated_cost_inr": 157200,
+    "contact_email": "cables@bsptcl.in",
+    "contact_phone": "+91-612-2222811",
+    "documents": [
+      "/docs/310.pdf"
+    ],
+    "detail_url": "/rfp/UTL-310.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nBihar State Power Transmission Corp (BSPTCL),\nProcurement Department,\nNagpur, India - 400001",
+      "envelope_marking": "BID FOR UTL-310 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/UTL-310.pdf"
+    },
+    "pdf_url": "/rfps/UTL-310.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 2.5 sqmm 12C",
+    "combined_title": "1.1kV Control Cable 12C x 2.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Routine Test",
+      "standard": "IS 10810",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹50K-1.5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-311",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Odisha Power Transmission Corp Ltd (OPTCL)",
+    "title": "22kV HT XLPE Cable 3C x 185mm² Al - Mumbai Grid",
+    "material": "3 Core 185 sqmm Aluminium XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-17",
+    "due_date": "2026-03-19T12:00:00.000Z",
+    "estimated_cost_inr": 3288000,
+    "contact_email": "cables@optcl.co.in",
+    "contact_phone": "+91-674-2540281",
+    "documents": [
+      "/docs/311.pdf"
+    ],
+    "detail_url": "/rfp/UTL-311.html",
+    "status": "active",
+    "pricing_tier": "GOOD_10",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/UTL-311",
+      "registration_opens": "02 February 2026",
+      "registration_closes": "12 March 2026",
+      "pdf_url": "/rfps/UTL-311.pdf"
+    },
+    "pdf_url": "/rfps/UTL-311.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "11kV",
+        "conductor": "Aluminium",
+        "size": "110 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 11kV Aluminium 110 sqmm 3C",
+    "combined_title": "11kV HT Cable 3C x 110 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-312",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Assam Power Distribution Corp Ltd (APDCL)",
+    "title": "LT Power Cable 4C x 70mm² Al XLPE - Mumbai Distribution",
+    "material": "4 Core 70 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-05",
+    "due_date": "2026-03-18T12:00:00.000Z",
+    "estimated_cost_inr": 784800,
+    "contact_email": "procurement@apdcl.gov.in",
+    "contact_phone": "+91-361-2540000",
+    "documents": [
+      "/docs/312.pdf"
+    ],
+    "detail_url": "/rfp/UTL-312.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_25",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "procurement@apdcl.gov.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/UTL-312.pdf"
+    },
+    "pdf_url": "/rfps/UTL-312.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "19",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Copper 70 sqmm 3C Control Cable 0.6kV Copper 2.5 sqmm 19C",
+    "combined_title": "1.1kV LT Cable 3C x 70 sqmm + 0.6kV Control Cable 19C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-313",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Himachal Pradesh State Electricity Board (HPSEB)",
+    "title": "Control Cable 12C x 2.5mm² Cu PVC - Mumbai Substation",
+    "material": "12 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-08",
+    "due_date": "2026-03-17T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "cables@hpseb.in",
+    "contact_phone": "+91-177-2658800",
+    "documents": [
+      "/docs/313.pdf"
+    ],
+    "detail_url": "/rfp/UTL-313.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_18",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@hpseb.in",
+      "meeting_subject": "Pre-bid Meeting Request - UTL-313 - [Your Company Name]",
+      "meeting_venue": "Himachal Pradesh State Electricity Board (HPSEB), Mumbai",
+      "pdf_url": "/rfps/UTL-313.pdf"
+    },
+    "pdf_url": "/rfps/UTL-313.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-314",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Uttarakhand Power Corporation Ltd (UPCL)",
+    "title": "EHV Cable 66kV 1C x 630mm² Al - Coimbatore Grid",
+    "material": "1 Core 630 sqmm Aluminium XLPE 66kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Coimbatore",
+    "publish_date": "2026-02-06",
+    "due_date": "2026-03-16T12:00:00.000Z",
+    "estimated_cost_inr": 60000000,
+    "contact_email": "cables@upcl.org",
+    "contact_phone": "+91-135-2710112",
+    "documents": [
+      "/docs/314.pdf"
+    ],
+    "detail_url": "/rfp/UTL-314.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 10,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nUttarakhand Power Corporation Ltd (UPCL),\nProcurement Department,\nCoimbatore, India - 400001",
+      "envelope_marking": "BID FOR UTL-314 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/UTL-314.pdf"
+    },
+    "pdf_url": "/rfps/UTL-314.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "275kV",
+        "conductor": "Aluminium",
+        "size": "1200 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 10,
+        "standard": "IEC 60840"
+      }
+    ],
+    "search_index": "EHV Cable 275kV Aluminium 1200 sqmm 1C",
+    "combined_title": "275kV EHV Cable 1C x 1200 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-315",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Goa Electricity Department",
+    "title": "LT Power Cable 4C x 95mm² Cu XLPE - Indore Distribution",
+    "material": "4 Core 95 sqmm Copper XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Indore",
+    "publish_date": "2026-02-26",
+    "due_date": "2026-04-15T12:00:00.000Z",
+    "estimated_cost_inr": 784800,
+    "contact_email": "ee.cables@goa.gov.in",
+    "contact_phone": "+91-832-2225000",
+    "documents": [
+      "/docs/315.pdf"
+    ],
+    "detail_url": "/rfp/UTL-315.html",
+    "status": "active",
+    "pricing_tier": "SUSPICIOUSLY_LOW_35",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/UTL-315",
+      "registration_opens": "01 March 2026",
+      "registration_closes": "08 April 2026",
+      "pdf_url": "/rfps/UTL-315.pdf"
+    },
+    "pdf_url": "/rfps/UTL-315.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "20",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 0.75kV Copper 70 sqmm 3C Control Cable 1.1kV Copper 2.5 sqmm 20C",
+    "combined_title": "0.75kV LT Cable 3C x 70 sqmm + 1.1kV Control Cable 20C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-316",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Sikkim Power Development Corp (SPDC)",
+    "title": "11kV HT XLPE Cable 3C x 70mm² Cu - Delhi Metro",
+    "material": "3 Core 70 sqmm Copper XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Delhi",
+    "publish_date": "2026-02-15",
+    "due_date": "2026-04-14T12:00:00.000Z",
+    "estimated_cost_inr": 6147000,
+    "contact_email": "cables@sikkimpower.in",
+    "contact_phone": "+91-3592-202700",
+    "documents": [
+      "/docs/316.pdf"
+    ],
+    "detail_url": "/rfp/UTL-316.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_30",
+    "market_qty_km": 9,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@sikkimpower.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/UTL-316.pdf"
+    },
+    "pdf_url": "/rfps/UTL-316.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "22kV",
+        "conductor": "Aluminium",
+        "size": "185 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 9,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 22kV Aluminium 185 sqmm 1C",
+    "combined_title": "22kV HT Cable 1C x 185 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-317",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Meghalaya Power Distribution Corp Ltd",
+    "title": "Control Cable 30C x 1.5mm² Cu PVC - Bangalore Water",
+    "material": "30 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Bangalore",
+    "publish_date": "2026-02-24",
+    "due_date": "2026-04-06T12:00:00.000Z",
+    "estimated_cost_inr": 157200,
+    "contact_email": "cables@mepdc.gov.in",
+    "contact_phone": "+91-364-2224500",
+    "documents": [
+      "/docs/317.pdf"
+    ],
+    "detail_url": "/rfp/UTL-317.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "cables@mepdc.gov.in",
+      "meeting_subject": "Pre-bid Meeting Request - UTL-317 - [Your Company Name]",
+      "meeting_venue": "Meghalaya Power Distribution Corp Ltd, Bangalore",
+      "pdf_url": "/rfps/UTL-317.pdf"
+    },
+    "pdf_url": "/rfps/UTL-317.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "25",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 2.5 sqmm 25C",
+    "combined_title": "1.1kV Control Cable 25C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "UTL-318",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Nagaland Power Corp Ltd (NPCL)",
+    "title": "22kV HT XLPE Cable 3C x 150mm² Cu - Chennai Power",
+    "material": "3 Core 150 sqmm Copper XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Chennai",
+    "publish_date": "2026-04-25",
+    "due_date": "2026-05-29T12:00:00.000Z",
+    "estimated_cost_inr": 3284800,
+    "contact_email": "cables@nagalandpower.com",
+    "contact_phone": "+91-370-2290011",
+    "documents": [
+      "/docs/318.pdf"
+    ],
+    "detail_url": "/rfp/UTL-318.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_20",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nNagaland Power Corp Ltd (NPCL),\nProcurement Department,\nChennai, India - 400001",
+      "envelope_marking": "BID FOR UTL-318 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/UTL-318.pdf"
+    },
+    "pdf_url": "/rfps/UTL-318.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "11kV",
+        "conductor": "Aluminium",
+        "size": "100 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 11kV Aluminium 100 sqmm 3C Control Cable 1.1kV Copper 2.5 sqmm 12C",
+    "combined_title": "11kV HT Cable 3C x 100 sqmm + 1.1kV Control Cable 12C x 2.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "UTL-319",
+    "source_type": "utilities",
+    "portal_name": "Utilities & Infrastructure Hub",
+    "organisation": "Tripura State Electricity Corp Ltd (TSECL)",
+    "title": "LT Power Cable 4C x 50mm² Al PVC - Kolkata Municipal",
+    "material": "4 Core 50 sqmm Aluminium PVC 1.1kV LT Power Cable Non-Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Kolkata",
+    "publish_date": "2026-04-11",
+    "due_date": "2026-05-26T12:00:00.000Z",
+    "estimated_cost_inr": 544000,
+    "contact_email": "cables@tsecl.in",
+    "contact_phone": "+91-381-2325000",
+    "documents": [
+      "/docs/319.pdf"
+    ],
+    "detail_url": "/rfp/UTL-319.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_18",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/UTL-319",
+      "registration_opens": "11 April 2026",
+      "registration_closes": "19 May 2026",
+      "pdf_url": "/rfps/UTL-319.pdf"
+    },
+    "pdf_url": "/rfps/UTL-319.pdf",
+    "buyer_type": "Utility Company",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 0.75kV Copper 70 sqmm 3C",
+    "combined_title": "0.75kV LT Cable 3C x 70 sqmm",
+    "external_testing_required": false
+  }
+]

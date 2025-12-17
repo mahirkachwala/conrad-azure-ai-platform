@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10px;
+      margin: 25px;
+      color: #333;
+      line-height: 1.5;
+    }
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 25px;
+      margin: -25px -25px 25px -25px;
+    }
+    .page-header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+    .page-header .tender-id {
+      font-size: 13px;
+      margin-top: 5px;
+      opacity: 0.9;
+    }
+    .quick-info {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+    .quick-info-item {
+      text-align: center;
+      flex: 1;
+    }
+    .quick-info-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #888;
+      letter-spacing: 0.5px;
+    }
+    .quick-info-value {
+      font-size: 12px;
+      font-weight: bold;
+      color: #667eea;
+      margin-top: 3px;
+    }
+    section {
+      margin: 20px 0;
+    }
+    section h2 {
+      font-size: 13px;
+      color: #667eea;
+      margin: 0 0 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #667eea;
+      font-weight: 600;
+    }
+    .info-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px;
+      margin: 8px 0;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #555;
+    }
+    .info-value {
+      color: #333;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #e0e7ff;
+      color: #667eea;
+      border-radius: 3px;
+      font-size: 9px;
+      margin-right: 5px;
+    }
+    ul {
+      margin: 8px 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin: 5px 0;
+    }
+    .highlight-card {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-header">
+    <h1>TENDER DOCUMENT</h1>
+    <div class="tender-id">Reference: {{tender_id}} | {{organisation}}</div>
+  </div>
+
+  <div class="quick-info">
+    <div class="quick-info-item">
+      <div class="quick-info-label">Published</div>
+      <div class="quick-info-value">{{publish_date}}</div>
+    </div>
+    <div class="quick-info-item">
+      <div class="quick-info-label">Deadline</div>
+      <div class="quick-info-value">{{due_date}}</div>
+    </div>
+    <div class="quick-info-item">
+      <div class="quick-info-label">Est. Value</div>
+      <div class="quick-info-value">₹{{formatCurrency estimated_cost_inr}}</div>
+    </div>
+    <div class="quick-info-item">
+      <div class="quick-info-label">Location</div>
+      <div class="quick-info-value">{{city}}</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Tender Information</h2>
+    <div class="info-row">
+      <div class="info-label">Title</div>
+      <div class="info-value">{{title}}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Material Required</div>
+      <div class="info-value">{{material}}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Product Category</div>
+      <div class="info-value">
+        <span class="tag">{{product_category}}</span>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Issuing Authority</div>
+      <div class="info-value">{{organisation}}</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical Requirements</h2>
+    <ul>
+      <li><strong>Material Type:</strong> {{material}}</li>
+      <li><strong>Conductor:</strong> Copper, electrolytic grade (EC), annealed and stranded Class 2 per IS 8130</li>
+      <li><strong>Insulation Material:</strong> XLPE (Cross-linked polyethylene), thermosetting grade</li>
+      <li><strong>Voltage Classification:</strong> 1.1 kV or 11 kV grade as per IS/IEC standards</li>
+      <li><strong>Applicable Standards:</strong> IS 7098 Part 1 & 2, IEC 60502-1, BIS certification required</li>
+      <li><strong>Testing Requirements:</strong> Routine tests + Type test certificates from NABL accredited labs</li>
+      <li><strong>Marking:</strong> ISI mark mandatory on cable sheath at 1-meter intervals</li>
+    </ul>
+  </section>
+
+  <div class="highlight-card">
+    <strong>Important:</strong> All bidders must submit technical and commercial bids separately in sealed envelopes. Late submissions will not be accepted under any circumstances.
+  </div>
+
+  <section>
+    <h2>Qualification Criteria</h2>
+    <ul>
+      <li>Valid BIS license for the specific cable type being tendered</li>
+      <li>Minimum 3 years experience in cable manufacturing</li>
+      <li>At least 3 reference orders from utilities/industries (each &gt; ₹3 Cr value)</li>
+      <li>ISO 9001:2015 quality certification (mandatory)</li>
+      <li>Manufacturing capacity: Minimum 150 MT per month with documentary proof</li>
+      <li>Average annual turnover ≥ ₹12 Crores in previous 3 financial years</li>
+      <li>No blacklisting by any government/PSU in last 5 years</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Financial Terms</h2>
+    <div class="info-row">
+      <div class="info-label">Earnest Money (EMD)</div>
+      <div class="info-value">₹ {{calculateEMD estimated_cost_inr}} (2% of est. value)</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Tender Processing Fee</div>
+      <div class="info-value">₹ 2,000 + GST (non-refundable)</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Price Validity</div>
+      <div class="info-value">Firm prices for 90 days from tender opening</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Payment Terms</div>
+      <div class="info-value">80% on delivery + inspection, 20% after 30 days</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Delivery Schedule</div>
+      <div class="info-value">Within 50 days from Purchase Order date</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Warranty Period</div>
+      <div class="info-value">24 months from commissioning date</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact Details</h2>
+    <div class="info-row">
+      <div class="info-label">Contact Person</div>
+      <div class="info-value">{{contact_person}}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Email</div>
+      <div class="info-value">{{contact_email}}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Phone</div>
+      <div class="info-value">{{contact_phone}}</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Office Address</div>
+      <div class="info-value">{{organisation}}, {{city}}</div>
+    </div>
+  </section>
+
+  <div style="text-align: center; margin-top: 30px; font-size: 9px; color: #999;">
+    Auto-generated tender document | {{tender_id}} | Confidential
+  </div>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Agentic RFP Orchestration | EY Techathon 6.0</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0b0f18 0%, #1a1f35 100%);
+  color: #e5f2ff;
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .subtitle {
+  font-size: 18px;
+  color: #94a3b8;
+  margin: 8px 0;
+}
+.header .ey-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1a1a1a;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.card h2 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mermaid {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  overflow-x: auto;
+  min-height: 400px;
+}
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+button {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  border: 0;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+button:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+.btn-secondary:hover {
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid #334155;
+  color: #94a3b8;
+  box-shadow: none;
+}
+.btn-outline:hover {
+  border-color: #667eea;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+pre {
+  white-space: pre-wrap;
+  background: #0a1222;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+  color: #cbd5e1;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.log-entry {
+  margin: 4px 0;
+  padding: 10px 14px;
+  background: #1e293b;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+  font-size: 13px;
+  font-family: 'Fira Code', monospace;
+}
+.log-entry.master { border-left-color: #8b5cf6; }
+.log-entry.sales { border-left-color: #3b82f6; }
+.log-entry.technical { border-left-color: #f59e0b; }
+.log-entry.pricing { border-left-color: #ec4899; }
+.log-entry.system { border-left-color: #94a3b8; }
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.status.idle { background: #334155; color: #94a3b8; }
+.status.running { background: #fbbf24; color: #78350f; animation: pulse 1.5s infinite; }
+.status.success { background: #22c55e; color: #052e16; }
+.status.error { background: #ef4444; color: #fff; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.stat-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  text-align: center;
+}
+.stat-card .label {
+  font-size: 12px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.stat-card .value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+.stat-card .value.highlight {
+  background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.agent-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+  padding: 16px;
+  background: #1e293b;
+  border-radius: 10px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.legend-dot.master { background: #8b5cf6; }
+.legend-dot.sales { background: #3b82f6; }
+.legend-dot.tech { background: #f59e0b; }
+.legend-dot.pricing { background: #ec4899; }
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 8px;
+}
+.tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  border-radius: 8px 8px 0 0;
+}
+.tab:hover { color: #f1f5f9; background: #1e293b; }
+.tab.active {
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+.output-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.output-table th, .output-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #334155;
+}
+.output-table th {
+  background: #1e293b;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+.output-table tr:hover { background: #1e293b; }
+.spec-match {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.spec-match.high { background: #22c55e; color: #052e16; }
+.spec-match.medium { background: #f59e0b; color: #78350f; }
+.spec-match.low { background: #ef4444; color: #fff; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🤖 Agentic RFP Orchestration</h1>
+    <p class="subtitle">Multi-Agent Workflow powered by LangGraph</p>
+    <div class="ey-badge">EY TECHATHON 6.0 - Round 2</div>
+  </div>
+
+  <!-- Agent Legend -->
+  <div class="agent-legend">
+    <div class="legend-item"><span class="legend-dot master"></span> Master Agent (Orchestrator)</div>
+    <div class="legend-item"><span class="legend-dot sales"></span> Sales Agent (RFP Scanner)</div>
+    <div class="legend-item"><span class="legend-dot tech"></span> Technical Agent (SKU Matcher)</div>
+    <div class="legend-item"><span class="legend-dot pricing"></span> Pricing Agent (Cost Calculator)</div>
+  </div>
+
+  <!-- Workflow Graph -->
+  <div class="card">
+    <h2>📊 Agent Workflow Graph</h2>
+    <div class="tabs">
+      <button class="tab active" onclick="switchDiagram('detailed')">Detailed View</button>
+      <button class="tab" onclick="switchDiagram('simple')">Simple View</button>
+    </div>
+    <div id="diagram-container" class="mermaid">Loading graph...</div>
+  </div>
+
+  <!-- Execution Controls -->
+  <div class="card">
+    <h2>🎮 Workflow Execution</h2>
+    <div class="controls">
+      <button id="run" onclick="runWorkflow()">
+        <span>▶️</span> Run Complete Workflow
+      </button>
+      <button id="clear" class="btn-secondary" onclick="clearOutput()">
+        <span>🔄</span> Clear Output
+      </button>
+      <button class="btn-outline" onclick="location.reload()">
+        <span>↻</span> Refresh Page
+      </button>
+    </div>
+    <div id="status"><span class="status idle">⏸️ Ready to execute</span></div>
+  </div>
+
+  <!-- Stats Dashboard -->
+  <div class="card" id="stats-card" style="display: none;">
+    <h2>📈 Workflow Results</h2>
+    <div id="stats" class="stats"></div>
+  </div>
+
+  <!-- Results Grid -->
+  <div class="grid-2">
+    <!-- Agent Logs -->
+    <div class="card">
+      <h2>📝 Agent Execution Logs</h2>
+      <div id="logs"><pre>Click "Run Complete Workflow" to start...</pre></div>
+    </div>
+
+    <!-- Structured Output -->
+    <div class="card">
+      <h2>📋 Structured Output</h2>
+      <div class="tabs">
+        <button class="tab active" onclick="switchOutput('summary')">Summary</button>
+        <button class="tab" onclick="switchOutput('skus')">SKU Matches</button>
+        <button class="tab" onclick="switchOutput('pricing')">Pricing</button>
+        <button class="tab" onclick="switchOutput('json')">Raw JSON</button>
+      </div>
+      <div id="output-summary" class="tab-content active">
+        <p style="color: #94a3b8;">Execute workflow to see results...</p>
+      </div>
+      <div id="output-skus" class="tab-content"></div>
+      <div id="output-pricing" class="tab-content"></div>
+      <div id="output-json" class="tab-content">
+        <pre id="out">Execute workflow to see JSON output...</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+mermaid.initialize({ 
+  startOnLoad: false, 
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#667eea',
+    primaryTextColor: '#fff',
+    primaryBorderColor: '#764ba2',
+    lineColor: '#94a3b8',
+    secondaryColor: '#1e293b',
+    tertiaryColor: '#0f172a'
+  }
+});
+
+let currentDiagram = 'detailed';
+
+async function loadDiagram(type = 'detailed') {
+  const container = document.getElementById('diagram-container');
+  try {
+    const url = type === 'simple' ? '/api/agentic/diagram-simple.mmd' : '/api/agentic/diagram.mmd';
+    const mmd = await fetch(url).then(r => r.text());
+    container.innerHTML = mmd;
+    container.removeAttribute('data-processed');
+    await mermaid.run({ querySelector: '#diagram-container' });
+  } catch (err) {
+    container.innerHTML = '<p style="color: #ef4444;">Error loading diagram: ' + err.message + '</p>';
+  }
+}
+
+function switchDiagram(type) {
+  currentDiagram = type;
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  loadDiagram(type);
+}
+
+function switchOutput(tab) {
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('output-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+async function runWorkflow() {
+  const btn = document.getElementById('run');
+  const statusDiv = document.getElementById('status');
+  const logsDiv = document.getElementById('logs');
+  const statsCard = document.getElementById('stats-card');
+  const statsDiv = document.getElementById('stats');
+  const outDiv = document.getElementById('out');
+
+  btn.disabled = true;
+  statusDiv.innerHTML = '<span class="status running">⏳ Running workflow... (this may take a few seconds)</span>';
+  logsDiv.innerHTML = '<pre>🚀 Starting agent execution...</pre>';
+  statsCard.style.display = 'none';
+
+  try {
+    const response = await fetch('/api/agentic/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+
+    const data = await response.json();
+
+    if (data.ok) {
+      statusDiv.innerHTML = '<span class="status success">✅ Workflow completed successfully!</span>';
+      
+      // Display logs with color coding
+      const logs = data.result.logs || [];
+      logsDiv.innerHTML = logs.map(log => {
+        let cls = 'system';
+        if (log.agent === 'Master') cls = 'master';
+        else if (log.agent === 'Sales') cls = 'sales';
+        else if (log.agent === 'Technical') cls = 'technical';
+        else if (log.agent === 'Pricing') cls = 'pricing';
+        return `<div class="log-entry ${cls}">${log.msg}</div>`;
+      }).join('');
+
+      // Display stats
+      const result = data.result;
+      const summary = data.workflow_summary || {};
+      
+      statsCard.style.display = 'block';
+      statsDiv.innerHTML = `
+        <div class="stat-card">
+          <div class="label">RFP Selected</div>
+          <div class="value">${result.selectedRFP?.tender_id || 'N/A'}</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Products Matched</div>
+          <div class="value">${result.recommendedSKUs?.length || 0}</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Avg Spec Match</div>
+          <div class="value highlight">${summary.avg_spec_match || 0}%</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Grand Total</div>
+          <div class="value highlight">₹${((result.consolidatedPricing?.grand_total || 0) / 100000).toFixed(2)}L</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Duration</div>
+          <div class="value">${summary.duration_ms || 0}ms</div>
+        </div>
+      `;
+
+      // Display summary output
+      document.getElementById('output-summary').innerHTML = `
+        <h3 style="color: #f1f5f9; margin-bottom: 16px;">📋 RFP Response Summary</h3>
+        <table class="output-table">
+          <tr><th>Field</th><th>Value</th></tr>
+          <tr><td>RFP ID</td><td>${result.selectedRFP?.tender_id || 'N/A'}</td></tr>
+          <tr><td>Buyer</td><td>${result.selectedRFP?.organisation || 'N/A'}</td></tr>
+          <tr><td>Project</td><td>${result.selectedRFP?.title || 'N/A'}</td></tr>
+          <tr><td>Products Matched</td><td>${result.recommendedSKUs?.length || 0}</td></tr>
+          <tr><td>Average Spec Match</td><td><span class="spec-match high">${summary.avg_spec_match || 0}%</span></td></tr>
+          <tr><td>Material Cost</td><td>₹${((result.consolidatedPricing?.total_material_cost || 0) / 100000).toFixed(2)} Lakhs</td></tr>
+          <tr><td>Test Cost</td><td>₹${((result.consolidatedPricing?.total_test_cost || 0) / 1000).toFixed(1)}K</td></tr>
+          <tr><td>Grand Total (incl GST)</td><td><strong>₹${((result.consolidatedPricing?.grand_total || 0) / 100000).toFixed(2)} Lakhs</strong></td></tr>
+        </table>
+      `;
+
+      // Display SKU matches
+      const skus = result.recommendedSKUs || [];
+      document.getElementById('output-skus').innerHTML = `
+        <h3 style="color: #f1f5f9; margin-bottom: 16px;">🔧 SKU Recommendations</h3>
+        <table class="output-table">
+          <tr><th>RFP Product</th><th>Recommended SKU</th><th>Spec Match</th><th>Price/km</th></tr>
+          ${skus.map(s => `
+            <tr>
+              <td>${(s.rfp_product || '').substring(0, 40)}...</td>
+              <td><code>${s.sku_id || 'N/A'}</code></td>
+              <td><span class="spec-match ${s.spec_match_percentage >= 80 ? 'high' : s.spec_match_percentage >= 60 ? 'medium' : 'low'}">${s.spec_match_percentage || 0}%</span></td>
+              <td>₹${((s.unit_price || 0) / 100000).toFixed(2)}L</td>
+            </tr>
+          `).join('')}
+        </table>
+      `;
+
+      // Display pricing
+      const pricing = result.consolidatedPricing || {};
+      document.getElementById('output-pricing').innerHTML = `
+        <h3 style="color: #f1f5f9; margin-bottom: 16px;">💰 Pricing Breakdown</h3>
+        <table class="output-table">
+          <tr><th>Component</th><th>Amount</th></tr>
+          <tr><td>Total Material Cost</td><td>₹${((pricing.total_material_cost || 0) / 100000).toFixed(2)} Lakhs</td></tr>
+          <tr><td>Total Test/Services Cost</td><td>₹${((pricing.total_test_cost || 0) / 1000).toFixed(1)}K</td></tr>
+          <tr><td>Subtotal</td><td>₹${((pricing.subtotal || 0) / 100000).toFixed(2)} Lakhs</td></tr>
+          <tr><td>GST @ 18%</td><td>₹${((pricing.gst || 0) / 100000).toFixed(2)} Lakhs</td></tr>
+          <tr style="background: #1e293b; font-weight: bold;"><td>GRAND TOTAL</td><td>₹${((pricing.grand_total || 0) / 100000).toFixed(2)} Lakhs</td></tr>
+        </table>
+        <h4 style="color: #f1f5f9; margin: 20px 0 12px;">Tests Included:</h4>
+        <table class="output-table">
+          <tr><th>Test ID</th><th>Test Name</th><th>Price</th></tr>
+          ${(pricing.tests_included || []).slice(0, 8).map(t => `
+            <tr><td>${t.test_id}</td><td>${t.test_name}</td><td>₹${(t.price_inr || 0).toLocaleString()}</td></tr>
+          `).join('')}
+        </table>
+      `;
+
+      // Raw JSON
+      outDiv.textContent = JSON.stringify(data.result, null, 2);
+    } else {
+      statusDiv.innerHTML = '<span class="status error">❌ Workflow failed</span>';
+      logsDiv.innerHTML = `<pre style="color: #ef4444;">Error: ${data.error}</pre>`;
+      outDiv.textContent = JSON.stringify(data, null, 2);
+    }
+  } catch (err) {
+    statusDiv.innerHTML = '<span class="status error">❌ Network error</span>';
+    logsDiv.innerHTML = `<pre style="color: #ef4444;">Failed to execute: ${err.message}</pre>`;
+    outDiv.textContent = err.stack;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function clearOutput() {
+  document.getElementById('status').innerHTML = '<span class="status idle">⏸️ Ready to execute</span>';
+  document.getElementById('logs').innerHTML = '<pre>Click "Run Complete Workflow" to start...</pre>';
+  document.getElementById('out').textContent = 'Execute workflow to see JSON output...';
+  document.getElementById('stats-card').style.display = 'none';
+  document.getElementById('output-summary').innerHTML = '<p style="color: #94a3b8;">Execute workflow to see results...</p>';
+  document.getElementById('output-skus').innerHTML = '';
+  document.getElementById('output-pricing').innerHTML = '';
+}
+
+// Load diagram on page load
+loadDiagram('detailed');
+</script>
+</body>
+</html>

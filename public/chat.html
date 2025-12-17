@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConRad - Contract Radar | Intelligent RFP Discovery</title>
+  <link rel="stylesheet" href="/assets/chat.css">
+</head>
+<body>
+<div class="chat-container">
+  <header class="chat-header">
+    <div class="header-content">
+      <div class="bot-avatar">📡</div>
+      <div>
+        <h1>ConRad <span style="font-weight: 400; font-size: 0.6em; opacity: 0.8;">Contract Radar</span></h1>
+        <p class="status">Intelligent RFP Discovery & Analysis Platform</p>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="/">Main Portal</a>
+      <a href="/companies.html">🏢 Companies</a>
+      <a href="/portals/gov.html">Gov Portal</a>
+      <a href="/portals/industrial.html">Industrial</a>
+      <a href="/portals/utilities.html">Utilities</a>
+    </nav>
+    <nav class="header-nav" style="background: rgba(99,102,241,0.1); margin-top: 8px; padding: 8px;">
+      <strong style="color: #6366f1;">📊 Data Sources:</strong>
+      <a href="/portals/mca.html" style="font-size: 13px;">MCA</a>
+      <a href="/portals/zauba.html" style="font-size: 13px;">Zauba</a>
+      <a href="/portals/tofler.html" style="font-size: 13px;">Tofler</a>
+      <a href="/portals/gem.html" style="font-size: 13px;">GeM</a>
+      <a href="/portals/tender247.html" style="font-size: 13px;">Tender247</a>
+    </nav>
+  </header>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="message bot-message">
+      <div class="message-avatar">📡</div>
+      <div class="message-content">
+        <p>👋 Welcome to <strong>ConRad</strong> — your Contract Radar with <strong style="color: #06b6d4;">Adaptive AI</strong>.</p>
+        <p style="margin-top: 10px; color: #64748b;">I use <strong>5 cable CSVs</strong> (HT, LT, Control, EHV, Instrumentation) to generate search permutations. I scan 3 portals and adapt to any new data you provide.</p>
+        
+        <div style="margin-top: 12px; padding: 14px; background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-radius: 10px; border: 1px solid #7dd3fc;">
+          <p style="font-weight: 600; color: #0369a1; margin-bottom: 10px; font-size: 15px;">🔍 Search Examples:</p>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: #0c4a6e;">
+            <li style="margin-bottom: 6px;"><strong style="color: #0369a1;">"HT cables 11kV"</strong> — Uses ht_cables.csv permutations</li>
+            <li style="margin-bottom: 6px;"><strong style="color: #0369a1;">"Control cables Mumbai"</strong> — City-filtered search</li>
+            <li><strong style="color: #0369a1;">"LT cables 4 core copper"</strong> — Spec-based matching</li>
+          </ul>
+        </div>
+        
+        <div style="margin-top: 12px; padding: 14px; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 10px; border: 1px solid #6ee7b7;">
+          <p style="font-weight: 600; color: #047857; margin-bottom: 10px; font-size: 15px;">🧠 Adaptive Learning Commands:</p>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: #065f46;">
+            <li style="margin-bottom: 6px;"><strong style="color: #047857;">"learning status"</strong> — Check what I've learned</li>
+            <li style="margin-bottom: 6px;"><strong style="color: #047857;">"learn this template"</strong> — After uploading a PDF</li>
+            <li><strong style="color: #047857;">"generate similar template"</strong> — Create from learned format</li>
+          </ul>
+        </div>
+        
+        <div style="margin-top: 12px; padding: 14px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 10px; border: 1px solid #fbbf24;">
+          <p style="font-weight: 600; color: #b45309; margin-bottom: 10px; font-size: 15px;">✨ Interactive Features:</p>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; color: #92400e;">
+            <li style="margin-bottom: 6px;"><strong style="color: #b45309;">"compose email"</strong> — Preview & modify before sending</li>
+            <li style="margin-bottom: 6px;"><strong style="color: #b45309;">"generate quotation"</strong> — Get pricing with modifications</li>
+            <li><strong style="color: #b45309;">"modify PDF"</strong> — Change generated documents</li>
+          </ul>
+        </div>
+        
+        <p style="margin-top: 12px; font-size: 13px; color: #94a3b8;">
+          📎 Upload any RFP PDF to analyze • I adapt to new formats automatically!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input-container">
+    <form id="chat-form" class="chat-form">
+      <label for="file-upload" class="upload-btn" title="Upload PDF, Word document, or CSV">
+        <input type="file" id="file-upload" accept=".pdf,.doc,.docx,.csv" style="display: none;">
+        📎
+      </label>
+      <button type="button" id="voice-btn" class="voice-btn" title="Voice Input (FasterWhisper)">
+        🎤
+      </button>
+      <input 
+        type="text" 
+        id="user-input" 
+        placeholder="Type your question or upload a document... (e.g., 'find copper cables in Mumbai')" 
+        autocomplete="off"
+      >
+      <button type="submit" class="send-btn">
+        <span class="send-icon">➤</span>
+      </button>
+    </form>
+  </div>
+  
+  <!-- Voice Recording Modal -->
+  <div id="voice-modal" class="voice-modal" style="display: none;">
+    <div class="voice-modal-content">
+      <div class="voice-indicator" id="voice-indicator">
+        <div class="voice-waves">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p id="voice-status">🎤 Listening...</p>
+      </div>
+      <div class="voice-controls">
+        <button id="voice-stop-btn" class="voice-stop-btn">⏹️ Stop & Transcribe</button>
+        <button id="voice-cancel-btn" class="voice-cancel-btn">❌ Cancel</button>
+      </div>
+      <p class="voice-hint">Speak clearly into your microphone</p>
+    </div>
+  </div>
+</div>
+
+<div id="reminder-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>⏰ Set Reminder</h2>
+      <button class="modal-close" onclick="closeReminderModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="reminder-tender-id">
+      <div class="reminder-info">
+        <h3 id="reminder-title"></h3>
+        <p><strong>Organisation:</strong> <span id="reminder-org"></span></p>
+        <p><strong>Due Date:</strong> <span id="reminder-due-date"></span></p>
+      </div>
+      <div class="form-group">
+        <label for="reminder-datetime">Remind me on:</label>
+        <input type="datetime-local" id="reminder-datetime" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="reminder-notes">Notes (optional):</label>
+        <textarea id="reminder-notes" class="form-control" rows="3" placeholder="Add notes for this reminder..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-google-cal" onclick="addToGoogleCalendar()">📅 Add to Google Calendar</button>
+      <button class="btn-secondary" onclick="downloadCalendar()" title="For Outlook/Apple Calendar">📥 Download .ics</button>
+      <button class="btn-primary" onclick="saveReminder()">💾 Save Reminder</button>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/chat.js"></script>
+</body>
+</html>

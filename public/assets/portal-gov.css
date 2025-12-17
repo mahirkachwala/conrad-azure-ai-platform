@@ -1,0 +1,340 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  min-height: 100vh;
+  color: #2d3748;
+}
+
+.gov-header {
+  background: linear-gradient(90deg, #1a365d 0%, #2c5282 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 4px solid #d69e2e;
+}
+
+.header-emblem {
+  font-size: 3rem;
+}
+
+.header-content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.breadcrumb {
+  background: white;
+  padding: 0.8rem 2rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-box {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.search-box h2 {
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.8rem;
+  border: 2px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2c5282;
+}
+
+.btn-search-gov {
+  background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1.7rem;
+}
+
+.btn-search-gov:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(44, 82, 130, 0.3);
+}
+
+#results {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.results-header {
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #d69e2e;
+}
+
+.tender-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.tender-card {
+  border: 2px solid #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 6px;
+  background: #f7fafc;
+  transition: all 0.3s;
+}
+
+.tender-card:hover {
+  border-color: #2c5282;
+  box-shadow: 0 4px 8px rgba(44, 82, 130, 0.15);
+}
+
+.t-id {
+  display: inline-block;
+  background: #1a365d;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.t-title {
+  font-size: 1.3rem;
+  color: #1a202c;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.tender-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+}
+
+.meta-item {
+  font-size: 0.9rem;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.t-cost {
+  color: #2c5282;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.tender-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-detail {
+  background: #2c5282;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-detail:hover {
+  background: #1a365d;
+}
+
+.no-results, .placeholder {
+  text-align: center;
+  padding: 3rem;
+  color: #718096;
+  font-size: 1.1rem;
+}
+
+/* Buyer-Centric Styles */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.buyer-type-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.buyer-type-badge.gov {
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  color: white;
+}
+
+.buyer-type-badge.industrial {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+  color: white;
+}
+
+.buyer-type-badge.utility {
+  background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+  color: white;
+}
+
+.buyer-info-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #0284c7;
+  border-left: 4px solid #0284c7;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.buyer-label {
+  font-size: 0.8rem;
+  color: #0369a1;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.buyer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0c4a6e;
+}
+
+.requirement-box {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.req-label {
+  font-size: 0.8rem;
+  color: #b45309;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.req-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #78350f;
+}
+
+.t-status.active {
+  color: #15803d;
+}
+
+.t-status.closing-soon {
+  color: #b45309;
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-download:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  transform: translateY(-1px);
+}
+
+.gov-footer {
+  background: #1a365d;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+}
+
+.gov-footer p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

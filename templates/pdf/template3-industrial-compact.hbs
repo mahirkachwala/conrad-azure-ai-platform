@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-size: 11px;
+      margin: 30px 40px;
+      color: #222;
+    }
+    .header {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      border-bottom: 2px solid #c00;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .header h2 {
+      font-size: 16px;
+      margin: 0 0 5px 0;
+      color: #c00;
+    }
+    .header small {
+      font-size: 10px;
+      color: #666;
+    }
+    .ref-box {
+      text-align: right;
+      font-size: 10px;
+    }
+    .ref-box strong {
+      display: block;
+      font-size: 13px;
+      color: #c00;
+    }
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .box {
+      border: 1px solid #ddd;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .box h3 {
+      font-size: 12px;
+      margin: 0 0 10px 0;
+      color: #c00;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+    table td {
+      padding: 4px 8px;
+      border-bottom: 1px solid #eee;
+    }
+    table td:first-child {
+      font-weight: bold;
+      width: 110px;
+      color: #555;
+    }
+    .full-width {
+      grid-column: 1 / -1;
+    }
+    ul {
+      margin: 8px 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin: 4px 0;
+    }
+    .footer-stamp {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px dashed #999;
+      font-size: 9px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h2>{{organisation}}</h2>
+      <small>Tender Notice - {{product_category}}</small>
+    </div>
+    <div class="ref-box">
+      <strong>{{tender_id}}</strong>
+      Issue: {{publish_date}}<br>
+      Due: {{due_date}}
+    </div>
+  </div>
+
+  <div class="grid-layout">
+    <div class="box">
+      <h3>Tender Details</h3>
+      <table>
+        <tr>
+          <td>Title</td>
+          <td>{{title}}</td>
+        </tr>
+        <tr>
+          <td>Material</td>
+          <td>{{material}}</td>
+        </tr>
+        <tr>
+          <td>Category</td>
+          <td>{{product_category}}</td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td>{{city}}</td>
+        </tr>
+        <tr>
+          <td>Est. Value</td>
+          <td>₹ {{formatCurrency estimated_cost_inr}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="box">
+      <h3>Key Dates & Terms</h3>
+      <table>
+        <tr>
+          <td>Published</td>
+          <td>{{publish_date}}</td>
+        </tr>
+        <tr>
+          <td>Deadline</td>
+          <td>{{due_date}}, 3:00 PM</td>
+        </tr>
+        <tr>
+          <td>EMD</td>
+          <td>₹ {{calculateEMD estimated_cost_inr}}</td>
+        </tr>
+        <tr>
+          <td>Tender Fee</td>
+          <td>₹ 1,500 (DD/Online)</td>
+        </tr>
+        <tr>
+          <td>Delivery</td>
+          <td>45-60 days ex-PO</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="box full-width">
+      <h3>Technical Specifications</h3>
+      <ul>
+        <li><strong>Product:</strong> {{material}} - {{product_category}}</li>
+        <li><strong>Conductor:</strong> Copper EC Grade, annealed, Class 2 stranded per IS 8130</li>
+        <li><strong>Insulation:</strong> XLPE thermosetting type, colored as per IS specifications</li>
+        <li><strong>Voltage Grade:</strong> 1.1 kV / 11 kV rated (as applicable to cable type)</li>
+        <li><strong>Standards:</strong> IS 7098-1, IS 7098-2, IEC 60502 compliance required</li>
+        <li><strong>Certification:</strong> BIS license mandatory, ISI mark on finished product</li>
+        <li><strong>Testing:</strong> Routine tests per IS spec + Type test reports from NABL labs</li>
+      </ul>
+    </div>
+
+    <div class="box full-width">
+      <h3>Eligibility & Documentation</h3>
+      <ul>
+        <li>Manufacturers with valid BIS license for specified cable type</li>
+        <li>Minimum 3 similar supply orders in last 5 years (copy of POs required)</li>
+        <li>ISO 9001:2015 certification (copy required)</li>
+        <li>Average turnover ≥ ₹15 Cr in last 3 financial years (audited statements)</li>
+        <li>Manufacturing capacity: Min 200 MT/month with proof</li>
+        <li>GST registration, PAN, current bank solvency certificate</li>
+        <li>No litigation/blacklisting declaration on company letterhead</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>Commercial Terms</h3>
+      <table>
+        <tr>
+          <td>Price</td>
+          <td>Firm for 120 days</td>
+        </tr>
+        <tr>
+          <td>Payment</td>
+          <td>85% on delivery, 15% post-acceptance</td>
+        </tr>
+        <tr>
+          <td>Warranty</td>
+          <td>18 months from commissioning</td>
+        </tr>
+        <tr>
+          <td>LD Clause</td>
+          <td>0.5% per week, max 7.5%</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="box">
+      <h3>Contact Information</h3>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>{{contact_person}}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{contact_email}}</td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>{{contact_phone}}</td>
+        </tr>
+        <tr>
+          <td>Office</td>
+          <td>{{city}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-stamp">
+    Official Tender Document | {{tender_id}} | {{organisation}} | Auto-generated for demonstration
+  </div>
+</body>
+</html>

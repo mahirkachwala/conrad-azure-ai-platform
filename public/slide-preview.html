@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>Planned Solution Model with Tech Stack</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      padding: 60px 80px;
+    }
+    
+    .slide-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 40px;
+    }
+    
+    .column h2 {
+      font-size: 28px;
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #667eea;
+    }
+    
+    .dataset-item {
+      margin-bottom: 18px;
+    }
+    
+    .dataset-item h3 {
+      font-size: 18px;
+      color: #f093fb;
+      margin-bottom: 6px;
+    }
+    
+    .dataset-item p {
+      font-size: 14px;
+      color: #cccccc;
+      line-height: 1.5;
+    }
+    
+    .agent-item {
+      margin-bottom: 16px;
+    }
+    
+    .agent-item h3 {
+      font-size: 18px;
+      color: #48bb78;
+      margin-bottom: 4px;
+    }
+    
+    .agent-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .agent-item li {
+      font-size: 13px;
+      color: #cccccc;
+      padding-left: 15px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+    
+    .agent-item li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+    }
+    
+    .tech-stack {
+      margin-top: 30px;
+    }
+    
+    .tech-stack h2 {
+      font-size: 32px;
+      color: #f59e0b;
+      margin-bottom: 15px;
+    }
+    
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    
+    .tech-item {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 3px solid #667eea;
+    }
+    
+    .tech-item h3 {
+      font-size: 14px;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+    
+    .tech-item p {
+      font-size: 11px;
+      color: #999999;
+    }
+    
+    .metrics {
+      position: absolute;
+      bottom: 60px;
+      right: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px 30px;
+      border-radius: 12px;
+    }
+    
+    .metrics h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .metrics p {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="slide-title">PLANNED SOLUTION MODEL WITH TECH STACK</h1>
+  
+  <div class="content-grid">
+    <div class="column">
+      <h2>DATA ARCHITECTURE</h2>
+      
+      <div class="dataset-item">
+        <h3>Multi-Portal Database</h3>
+        <p>90 tenders across 3 portals (Government, Industrial, Utilities) with consistent JSON schema</p>
+      </div>
+      
+      <div class="dataset-item">
+        <h3>OEM Product Catalog</h3>
+        <p>11 certified products with detailed specs for automated matching</p>
+      </div>
+      
+      <div class="dataset-item">
+        <h3>Test Pricing Database</h3>
+        <p>20 installation & commissioning tests (₹5K-₹3L range)</p>
+      </div>
+      
+      <div class="dataset-item">
+        <h3>Risk Detection Engine</h3>
+        <p>8 risky clause patterns: unlimited liability, high LD (>10%), no advance payment</p>
+      </div>
+      
+      <div class="dataset-item">
+        <h3>Assumptions Engine</h3>
+        <p>8 gap patterns with auto-generated industry-standard assumptions</p>
+      </div>
+      
+      <div class="dataset-item">
+        <h3>Document Intelligence</h3>
+        <p>PDF & Word extraction with AI-powered structured data recognition (19 fields)</p>
+      </div>
+    </div>
+    
+    <div class="column">
+      <h2>AI AGENT ORCHESTRATION</h2>
+      
+      <div class="agent-item">
+        <h3>Sales Agent</h3>
+        <ul>
+          <li>Scans 90 tenders across 3 portals</li>
+          <li>Filters by deadline proximity</li>
+          <li>AI scoring for best opportunity</li>
+        </ul>
+      </div>
+      
+      <div class="agent-item">
+        <h3>Technical Agent</h3>
+        <ul>
+          <li>Extracts product specs from RFP</li>
+          <li>Matches against 11 OEM products</li>
+          <li>Equal-weight spec scoring (92% accuracy)</li>
+        </ul>
+      </div>
+      
+      <div class="agent-item">
+        <h3>Pricing Agent</h3>
+        <ul>
+          <li>Calculates material costs from OEM prices</li>
+          <li>Adds installation/testing costs</li>
+          <li>Generates editable pricing table</li>
+        </ul>
+      </div>
+      
+      <div class="agent-item">
+        <h3>Master Agent</h3>
+        <ul>
+          <li>Orchestrates 3 specialized agents</li>
+          <li>Calculates win probability (78% HIGH)</li>
+          <li>Detects risky clauses & critical gaps</li>
+        </ul>
+      </div>
+      
+      <div class="agent-item">
+        <h3>HITL Approval Workflow</h3>
+        <ul>
+          <li>Live pricing table editing with validation</li>
+          <li>Manager approval with audit trail</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tech-stack">
+    <h2>TECHNOLOGY STACK</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <h3>Flexible AI</h3>
+        <p>Gemini 2.0 Flash / Ollama / OpenAI</p>
+      </div>
+      <div class="tech-item">
+        <h3>Backend</h3>
+        <p>Express.js with REST APIs</p>
+      </div>
+      <div class="tech-item">
+        <h3>Document Processing</h3>
+        <p>PDFKit, pdf-parse, Mammoth</p>
+      </div>
+      <div class="tech-item">
+        <h3>Database</h3>
+        <p>SQLite + JSON feeds</p>
+      </div>
+      <div class="tech-item">
+        <h3>Gmail Integration</h3>
+        <p>Pre-filled counter-offer emails</p>
+      </div>
+      <div class="tech-item">
+        <h3>Google Calendar</h3>
+        <p>Deadline reminders + .ics export</p>
+      </div>
+      <div class="tech-item">
+        <h3>Network Resilience</h3>
+        <p>Exponential backoff retry (3x)</p>
+      </div>
+      <div class="tech-item">
+        <h3>Export Engine</h3>
+        <p>CSV, PDF, Branded One-Pager</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="metrics">
+    <h3>KEY METRICS</h3>
+    <p>⚡ 90% time reduction (4h → 20min)</p>
+    <p>🎯 80-85% base accuracy | 95-98% with HITL</p>
+    <p>📊 92% spec match | 78% win probability</p>
+    <p>📄 19 fields extracted from documents</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      font-size: 12px;
+      margin: 50px 60px;
+      line-height: 1.8;
+      color: #000;
+    }
+    .letterhead {
+      text-align: center;
+      border-bottom: 1px solid #000;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+    }
+    .letterhead h1 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: bold;
+    }
+    .letterhead p {
+      margin: 3px 0;
+      font-size: 10px;
+    }
+    .ref-line {
+      margin: 20px 0;
+      font-size: 11px;
+    }
+    .date-line {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .subject {
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 20px 0;
+    }
+    .body-text {
+      text-align: justify;
+      margin: 15px 0;
+    }
+    .body-text p {
+      margin: 12px 0;
+    }
+    .details-table {
+      width: 100%;
+      margin: 20px 0;
+      border: 1px solid #000;
+    }
+    .details-table td {
+      padding: 8px;
+      border: 1px solid #666;
+    }
+    .details-table td:first-child {
+      width: 200px;
+      font-weight: bold;
+      background: #f5f5f5;
+    }
+    .signature-block {
+      margin-top: 40px;
+      text-align: right;
+    }
+    .signature-block p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="letterhead">
+    <h1>{{organisation}}</h1>
+    <p>{{city}}</p>
+    <p>Procurement & Materials Management Department</p>
+  </div>
+
+  <div class="ref-line">
+    <strong>Ref No:</strong> {{tender_id}} &nbsp;&nbsp;&nbsp; <strong>Classification:</strong> Open Tender
+  </div>
+
+  <div class="date-line">
+    Date: {{publish_date}}
+  </div>
+
+  <div class="subject">
+    Subject: Invitation for Bids - {{title}}
+  </div>
+
+  <div class="body-text">
+    <p>Dear Sir/Madam,</p>
+
+    <p>{{organisation}} invites sealed bids from reputed manufacturers/authorized dealers for supply of <strong>{{material}}</strong> as per the specifications and terms outlined in this tender document.</p>
+
+    <p>This procurement is being undertaken to support our infrastructure development initiative in {{city}} and surrounding areas. We are seeking vendors who can demonstrate proven capability in manufacturing and supplying similar materials to utilities and industrial organizations.</p>
+  </div>
+
+  <table class="details-table">
+    <tr>
+      <td>Tender Reference Number</td>
+      <td>{{tender_id}}</td>
+    </tr>
+    <tr>
+      <td>Material Description</td>
+      <td>{{material}}</td>
+    </tr>
+    <tr>
+      <td>Product Classification</td>
+      <td>{{product_category}}</td>
+    </tr>
+    <tr>
+      <td>Estimated Contract Value</td>
+      <td>Indian Rupees {{formatCurrency estimated_cost_inr}} (inclusive of all taxes)</td>
+    </tr>
+    <tr>
+      <td>Tender Document Issue Date</td>
+      <td>{{publish_date}}</td>
+    </tr>
+    <tr>
+      <td>Last Date for Bid Submission</td>
+      <td>{{due_date}} at 2:00 PM (Indian Standard Time)</td>
+    </tr>
+    <tr>
+      <td>Delivery Location</td>
+      <td>{{organisation}}, {{city}}</td>
+    </tr>
+    <tr>
+      <td>Earnest Money Deposit (EMD)</td>
+      <td>₹ {{calculateEMD estimated_cost_inr}}</td>
+    </tr>
+    <tr>
+      <td>Tender Document Fee</td>
+      <td>₹ 3,500/- (Non-refundable)</td>
+    </tr>
+  </table>
+
+  <div class="body-text">
+    <p><strong>Technical Specifications:</strong></p>
+    <p>The material shall conform to the following specifications:</p>
+    <ul>
+      <li>Conductor: Electrolytic Grade Copper (EC Grade), annealed, stranded as per IS 8130</li>
+      <li>Insulation: XLPE (Cross-linked Polyethylene) thermosetting compound</li>
+      <li>Voltage Rating: 1.1 kV / 11 kV grade as applicable</li>
+      <li>Standards: IS 7098-1, IS 7098-2, IEC 60502 compliance mandatory</li>
+      <li>Certification: Valid BIS license and ISI marking required</li>
+      <li>Testing: Routine and type test certificates from NABL accredited laboratories</li>
+    </ul>
+
+    <p><strong>Eligibility Criteria:</strong></p>
+    <ul>
+      <li>Valid BIS license for the cable type being tendered</li>
+      <li>Minimum THREE (3) similar supply orders in last FIVE (5) years</li>
+      <li>ISO 9001:2015 certification (copy to be submitted)</li>
+      <li>Average annual turnover not less than ₹10 Crores in preceding 3 years</li>
+      <li>Manufacturing facility with adequate production capacity</li>
+      <li>No ongoing litigation or blacklisting declaration</li>
+    </ul>
+
+    <p><strong>Terms of Payment:</strong> Eighty percent (80%) against delivery and inspection, remaining twenty percent (20%) after acceptance and commissioning.</p>
+
+    <p><strong>Delivery Period:</strong> Supply shall be completed within sixty (60) calendar days from the date of issue of Purchase Order.</p>
+
+    <p><strong>Warranty:</strong> Twenty-four (24) months from the date of commissioning or thirty (30) months from the date of delivery, whichever occurs earlier.</p>
+
+    <p>Interested bidders may obtain further clarifications by contacting the undersigned during office hours (10:00 AM to 5:00 PM) on all working days.</p>
+
+    <p>This tender is subject to our standard terms and conditions. The organization reserves the right to accept or reject any or all bids without assigning any reason thereof.</p>
+  </div>
+
+  <div class="signature-block">
+    <p><strong>{{contact_person}}</strong></p>
+    <p>Procurement Manager</p>
+    <p>{{organisation}}</p>
+    <p>Email: {{contact_email}}</p>
+    <p>Phone: {{contact_phone}}</p>
+  </div>
+
+  <div style="margin-top: 30px; font-size: 10px; color: #666; text-align: center;">
+    This is an auto-generated tender document | Ref: {{tender_id}}
+  </div>
+</body>
+</html>

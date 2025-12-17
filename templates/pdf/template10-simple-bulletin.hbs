@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      margin: 35px 45px;
+      color: #000;
+      line-height: 1.6;
+    }
+    .header-line {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      border-top: 2px solid #000;
+      border-bottom: 2px solid #000;
+      padding: 8px 0;
+      margin-bottom: 20px;
+    }
+    .notice-box {
+      border: 3px double #000;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .notice-box .title {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .notice-box .tender-ref {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+    .field {
+      margin: 10px 0;
+    }
+    .field-label {
+      display: inline-block;
+      width: 200px;
+      font-weight: bold;
+    }
+    .field-value {
+      display: inline;
+    }
+    .section-divider {
+      border-top: 1px dashed #000;
+      margin: 18px 0;
+    }
+    .section-title {
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 15px 0 8px 0;
+    }
+    ul {
+      margin: 5px 0;
+      padding-left: 25px;
+    }
+    .footer-line {
+      text-align: center;
+      border-top: 2px solid #000;
+      padding-top: 10px;
+      margin-top: 25px;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-line">
+    OFFICIAL TENDER BULLETIN
+  </div>
+
+  <div class="notice-box">
+    <div class="title">{{organisation}}</div>
+    <div class="tender-ref">Tender Reference: {{tender_id}}</div>
+    <div style="margin-top: 8px; font-size: 10px;">Issued: {{publish_date}}</div>
+  </div>
+
+  <div class="section-title">TENDER PARTICULARS</div>
+
+  <div class="field">
+    <span class="field-label">Subject Matter:</span>
+    <span class="field-value">{{title}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Material Description:</span>
+    <span class="field-value">{{material}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Product Category:</span>
+    <span class="field-value">{{product_category}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Estimated Value:</span>
+    <span class="field-value">INR {{formatCurrency estimated_cost_inr}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Publication Date:</span>
+    <span class="field-value">{{publish_date}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Closing Date & Time:</span>
+    <span class="field-value">{{due_date}}, 14:00 Hours (IST)</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Delivery Location:</span>
+    <span class="field-value">{{city}}</span>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <div class="section-title">TECHNICAL SPECIFICATION SUMMARY</div>
+
+  <p>The material shall comply with the following minimum standards:</p>
+
+  <ul>
+    <li>Conductor: Copper EC Grade, Class 2 stranded (IS 8130)</li>
+    <li>Insulation: XLPE thermosetting type</li>
+    <li>Voltage: 1.1 kV or 11 kV grade as applicable</li>
+    <li>Standards: IS 7098 Parts 1 & 2, IEC 60502</li>
+    <li>Certification: BIS license valid for specified cable</li>
+    <li>Marking: ISI mark on cable sheath at regular intervals</li>
+    <li>Testing: Routine tests per IS spec + Type tests from NABL labs</li>
+  </ul>
+
+  <div class="section-divider"></div>
+
+  <div class="section-title">BIDDER QUALIFICATION REQUIREMENTS</div>
+
+  <ul>
+    <li>Valid BIS manufacturing license for the cable type</li>
+    <li>Minimum 3 years manufacturing experience</li>
+    <li>At least 3 similar orders completed in last 5 years</li>
+    <li>ISO 9001:2015 quality certification</li>
+    <li>Average annual turnover: Minimum INR 10 Crores</li>
+    <li>Production capacity: Minimum 150 MT per month</li>
+    <li>No blacklisting or ongoing litigation</li>
+  </ul>
+
+  <div class="section-divider"></div>
+
+  <div class="section-title">FINANCIAL TERMS</div>
+
+  <div class="field">
+    <span class="field-label">Earnest Money Deposit:</span>
+    <span class="field-value">INR {{calculateEMD estimated_cost_inr}} (2% of est. value)</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Tender Processing Fee:</span>
+    <span class="field-value">INR 2,000/- (Non-refundable)</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Bid Validity Period:</span>
+    <span class="field-value">90 days from date of opening</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Payment Terms:</span>
+    <span class="field-value">80% against delivery, 20% post-acceptance</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Delivery Schedule:</span>
+    <span class="field-value">60 days from Purchase Order</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Warranty Period:</span>
+    <span class="field-value">24 months from commissioning</span>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <div class="section-title">SUBMISSION INSTRUCTIONS</div>
+
+  <p>Sealed bids clearly marked with Tender Reference Number shall be submitted to the following address on or before the closing date and time mentioned above:</p>
+
+  <p style="text-align: center; margin: 15px 0; font-weight: bold;">
+    {{organisation}}<br>
+    {{city}}<br>
+  </p>
+
+  <p>Late submissions shall be summarily rejected. The organization reserves the right to accept or reject any bid without assigning reasons.</p>
+
+  <div class="section-divider"></div>
+
+  <div class="section-title">CONTACT FOR QUERIES</div>
+
+  <div class="field">
+    <span class="field-label">Name:</span>
+    <span class="field-value">{{contact_person}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Email:</span>
+    <span class="field-value">{{contact_email}}</span>
+  </div>
+
+  <div class="field">
+    <span class="field-label">Telephone:</span>
+    <span class="field-value">{{contact_phone}}</span>
+  </div>
+
+  <div class="footer-line">
+    TENDER BULLETIN {{tender_id}}<br>
+    Issued by {{organisation}}<br>
+    Auto-generated document for demonstration purposes
+  </div>
+</body>
+</html>

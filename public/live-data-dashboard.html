@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Data Dashboard - AI-Ready Tender Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        .status {
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .status.loading {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat {
+            text-align: center;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .label-well-established { background: #d1fae5; color: #065f46; }
+        .label-moderate { background: #fed7aa; color: #92400e; }
+        .label-risky { background: #fee2e2; color: #991b1b; }
+        .label-unknown { background: #e5e7eb; color: #374151; }
+        .log {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Live Data Dashboard</h1>
+            <p>Manage real-time RFP collection and company verification from CPPP & OpenCorporates</p>
+        </div>
+
+        <div class="grid">
+            <!-- Collect RFPs Card -->
+            <div class="card">
+                <h2>
+                    <div class="card-icon" style="background: #dbeafe; color: #1e40af;">📡</div>
+                    Collect Live RFPs
+                </h2>
+                <p style="color: #666; font-size: 13px; margin-bottom: 15px;">
+                    Scrape latest tenders from CPPP (Central Public Procurement Portal)
+                </p>
+                <button class="btn btn-primary" onclick="collectRFPs()">
+                    Scrape CPPP Now
+                </button>
+                <div id="rfp-status" class="status" style="display:none;"></div>
+            </div>
+
+            <!-- Shortlist Companies Card -->
+            <div class="card">
+                <h2>
+                    <div class="card-icon" style="background: #d1fae5; color: #065f46;">🏢</div>
+                    Verify Companies
+                </h2>
+                <p style="color: #666; font-size: 13px; margin-bottom: 15px;">
+                    Fetch and verify companies from OpenCorporates with credibility labels
+                </p>
+                <button class="btn btn-primary" onclick="shortlistCompanies()">
+                    Verify Companies
+                </button>
+                <div id="company-status" class="status" style="display:none;"></div>
+            </div>
+
+            <!-- Match RFPs Card -->
+            <div class="card">
+                <h2>
+                    <div class="card-icon" style="background: #fef3c7; color: #92400e;">🎯</div>
+                    Match RFPs
+                </h2>
+                <p style="color: #666; font-size: 13px; margin-bottom: 15px;">
+                    Automatically match RFPs with relevant vendors using tag mapping
+                </p>
+                <button class="btn btn-primary" onclick="matchRFPs()">
+                    Run Matching
+                </button>
+                <div id="match-status" class="status" style="display:none;"></div>
+            </div>
+
+            <!-- Cache Stats Card -->
+            <div class="card">
+                <h2>
+                    <div class="card-icon" style="background: #e0e7ff; color: #5b21b6;">📦</div>
+                    Cache Manager
+                </h2>
+                <p style="color: #666; font-size: 13px; margin-bottom: 15px;">
+                    View and manage OpenCorporates company cache
+                </p>
+                <button class="btn btn-primary" onclick="viewCache()">
+                    View Cache
+                </button>
+                <button class="btn btn-danger" onclick="clearCache()">
+                    Clear Cache
+                </button>
+                <div id="cache-status" class="status" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div class="card">
+            <h2>📊 Current Dataset Statistics</h2>
+            <div class="stats" id="stats">
+                <div class="stat">
+                    <div class="stat-value" id="stat-rfps">-</div>
+                    <div class="stat-label">Live RFPs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-companies">-</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-matches">-</div>
+                    <div class="stat-label">Matches</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-cache">-</div>
+                    <div class="stat-label">Cached</div>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="loadStats()">Refresh Stats</button>
+        </div>
+    </div>
+
+    <script>
+        async function collectRFPs() {
+            const statusEl = document.getElementById('rfp-status');
+            statusEl.style.display = 'block';
+            statusEl.className = 'status loading';
+            statusEl.innerHTML = '⏳ Scraping CPPP portal... This may take 30-60 seconds...';
+
+            try {
+                const response = await fetch('/api/live/collect?keywords=cable,transformer,switchgear,conductor,oil&limit=90');
+                const data = await response.json();
+
+                if (data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `✅ Success! Collected ${data.count} live RFPs from CPPP<br>Cached at: ${new Date(data.cached_at).toLocaleString()}`;
+                    loadStats();
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `❌ Error: ${data.error}`;
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `❌ Network error: ${error.message}`;
+            }
+        }
+
+        async function shortlistCompanies() {
+            const statusEl = document.getElementById('company-status');
+            statusEl.style.display = 'block';
+            statusEl.className = 'status loading';
+            statusEl.innerHTML = '⏳ Fetching companies from OpenCorporates... This will take 2-3 minutes...';
+
+            try {
+                const response = await fetch('/api/live/shortlist-companies', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ resource_tags: [], limit: 60 })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    const labels = Object.entries(data.label_distribution).map(([label, count]) => {
+                        const labelClass = label.toLowerCase().replace('_', '-');
+                        return `<span class="label label-${labelClass}">${label}: ${count}</span>`;
+                    }).join(' ');
+                    
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `✅ Success! Verified ${data.count} companies<br>Distribution: ${labels}`;
+                    loadStats();
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `❌ Error: ${data.error}`;
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `❌ Network error: ${error.message}`;
+            }
+        }
+
+        async function matchRFPs() {
+            const statusEl = document.getElementById('match-status');
+            statusEl.style.display = 'block';
+            statusEl.className = 'status loading';
+            statusEl.innerHTML = '⏳ Running RFP-to-vendor matching algorithm...';
+
+            try {
+                const response = await fetch('/api/live/match', { method: 'POST' });
+                const data = await response.json();
+
+                if (data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `✅ Success! Matched ${data.count} RFPs to vendor shortlists`;
+                    loadStats();
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `❌ Error: ${data.error}`;
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `❌ Network error: ${error.message}`;
+            }
+        }
+
+        async function viewCache() {
+            const statusEl = document.getElementById('cache-status');
+            statusEl.style.display = 'block';
+            statusEl.className = 'status loading';
+            statusEl.innerHTML = '⏳ Loading cache...';
+
+            try {
+                const response = await fetch('/api/live/cache-stats');
+                const data = await response.json();
+
+                const labelCounts = data.companies.reduce((acc, c) => {
+                    acc[c.label] = (acc[c.label] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const labels = Object.entries(labelCounts).map(([label, count]) => {
+                    const labelClass = label.toLowerCase().replace('_', '-');
+                    return `<span class="label label-${labelClass}">${label}: ${count}</span>`;
+                }).join(' ');
+
+                statusEl.className = 'status success';
+                statusEl.innerHTML = `📦 ${data.cached_companies} companies in cache<br>${labels}`;
+                loadStats();
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        async function clearCache() {
+            if (!confirm('Are you sure you want to clear the company cache? This will require re-fetching all companies from OpenCorporates.')) {
+                return;
+            }
+
+            const statusEl = document.getElementById('cache-status');
+            statusEl.style.display = 'block';
+            statusEl.className = 'status loading';
+            statusEl.innerHTML = '⏳ Clearing cache...';
+
+            try {
+                const response = await fetch('/api/live/cache', { method: 'DELETE' });
+                const data = await response.json();
+
+                if (data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `✅ ${data.message}`;
+                    loadStats();
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `❌ Error clearing cache`;
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        async function loadStats() {
+            try {
+                const [rfpsRes, companiesRes, cacheRes] = await Promise.all([
+                    fetch('/data/live-tenders.json').catch(() => ({ ok: false })),
+                    fetch('/data/live-companies.json').catch(() => ({ ok: false })),
+                    fetch('/api/live/cache-stats').catch(() => ({ ok: false }))
+                ]);
+
+                if (rfpsRes.ok) {
+                    const rfps = await rfpsRes.json();
+                    document.getElementById('stat-rfps').textContent = rfps.length || 0;
+                }
+
+                if (companiesRes.ok) {
+                    const companies = await companiesRes.json();
+                    document.getElementById('stat-companies').textContent = companies.length || 0;
+                }
+
+                if (cacheRes.ok) {
+                    const cache = await cacheRes.json();
+                    document.getElementById('stat-cache').textContent = cache.cached_companies || 0;
+                }
+
+                const matchesRes = await fetch('/data/rfp-matches.json').catch(() => ({ ok: false }));
+                if (matchesRes.ok) {
+                    const matches = await matchesRes.json();
+                    document.getElementById('stat-matches').textContent = matches.length || 0;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Load stats on page load
+        window.addEventListener('load', loadStats);
+    </script>
+</body>
+</html>

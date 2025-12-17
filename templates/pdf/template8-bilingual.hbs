@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: 'Noto Sans', Arial, sans-serif;
+      font-size: 11px;
+      margin: 30px 40px;
+      color: #000;
+    }
+    .dual-header {
+      text-align: center;
+      border: 3px double #000;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+    .dual-header h1 {
+      font-size: 16px;
+      margin: 0 0 5px 0;
+    }
+    .dual-header .hindi {
+      font-size: 14px;
+      margin: 3px 0;
+      color: #333;
+    }
+    .tender-box {
+      background: #fffacd;
+      border: 2px solid #ffa500;
+      padding: 12px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    .tender-box .tender-no {
+      font-size: 15px;
+      font-weight: bold;
+      color: #ff6600;
+    }
+    .info-section {
+      margin: 20px 0;
+    }
+    .info-section h3 {
+      background: #4a4a4a;
+      color: white;
+      padding: 6px 10px;
+      font-size: 12px;
+      margin: 15px 0 8px 0;
+    }
+    .bilingual-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px dotted #ccc;
+    }
+    .label-en {
+      font-weight: bold;
+      color: #000;
+    }
+    .label-hi {
+      font-size: 9px;
+      color: #666;
+    }
+    .govt-seal {
+      position: fixed;
+      top: 50px;
+      right: 50px;
+      width: 80px;
+      height: 80px;
+      border: 2px solid #ff6600;
+      border-radius: 50%;
+      opacity: 0.2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="govt-seal">भारत सरकार<br>Govt of India</div>
+  
+  <div class="dual-header">
+    <h1>{{organisation}}</h1>
+    <div class="hindi">निविदा सूचना / TENDER NOTICE</div>
+  </div>
+
+  <div class="tender-box">
+    <div class="tender-no">Tender No. / निविदा संख्या: {{tender_id}}</div>
+    <div style="margin-top: 8px; font-size: 10px;">{{title}}</div>
+  </div>
+
+  <div class="info-section">
+    <h3>TENDER INFORMATION / निविदा जानकारी</h3>
+    
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Publication Date</div>
+        <div class="label-hi">प्रकाशन तिथि</div>
+      </div>
+      <div>{{publish_date}}</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Bid Submission Deadline</div>
+        <div class="label-hi">बोली जमा करने की अंतिम तिथि</div>
+      </div>
+      <div>{{due_date}} (2:00 PM IST)</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Estimated Value</div>
+        <div class="label-hi">अनुमानित मूल्य</div>
+      </div>
+      <div>₹ {{formatCurrency estimated_cost_inr}}</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Material Category</div>
+        <div class="label-hi">सामग्री श्रेणी</div>
+      </div>
+      <div>{{product_category}}</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Delivery Location</div>
+        <div class="label-hi">वितरण स्थान</div>
+      </div>
+      <div>{{city}}</div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>SCOPE OF WORK / कार्य का दायरा</h3>
+    <p><strong>English:</strong> Supply of {{material}} conforming to IS/IEC standards for {{organisation}}.</p>
+    <p><strong>हिंदी:</strong> {{organisation}} के लिए IS/IEC मानकों के अनुरूप {{material}} की आपूर्ति।</p>
+  </div>
+
+  <div class="info-section">
+    <h3>TECHNICAL SPECIFICATIONS / तकनीकी विनिर्देश</h3>
+    <ul>
+      <li><strong>Conductor / कंडक्टर:</strong> Electrolytic Copper, Class 2 stranded (IS 8130)</li>
+      <li><strong>Insulation / इन्सुलेशन:</strong> XLPE (Cross-linked Polyethylene)</li>
+      <li><strong>Voltage Rating / वोल्टेज रेटिंग:</strong> 1.1 kV / 11 kV grade</li>
+      <li><strong>Standards / मानक:</strong> IS 7098, IEC 60502, BIS certified</li>
+      <li><strong>Testing / परीक्षण:</strong> NABL accredited lab reports required</li>
+    </ul>
+  </div>
+
+  <div class="info-section">
+    <h3>ELIGIBILITY / पात्रता मानदंड</h3>
+    <ul>
+      <li>Valid BIS license / वैध BIS लाइसेंस</li>
+      <li>Minimum 3 similar orders in last 5 years / पिछले 5 वर्षों में न्यूनतम 3 समान आदेश</li>
+      <li>ISO 9001:2015 certification / ISO 9001:2015 प्रमाणन</li>
+      <li>Average turnover ≥ ₹10 Cr / औसत टर्नओवर ≥ ₹10 करोड़</li>
+      <li>Manufacturing capacity ≥ 200 MT/month / विनिर्माण क्षमता ≥ 200 मीट्रिक टन/माह</li>
+    </ul>
+  </div>
+
+  <div class="info-section">
+    <h3>COMMERCIAL TERMS / वाणिज्यिक शर्तें</h3>
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Earnest Money Deposit</div>
+        <div class="label-hi">अर्नेस्ट मनी डिपॉजिट</div>
+      </div>
+      <div>₹ {{calculateEMD estimated_cost_inr}} (2% of tender value)</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Tender Fee</div>
+        <div class="label-hi">निविदा शुल्क</div>
+      </div>
+      <div>₹ 2,950 (Non-refundable / अप्रतिदेय)</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Payment Terms</div>
+        <div class="label-hi">भुगतान की शर्तें</div>
+      </div>
+      <div>80% on delivery, 20% after commissioning</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Delivery Period</div>
+        <div class="label-hi">डिलीवरी अवधि</div>
+      </div>
+      <div>60 days from Purchase Order / पर्चेज ऑर्डर से 60 दिन</div>
+    </div>
+
+    <div class="bilingual-row">
+      <div>
+        <div class="label-en">Warranty</div>
+        <div class="label-hi">वारंटी</div>
+      </div>
+      <div>24 months from commissioning / कमीशनिंग से 24 महीने</div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>CONTACT DETAILS / संपर्क विवरण</h3>
+    <p>
+      <strong>Name / नाम:</strong> {{contact_person}}<br>
+      <strong>Email / ईमेल:</strong> {{contact_email}}<br>
+      <strong>Phone / फोन:</strong> {{contact_phone}}<br>
+      <strong>Office / कार्यालय:</strong> {{organisation}}, {{city}}
+    </p>
+  </div>
+
+  <div style="margin-top: 25px; text-align: center; font-size: 9px; color: #666;">
+    Government of India Official Document / भारत सरकार का आधिकारिक दस्तावेज़<br>
+    {{tender_id}} | Auto-generated for demonstration
+  </div>
+</body>
+</html>

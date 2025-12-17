@@ -1,0 +1,139 @@
+# ====================================================
+# Environment & Secrets
+# ====================================================
+.env
+.env.local
+.env.*.local
+env.txt
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.json
+credentials.json
+
+# ====================================================
+# Node.js
+# ====================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+# Note: package-lock.json should be committed for consistent installs
+# yarn.lock and pnpm-lock.yaml should also be committed if using those package managers
+
+# ====================================================
+# Python
+# ====================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+venv/
+ENV/
+env/
+
+# ====================================================
+# IDEs & Editors
+# ====================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# ====================================================
+# Logs
+# ====================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ====================================================
+# Database & Cache
+# ====================================================
+*.db
+*.sqlite
+*.sqlite3
+chroma_db/
+.chroma/
+data/cache/
+data/indexed_documents/
+data/indexed_products/
+data/indexed_tenders/
+
+# ====================================================
+# Uploads & Temporary Files
+# ====================================================
+uploads/
+temp/
+tmp/
+*.tmp
+.temp/
+
+# ====================================================
+# Build & Distribution
+# ====================================================
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ====================================================
+# Testing & Coverage
+# ====================================================
+coverage/
+.nyc_output/
+*.lcov
+.jest/
+
+# ====================================================
+# OS Files
+# ====================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ====================================================
+# Project Specific
+# ====================================================
+data/model_weights.json
+data/modification_patterns.json
+public/data/all-portals.json
+public/data/companies.json
+public/data/cppp.json
+public/data/rfp-matches.json
+public/data/rfps.json
+

@@ -1,0 +1,8 @@
+SKU_ID,Product_Name,Type,Conductor_Material,Conductor_Area_mm2,Voltage_Rating_kV,Insulation,Armoured,No_of_Cores,Temperature_Range,Standard,Unit_Weight_kg_per_km,Unit_Price_per_km,Lead_Time_Days,Description
+CBL008,1C x 500 sqmm HT EHV Cable,EHV Cable,Aluminium,500,66,XLPE,Yes,1,-10 to 90,IS 7098,2400,2800000,35,"Single core 500 sq mm aluminium EHV cable XLPE insulated 66kV rated for power transmission"
+CBL014,1C x 630 sqmm EHV XLPE Cable,EHV Cable,Aluminium,630,110,XLPE,Yes,1,-10 to 90,IEC 60840,3200,4500000,45,"Single core 630 sq mm aluminium EHV transmission cable 110kV XLPE insulated IEC 60840"
+CBL086,1C x 800 sqmm EHV XLPE Cable,EHV Cable,Aluminium,800,132,XLPE,Yes,1,-10 to 90,IEC 60840,4200,5800000,50,"Single core 800 sq mm aluminium EHV transmission cable 132kV XLPE insulated IEC 60840"
+CBL089,1C x 1000 sqmm EHV XLPE Cable,EHV Cable,Aluminium,1000,220,XLPE,Yes,1,-10 to 90,IEC 62067,5500,7500000,60,"Single core 1000 sq mm aluminium EHV cable 220kV XLPE insulated IEC 62067 transmission"
+
+
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body { 
+      font-family: 'Times New Roman', serif;
+      font-size: 11px;
+      line-height: 1.5;
+      margin: 40px;
+      color: #000;
+    }
+    .header {
+      text-align: center;
+      border-bottom: 3px double #000;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 16px;
+      margin: 5px 0;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .header h2 {
+      font-size: 14px;
+      margin: 5px 0;
+      font-weight: normal;
+    }
+    .notice-box {
+      border: 2px solid #000;
+      padding: 15px;
+      margin: 20px 0;
+      background: #f5f5f5;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    .meta-table td, .meta-table th {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: left;
+    }
+    .meta-table th {
+      background: #e0e0e0;
+      font-weight: bold;
+    }
+    .section {
+      margin: 20px 0;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 15px 0 10px 0;
+    }
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+    table.spec-table td, table.spec-table th {
+      border: 1px solid #444;
+      padding: 6px 10px;
+      vertical-align: top;
+    }
+    table.spec-table th {
+      background: #d0d0d0;
+      font-weight: bold;
+    }
+    .footer {
+      position: fixed;
+      bottom: 30px;
+      left: 40px;
+      right: 40px;
+      font-size: 9px;
+      color: #666;
+      border-top: 1px solid #999;
+      padding-top: 10px;
+    }
+    ul {
+      margin: 5px 0;
+      padding-left: 25px;
+    }
+    .stamp {
+      position: fixed;
+      bottom: 100px;
+      right: 60px;
+      width: 120px;
+      height: 120px;
+      border: 2px solid #666;
+      border-radius: 60px;
+      opacity: 0.3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      transform: rotate(-15deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="stamp">OFFICIAL<br>DOCUMENT</div>
+  
+  <div class="header">
+    <h1>{{organisation}}</h1>
+    <h2>NOTICE INVITING TENDER (NIT)</h2>
+    <div style="margin-top: 10px;">Tender No: <strong>{{tender_id}}</strong></div>
+  </div>
+
+  <div class="notice-box">
+    <strong>Subject:</strong> {{title}}<br>
+    <strong>Material Category:</strong> {{product_category}}<br>
+    <strong>Location:</strong> {{city}}
+  </div>
+
+  <div class="section">
+    <div class="section-title">1. TENDER INFORMATION</div>
+    <table class="meta-table">
+      <tr>
+        <th>Particulars</th>
+        <th>Details</th>
+      </tr>
+      <tr>
+        <td>Tender Reference No.</td>
+        <td>{{tender_id}}</td>
+      </tr>
+      <tr>
+        <td>Publication Date</td>
+        <td>{{publish_date}}</td>
+      </tr>
+      <tr>
+        <td>Bid Submission Deadline</td>
+        <td>{{due_date}} (2:00 PM IST)</td>
+      </tr>
+      <tr>
+        <td>Estimated Value</td>
+        <td>₹ {{formatCurrency estimated_cost_inr}}</td>
+      </tr>
+      <tr>
+        <td>Delivery Location</td>
+        <td>{{city}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">2. SCOPE OF WORK</div>
+    <p>The {{organisation}} invites sealed bids from eligible vendors for the supply of <strong>{{material}}</strong> as per the technical specifications detailed below.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">3. TECHNICAL SPECIFICATIONS</div>
+    <table class="spec-table">
+      <tr>
+        <th>S.No.</th>
+        <th>Description</th>
+        <th>Specification</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Material Type</td>
+        <td>{{material}}</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Category</td>
+        <td>{{product_category}}</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Standards Compliance</td>
+        <td>IS 7098 (Part 1 & 2), IEC 60502, BIS certified</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Conductor Material</td>
+        <td>Electrolytic Grade Copper, Class 2 stranded</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Insulation</td>
+        <td>XLPE (Cross-linked Polyethylene), Type ST2</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Voltage Rating</td>
+        <td>1.1 kV / 11 kV (as applicable)</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">4. ELIGIBILITY CRITERIA</div>
+    <p>Bidders must satisfy the following conditions:</p>
+    <ul>
+      <li>Must have executed at least THREE (3) similar orders in the last FIVE (5) years with Central/State Government entities or PSUs</li>
+      <li>Average annual turnover of minimum ₹ 10 Crores in the last 3 financial years</li>
+      <li>Valid ISO 9001:2015 certification for quality management</li>
+      <li>Type test reports from NABL accredited laboratories</li>
+      <li>Manufacturing facility with minimum 500 MT/month capacity</li>
+      <li>No ongoing litigation or blacklisting by any Government department</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">5. COMMERCIAL TERMS</div>
+    <table class="meta-table">
+      <tr>
+        <td><strong>Earnest Money Deposit (EMD)</strong></td>
+        <td>₹ {{calculateEMD estimated_cost_inr}} (2% of estimated value)</td>
+      </tr>
+      <tr>
+        <td><strong>Tender Fee</strong></td>
+        <td>₹ 2,950/- (Non-refundable)</td>
+      </tr>
+      <tr>
+        <td><strong>Bid Validity</strong></td>
+        <td>120 days from bid opening date</td>
+      </tr>
+      <tr>
+        <td><strong>Payment Terms</strong></td>
+        <td>80% against delivery, 20% after installation & commissioning</td>
+      </tr>
+      <tr>
+        <td><strong>Delivery Period</strong></td>
+        <td>60 days from date of Purchase Order</td>
+      </tr>
+      <tr>
+        <td><strong>Warranty</strong></td>
+        <td>24 months from date of commissioning</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">6. CONTACT INFORMATION</div>
+    <p>
+      <strong>For Technical Queries:</strong> {{contact_person}}<br>
+      <strong>Email:</strong> {{contact_email}}<br>
+      <strong>Phone:</strong> {{contact_phone}}<br>
+      <strong>Address:</strong> {{organisation}}, {{city}}
+    </p>
+  </div>
+
+  <div class="footer">
+    This is an auto-generated tender document. Seal and authorized signature required. Page 1 of 1 | Tender {{tender_id}}
+  </div>
+</body>
+</html>

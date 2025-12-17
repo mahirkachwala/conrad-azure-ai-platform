@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeM - Government e-Marketplace | Public Procurement Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      color: #2c3e50;
+    }
+    
+    .gem-header {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    
+    .header-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .gov-emblem {
+      font-size: 50px;
+    }
+    
+    .header-text h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+    
+    .header-text p {
+      font-size: 13px;
+      opacity: 0.95;
+    }
+    
+    .nav-ribbon {
+      background: #1976d2;
+      padding: 10px 0;
+    }
+    
+    .nav-items {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav-items a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    .nav-items a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .wrapper {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .marketplace-panel {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    
+    .panel-heading {
+      color: #0d47a1;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .search-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
+    }
+    
+    .field-box {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .field-box label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #34495e;
+      margin-bottom: 8px;
+    }
+    
+    .field-box input, .field-box select {
+      padding: 11px;
+      border: 1px solid #cbd5e0;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    
+    .btn-search-gem {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      padding: 13px 30px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-search-gem:hover {
+      background: #1976d2;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s;
+    }
+    
+    .product-card:hover {
+      box-shadow: 0 4px 12px rgba(13,71,161,0.15);
+      border-color: #1976d2;
+    }
+    
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .product-id {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0d47a1;
+    }
+    
+    .category-badge {
+      background: #e3f2fd;
+      color: #0d47a1;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    
+    .product-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
+    }
+    
+    .supplier-name {
+      font-size: 14px;
+      color: #546e7a;
+      margin-bottom: 15px;
+    }
+    
+    .product-details {
+      background: #f7fafc;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    
+    .detail-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .detail-line:last-child {
+      margin-bottom: 0;
+    }
+    
+    .detail-key {
+      color: #718096;
+      font-weight: 500;
+    }
+    
+    .detail-value {
+      color: #2d3748;
+      font-weight: 700;
+    }
+    
+    .footer-gem {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px;
+      color: #a0aec0;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+  <div class="gem-header">
+    <div class="header-main">
+      <div class="gov-emblem">🇮🇳</div>
+      <div class="header-text">
+        <h1>GeM - Government e-Marketplace</h1>
+        <p>Ministry of Commerce & Industry | National Procurement Portal</p>
+      </div>
+    </div>
+    <div class="nav-ribbon">
+      <div class="nav-items">
+        <a href="/">🏠 Home</a>
+        <a href="/chat.html">💬 AI Chat</a>
+        <a href="/companies.html">📊 Vendors</a>
+        <a href="/portals/gov.html">🏛️ Procurement</a>
+        <a href="/portals/gem.html">🛒 Marketplace</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="marketplace-panel">
+      <h2 class="panel-heading">🔍 Search GeM Marketplace</h2>
+      <form id="search-form">
+        <div class="search-layout">
+          <div class="field-box">
+            <label>Product/Service</label>
+            <input type="text" id="product-search" placeholder="Search products...">
+          </div>
+          <div class="field-box">
+            <label>Category</label>
+            <select id="category-filter">
+              <option value="">All Categories</option>
+              <option value="wires-cables">Wires & Cables</option>
+              <option value="transformers">Transformers</option>
+              <option value="fmcg-packaging">FMCG Packaging</option>
+            </select>
+          </div>
+          <div class="field-box">
+            <label>Location</label>
+            <input type="text" id="location-filter" placeholder="City...">
+          </div>
+          <div class="field-box">
+            <button type="submit" class="btn-search-gem">Search Products</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="results">
+      <h2 style="color: #0d47a1; margin-bottom: 20px; font-weight: 700;">Marketplace Products (<span id="product-count">0</span>)</h2>
+      <div class="products-grid" id="products-grid">
+        <p class="empty-state">Search for products in GeM marketplace</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-gem">
+    <p style="font-size: 17px; font-weight: 600;">Government e-Marketplace (GeM)</p>
+    <p style="margin-top: 8px; font-size: 13px; opacity: 0.9;">Ministry of Commerce & Industry, Government of India | Demo Portal © 2025</p>
+  </div>
+
+  <script>
+    let tenders = [];
+
+    fetch('/data/all-portals.json')
+      .then(res => res.json())
+      .then(data => {
+        tenders = data;
+        renderProducts(tenders.slice(0, 20));
+      });
+
+    function renderProducts(list) {
+      const grid = document.getElementById('products-grid');
+      const count = document.getElementById('product-count');
+      
+      count.textContent = list.length;
+
+      if (list.length === 0) {
+        grid.innerHTML = '<p class="empty-state">No products found</p>';
+        return;
+      }
+
+      grid.innerHTML = list.map(tender => `
+        <div class="product-card">
+          <div class="product-header">
+            <div class="product-id">${tender.tender_id}</div>
+            <div class="category-badge">${tender.product_category.replace('-', ' ').toUpperCase()}</div>
+          </div>
+          <div class="product-title">${tender.title}</div>
+          <div class="supplier-name">Supplier: ${tender.organisation}</div>
+          <div class="product-details">
+            <div class="detail-line">
+              <span class="detail-key">Location:</span>
+              <span class="detail-value">${tender.city}</span>
+            </div>
+            <div class="detail-line">
+              <span class="detail-key">Value:</span>
+              <span class="detail-value">₹${tender.estimated_cost_inr.toLocaleString('en-IN')}</span>
+            </div>
+            <div class="detail-line">
+              <span class="detail-key">Deadline:</span>
+              <span class="detail-value">${new Date(tender.due_date).toLocaleDateString('en-IN')}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const productSearch = document.getElementById('product-search').value.toLowerCase();
+      const categoryFilter = document.getElementById('category-filter').value;
+      const locationFilter = document.getElementById('location-filter').value.toLowerCase();
+
+      const filtered = tenders.filter(tender => {
+        const matchesProduct = !productSearch || 
+          tender.title.toLowerCase().includes(productSearch) ||
+          tender.material.toLowerCase().includes(productSearch);
+        
+        const matchesCategory = !categoryFilter || tender.product_category === categoryFilter;
+        const matchesLocation = !locationFilter || tender.city.toLowerCase().includes(locationFilter);
+        
+        return matchesProduct && matchesCategory && matchesLocation;
+      });
+
+      renderProducts(filtered);
+    });
+  </script>
+</body>
+</html>

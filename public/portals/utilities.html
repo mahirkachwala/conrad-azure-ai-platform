@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilities & Infrastructure Hub - Power, Water, Infrastructure RFPs</title>
+  <link rel="stylesheet" href="/assets/portal-utilities.css">
+</head>
+<body>
+<div class="page-wrapper">
+  <header class="util-header">
+    <div class="brand">
+      <span class="icon">⚡</span>
+      <div>
+        <h1>Utilities & Infrastructure Hub</h1>
+        <p class="subtitle">Power | Water | Infrastructure Procurement</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="util-nav">
+    <a href="/">🏠 Main Portal</a>
+    <a href="/chat.html">💬 AI Assistant</a>
+    <a href="/portals/utilities.html" class="current">⚡ Utilities Hub</a>
+  </nav>
+
+  <main class="util-main">
+    <section class="search-container">
+      <h2 class="section-title">Search Infrastructure Tenders</h2>
+      <form id="search-form" class="util-form">
+        <div class="field-wrapper">
+          <label for="keyword">Search Term <span class="required">*</span></label>
+          <input type="text" id="keyword" name="keyword" placeholder="e.g., control cable, HT cable" required>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-wrapper">
+            <label for="category">Product Category <span class="required">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">-- Select Category --</option>
+              <option value="wires-cables">Wires & Cables</option>
+              <option value="transformers">Transformers</option>
+              <option value="fmcg-packaging">FMCG Packaging</option>
+            </select>
+          </div>
+
+          <div class="field-wrapper">
+            <label for="city">City <span class="required">*</span></label>
+            <input type="text" id="city" name="city" placeholder="e.g., Mumbai, Delhi" required>
+          </div>
+        </div>
+
+        <!-- Cable-Specific Filters -->
+        <div class="cable-filters" id="cable-filters" style="display: none;">
+          <div class="field-grid">
+            <div class="field-wrapper">
+              <label for="cable-type">Cable Type <span class="required">*</span></label>
+              <select id="cable-type" name="cable-type">
+                <option value="">-- Any Cable Type --</option>
+                <option value="ht-cable">HT Cable (High Tension)</option>
+                <option value="lt-cable">LT Cable (Low Tension)</option>
+                <option value="control-cable">Control Cable</option>
+                <option value="ehv-cable">EHV Cable (Extra High Voltage)</option>
+                <option value="instrumentation-cable">Instrumentation Cable</option>
+              </select>
+            </div>
+            <div class="field-wrapper">
+              <label for="voltage">Voltage Rating</label>
+              <select id="voltage" name="voltage">
+                <option value="">-- Any Voltage --</option>
+                <option value="1.1kv">1.1 kV (LT)</option>
+                <option value="3.3kv">3.3 kV</option>
+                <option value="6.6kv">6.6 kV</option>
+                <option value="11kv">11 kV</option>
+                <option value="22kv">22 kV</option>
+                <option value="33kv">33 kV</option>
+                <option value="66kv">66 kV (EHV)</option>
+                <option value="110kv">110 kV (EHV)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-wrapper">
+            <label for="due-date">Due Date (Before) <span class="required">*</span></label>
+            <input type="date" id="due-date" name="due-date" required>
+          </div>
+        </div>
+
+        <p class="required-note">* All fields are required</p>
+        <button type="submit" class="util-search-btn">⚡ Search Tenders</button>
+      </form>
+    </section>
+
+    <section class="results-area">
+      <div class="results-top">
+        <h3>Available Tenders</h3>
+        <div class="results-counter">
+          <span id="result-count">0</span> results
+        </div>
+      </div>
+      <div class="tender-list" id="tender-list">
+        <div class="empty-state">Loading tenders...</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="util-footer">
+    <p>Utilities & Infrastructure Hub © 2025 | Enterprise Procurement Platform</p>
+  </footer>
+</div>
+
+<script src="/assets/portal-utilities.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Learning Dashboard - Tender Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #667eea;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .card h2 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .status-ready { background: #10b981; }
+    .status-error { background: #ef4444; }
+    .status-warning { background: #f59e0b; }
+    
+    .provider-info {
+      margin: 10px 0;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid #667eea;
+    }
+    
+    .provider-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    
+    .provider-detail {
+      font-size: 14px;
+      color: #666;
+      margin: 3px 0;
+    }
+    
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .test-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    
+    .test-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .result-box {
+      margin-top: 15px;
+      padding: 15px;
+      background: #1e293b;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .comparison-item {
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid #667eea;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    
+    .badge-current {
+      background: #10b981;
+      color: white;
+    }
+    
+    .badge-available {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .badge-unavailable {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .guide-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .guide-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 AI Learning Dashboard</h1>
+      <p class="subtitle">Experiment with different AI providers and compare their responses</p>
+    </div>
+    
+    <div class="grid">
+      <!-- Provider Status -->
+      <div class="card">
+        <h2>📊 Provider Status</h2>
+        <div id="statusContainer">
+          <p style="color: #666;">Loading...</p>
+        </div>
+        <button onclick="refreshStatus()">🔄 Refresh Status</button>
+      </div>
+      
+      <!-- Quick Test -->
+      <div class="card">
+        <h2>⚡ Quick Test</h2>
+        <input 
+          type="text" 
+          class="test-input" 
+          id="testQuery" 
+          placeholder="find copper cables in Mumbai under 50 lakhs"
+          value="find copper cables in Mumbai under 50 lakhs"
+        />
+        <button onclick="runTest()">🧪 Test Current Provider</button>
+        <div id="testResult"></div>
+      </div>
+      
+      <!-- Available Models -->
+      <div class="card">
+        <h2>🦙 Ollama Models</h2>
+        <div id="modelsContainer">
+          <p style="color: #666;">Loading...</p>
+        </div>
+        <button onclick="refreshModels()">📥 Check Models</button>
+      </div>
+    </div>
+    
+    <!-- Comparison Tool -->
+    <div class="card">
+      <h2>🔬 Provider Comparison</h2>
+      <p style="color: #666; margin-bottom: 15px;">
+        Compare how different AI providers respond to the same query
+      </p>
+      <input 
+        type="text" 
+        class="test-input" 
+        id="compareQuery" 
+        placeholder="find copper cables in Mumbai under 50 lakhs"
+        value="find copper cables in Mumbai under 50 lakhs"
+      />
+      <button onclick="runComparison()">⚔️ Compare Providers</button>
+      <div id="comparisonResult"></div>
+    </div>
+    
+    <!-- Setup Guide -->
+    <div class="card">
+      <h2>📚 Setup Guide</h2>
+      <div class="provider-info">
+        <div class="provider-name">🚀 Getting Started with Ollama</div>
+        <div class="provider-detail">
+          <strong>Step 1:</strong> Install Ollama<br/>
+          <code>curl -fsSL https://ollama.ai/install.sh | sh</code>
+        </div>
+        <div class="provider-detail" style="margin-top: 8px;">
+          <strong>Step 2:</strong> Download a model<br/>
+          <code>ollama pull llama3.1:8b</code>
+        </div>
+        <div class="provider-detail" style="margin-top: 8px;">
+          <strong>Step 3:</strong> Set environment variable<br/>
+          <code>AI_PROVIDER=ollama</code>
+        </div>
+      </div>
+      <a href="/LEARNING_GUIDE.md" target="_blank" class="guide-link">
+        📖 Read Full Learning Guide →
+      </a>
+    </div>
+  </div>
+  
+  <script>
+    async function refreshStatus() {
+      const container = document.getElementById('statusContainer');
+      container.innerHTML = '<p style="color: #666;">Loading...</p>';
+      
+      try {
+        const res = await fetch('/api/ai/status');
+        const data = await res.json();
+        
+        let html = '<div class="provider-info">';
+        html += `<div class="provider-name">Current Provider: <strong>${data.current}</strong></div>`;
+        html += '</div>';
+        
+        for (const [name, info] of Object.entries(data.providers)) {
+          const status = info.available ? 'ready' : 'error';
+          const badge = name === data.current ? 'badge-current' : (info.available ? 'badge-available' : 'badge-unavailable');
+          
+          html += '<div class="provider-info">';
+          html += `<div class="provider-name">`;
+          html += `<span class="status-indicator status-${status}"></span> `;
+          html += name.toUpperCase();
+          html += `<span class="badge ${badge}">${info.status}</span>`;
+          html += '</div>';
+          if (info.model) {
+            html += `<div class="provider-detail">Model: ${info.model}</div>`;
+          }
+          if (info.url) {
+            html += `<div class="provider-detail">URL: ${info.url}</div>`;
+          }
+          if (info.error) {
+            html += `<div class="provider-detail" style="color: #ef4444;">Error: ${info.error}</div>`;
+          }
+          html += '</div>';
+        }
+        
+        container.innerHTML = html;
+      } catch (error) {
+        container.innerHTML = `<div style="color: #ef4444;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    async function refreshModels() {
+      const container = document.getElementById('modelsContainer');
+      container.innerHTML = '<p style="color: #666;">Loading...</p>';
+      
+      try {
+        const res = await fetch('/api/ai/models');
+        const data = await res.json();
+        
+        if (data.models && data.models.length > 0) {
+          let html = '<div style="margin-bottom: 15px;">';
+          html += `<strong>Installed Models (${data.models.length}):</strong>`;
+          html += '</div>';
+          
+          data.models.forEach(model => {
+            const size = model.size ? `(${(model.size / 1e9).toFixed(1)}GB)` : '';
+            html += `<div class="provider-detail">✅ ${model.name} ${size}</div>`;
+          });
+          
+          html += '<div style="margin-top: 15px;"><strong>Recommended for learning:</strong></div>';
+          data.recommendations.forEach(rec => {
+            const icon = rec.recommended ? '⭐' : '💡';
+            html += `<div class="provider-detail">${icon} ${rec.name} - ${rec.size} - ${rec.speed}, ${rec.accuracy}</div>`;
+          });
+          
+          container.innerHTML = html;
+        } else {
+          container.innerHTML = '<div style="color: #f59e0b;">No models installed. Run: <code>ollama pull llama3.1:8b</code></div>';
+        }
+      } catch (error) {
+        container.innerHTML = `<div style="color: #ef4444;">Ollama not running. Start it with: <code>ollama serve</code></div>`;
+      }
+    }
+    
+    async function runTest() {
+      const query = document.getElementById('testQuery').value;
+      const resultDiv = document.getElementById('testResult');
+      const btn = event.target;
+      
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Testing...';
+      resultDiv.innerHTML = '';
+      
+      try {
+        const res = await fetch('/api/ai/test', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        
+        const data = await res.json();
+        
+        let html = '<div class="result-box">';
+        html += `<strong>Provider:</strong> ${data.provider}\n`;
+        html += `<strong>Response Time:</strong> ${data.responseTime}\n\n`;
+        html += `<strong>Result:</strong>\n${JSON.stringify(data.result, null, 2)}`;
+        html += '</div>';
+        
+        resultDiv.innerHTML = html;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-box" style="background: #7f1d1d; color: #fca5a5;">Error: ${error.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🧪 Test Current Provider';
+      }
+    }
+    
+    async function runComparison() {
+      const query = document.getElementById('compareQuery').value;
+      const resultDiv = document.getElementById('comparisonResult');
+      const btn = event.target;
+      
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Comparing...';
+      resultDiv.innerHTML = '';
+      
+      try {
+        const res = await fetch('/api/ai/compare', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        
+        const data = await res.json();
+        
+        let html = '<div class="comparison-grid">';
+        
+        for (const [provider, result] of Object.entries(data.providers)) {
+          html += '<div class="comparison-item">';
+          html += `<strong style="color: #667eea; font-size: 16px;">${provider.toUpperCase()}</strong><br/>`;
+          
+          if (result.success) {
+            html += `<div style="color: #10b981; margin: 5px 0;">✅ Success (${result.responseTime})</div>`;
+            html += `<div class="result-box" style="margin-top: 10px;">${JSON.stringify(result.result, null, 2)}</div>`;
+          } else {
+            html += `<div style="color: #ef4444; margin: 5px 0;">❌ Failed</div>`;
+            html += `<div style="font-size: 13px; color: #666;">${result.error}</div>`;
+          }
+          
+          html += '</div>';
+        }
+        
+        html += '</div>';
+        resultDiv.innerHTML = html;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-box" style="background: #7f1d1d; color: #fca5a5;">Error: ${error.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '⚔️ Compare Providers';
+      }
+    }
+    
+    // Auto-load on page load
+    refreshStatus();
+    refreshModels();
+  </script>
+</body>
+</html>

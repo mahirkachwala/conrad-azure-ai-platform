@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: 'Open Sans', 'Segoe UI', sans-serif;
+      font-size: 10px;
+      margin: 20px 30px;
+      color: #2c3e50;
+      background: #f7f9fc;
+    }
+    .page {
+      background: white;
+      padding: 25px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .top-bar {
+      background: linear-gradient(90deg, #16a085 0%, #27ae60 100%);
+      color: white;
+      padding: 12px 20px;
+      margin: -25px -25px 20px -25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .top-bar .doc-type {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    .ribbon {
+      background: #e74c3c;
+      color: white;
+      padding: 8px 15px;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .key-info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .key-card {
+      background: #ecf0f1;
+      padding: 10px;
+      border-left: 3px solid #16a085;
+      text-align: center;
+    }
+    .key-card-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      color: #7f8c8d;
+      margin-bottom: 3px;
+    }
+    .key-card-value {
+      font-size: 11px;
+      font-weight: bold;
+      color: #16a085;
+    }
+    .content-section {
+      margin: 18px 0;
+    }
+    .content-section h2 {
+      font-size: 12px;
+      color: #16a085;
+      margin: 0 0 8px 0;
+      padding-bottom: 4px;
+      border-bottom: 2px solid #16a085;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .spec-item {
+      background: #f8f9fa;
+      padding: 8px;
+      border-radius: 3px;
+      font-size: 9px;
+    }
+    .spec-item strong {
+      display: block;
+      color: #16a085;
+      margin-bottom: 2px;
+    }
+    ul {
+      margin: 6px 0;
+      padding-left: 18px;
+    }
+    ul li {
+      margin: 4px 0;
+    }
+    .contact-footer {
+      background: #34495e;
+      color: white;
+      padding: 12px 20px;
+      margin: 20px -25px -25px -25px;
+      font-size: 9px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+    }
+    .contact-footer strong {
+      display: block;
+      color: #1abc9c;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-bar">
+      <h1>{{organisation}}</h1>
+      <div class="doc-type">PROCUREMENT DOCUMENT</div>
+    </div>
+
+    <div class="ribbon">TENDER REFERENCE: {{tender_id}}</div>
+
+    <h2 style="font-size: 14px; margin: 10px 0; color: #2c3e50;">{{title}}</h2>
+
+    <div class="key-info-grid">
+      <div class="key-card">
+        <div class="key-card-label">Published</div>
+        <div class="key-card-value">{{publish_date}}</div>
+      </div>
+      <div class="key-card">
+        <div class="key-card-label">Deadline</div>
+        <div class="key-card-value">{{due_date}}</div>
+      </div>
+      <div class="key-card">
+        <div class="key-card-label">Budget</div>
+        <div class="key-card-value">₹{{formatCurrency estimated_cost_inr}}</div>
+      </div>
+      <div class="key-card">
+        <div class="key-card-label">Location</div>
+        <div class="key-card-value">{{city}}</div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Material Requirement</h2>
+      <p><strong>Item:</strong> {{material}}</p>
+      <p><strong>Category:</strong> {{product_category}}</p>
+      <p><strong>Application:</strong> Infrastructure development and grid modernization</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Technical Parameters</h2>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <strong>Conductor Type</strong>
+          Electrolytic Copper, Class 2 stranded per IS 8130
+        </div>
+        <div class="spec-item">
+          <strong>Insulation Material</strong>
+          XLPE (Cross-linked Polyethylene) thermosetting
+        </div>
+        <div class="spec-item">
+          <strong>Voltage Grade</strong>
+          1.1 kV / 11 kV as per IS/IEC standards
+        </div>
+        <div class="spec-item">
+          <strong>Standards Compliance</strong>
+          IS 7098-1, IS 7098-2, IEC 60502-1
+        </div>
+        <div class="spec-item">
+          <strong>Certification</strong>
+          BIS license mandatory, ISI marking required
+        </div>
+        <div class="spec-item">
+          <strong>Testing</strong>
+          NABL lab reports for routine and type tests
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Vendor Qualification</h2>
+      <ul>
+        <li><strong>License:</strong> Valid BIS license for specified cable type</li>
+        <li><strong>Experience:</strong> Minimum 3 years in cable manufacturing</li>
+        <li><strong>Track Record:</strong> At least 3 orders from utilities/PSUs (each &gt; ₹5 Cr) in last 5 years</li>
+        <li><strong>Quality System:</strong> ISO 9001:2015 certification (current and valid)</li>
+        <li><strong>Financial Strength:</strong> Average turnover ≥ ₹15 Crores in last 3 fiscal years</li>
+        <li><strong>Production Capacity:</strong> Minimum 250 MT per month with adequate infrastructure</li>
+        <li><strong>Technical Capability:</strong> In-house testing lab with calibrated equipment</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Commercial Framework</h2>
+      <div class="spec-grid">
+        <div class="spec-item">
+          <strong>EMD Required</strong>
+          ₹ {{calculateEMD estimated_cost_inr}} (Bank Guarantee/DD)
+        </div>
+        <div class="spec-item">
+          <strong>Tender Fee</strong>
+          ₹ 3,000 + GST (non-refundable)
+        </div>
+        <div class="spec-item">
+          <strong>Price Validity</strong>
+          Firm prices for 120 days from opening
+        </div>
+        <div class="spec-item">
+          <strong>Payment Schedule</strong>
+          75% dispatch, 15% receipt, 10% commissioning
+        </div>
+        <div class="spec-item">
+          <strong>Delivery Timeline</strong>
+          Maximum 70 days from PO issuance
+        </div>
+        <div class="spec-item">
+          <strong>Warranty Coverage</strong>
+          24 months from date of commissioning
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Submission Instructions</h2>
+      <ul>
+        <li>Submit technical and commercial bids in separate sealed envelopes</li>
+        <li>All pages of bid document must be signed and stamped</li>
+        <li>Submit EMD and tender fee along with bid submission</li>
+        <li>Late submissions will be rejected without consideration</li>
+        <li>Conditional bids will not be entertained</li>
+      </ul>
+    </div>
+
+    <div class="contact-footer">
+      <div>
+        <strong>Contact Person</strong>
+        {{contact_person}}<br>
+        Procurement Manager
+      </div>
+      <div>
+        <strong>Communication</strong>
+        {{contact_email}}<br>
+        {{contact_phone}}
+      </div>
+      <div>
+        <strong>Office Address</strong>
+        {{organisation}}<br>
+        {{city}}
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 10px; font-size: 8px; color: #95a5a6;">
+    {{tender_id}} | Auto-generated tender document | Page 1 of 1
+  </div>
+</body>
+</html>

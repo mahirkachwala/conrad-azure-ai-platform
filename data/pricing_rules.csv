@@ -1,0 +1,42 @@
+Rule_ID,Parameter,Value,Type,Description
+P001,Delivery_Cost_Per_km,300,fixed,Delivery cost per kilometer of cable
+P002,GST_Rate,0.18,percentage,GST at 18% on total value
+P003,Profit_Margin,0.12,percentage,Standard OEM profit margin 12%
+P004,Packaging_Cost_Per_km,200,fixed,Drum and packaging cost per km
+P005,Insurance_Rate,0.005,percentage,Transit insurance 0.5% of product value
+P006,Handling_Charges,0.02,percentage,Loading/unloading charges 2%
+P007,Bulk_Discount_50km,0.03,percentage,3% discount for orders above 50km
+P008,Bulk_Discount_100km,0.05,percentage,5% discount for orders above 100km
+P009,Bulk_Discount_200km,0.08,percentage,8% discount for orders above 200km
+P010,Express_Delivery_Surcharge,0.15,percentage,15% surcharge for express delivery
+P011,Remote_Location_Surcharge,0.05,percentage,5% surcharge for remote locations
+P012,EMD_Percentage,0.02,percentage,Earnest Money Deposit 2%
+P013,Performance_Guarantee,0.05,percentage,Performance bank guarantee 5%
+P014,Retention_Money,0.10,percentage,Retention money 10% for 1 year
+P015,LD_Per_Week,0.005,percentage,Liquidated damages 0.5% per week delay
+P016,Max_LD_Cap,0.10,percentage,Maximum LD capped at 10%
+P017,Warranty_Period_Months,12,fixed,Standard warranty period in months
+P018,Extended_Warranty_Cost,0.02,percentage,Extended warranty cost per year 2%
+P019,Installation_Support,0.03,percentage,Installation supervision charges 3%
+P020,Technical_Documentation,5000,fixed,Technical documentation charges
+P021,Quality_Certification,8000,fixed,Quality certification and reports
+P022,Third_Party_Inspection,0.015,percentage,Third party inspection charges 1.5%
+P023,Customs_Duty_Import,0.075,percentage,Import customs duty 7.5%
+P024,Freight_Equalisation,0.01,percentage,Freight equalisation charge 1%
+P025,Price_Escalation_Steel,0.08,percentage,Annual steel price escalation 8%
+P026,Price_Escalation_Copper,0.12,percentage,Annual copper price escalation 12%
+P027,Price_Escalation_Aluminium,0.06,percentage,Annual aluminium price escalation 6%
+P028,Minimum_Order_Value,100000,fixed,Minimum order value in INR
+P029,Credit_Period_Days,30,fixed,Standard payment credit period
+P030,Early_Payment_Discount,0.02,percentage,2% discount for advance payment
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenCorporates Integration Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .nav-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .status-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .status-row:last-child {
+      border-bottom: none;
+    }
+    .status-label {
+      font-weight: 600;
+      color: #333;
+    }
+    .status-value {
+      color: #667eea;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge.enabled {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .badge.disabled {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .test-section {
+      margin-top: 30px;
+    }
+    .test-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .results {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    pre {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .comparison-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .comparison-card h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="nav-link">← Back to Home</a>
+    
+    <h1>🌐 OpenCorporates Integration Demo</h1>
+    <p class="subtitle">Testing real company data enrichment with 500 free API calls/day</p>
+    
+    <div class="status-card">
+      <h3 style="margin-bottom: 15px;">API Status</h3>
+      <div id="statusContent">
+        <div class="loading">Loading API status...</div>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test Company Lookup</h3>
+      <div class="test-buttons">
+        <button onclick="testSynthetic()">Test Synthetic Data</button>
+        <button onclick="testLive()" id="liveBtn">Test Live Data (uses 1 API call)</button>
+        <button onclick="compareMode()">Compare Synthetic vs Live</button>
+      </div>
+      
+      <div id="results" class="results" style="display: none;">
+        <h4 style="margin-bottom: 10px;">Results:</h4>
+        <pre id="resultsContent"></pre>
+      </div>
+      
+      <div id="comparison" class="comparison" style="display: none;">
+        <div class="comparison-card">
+          <h3>⚡ Synthetic (Instant)</h3>
+          <pre id="syntheticData"></pre>
+        </div>
+        <div class="comparison-card">
+          <h3>🌐 Live OpenCorporates</h3>
+          <pre id="liveData"></pre>
+        </div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-radius: 8px;">
+      <h4 style="color: #1976d2; margin-bottom: 10px;">💡 How It Works</h4>
+      <ul style="line-height: 1.8; color: #333;">
+        <li><strong>Synthetic Data:</strong> Fast, deterministic scoring using seeded algorithm (FREE, unlimited)</li>
+        <li><strong>Live Data:</strong> Enriches with real company info from OpenCorporates API (500 calls/day free)</li>
+        <li><strong>Hybrid Approach:</strong> Uses live data when available, falls back to synthetic for missing fields</li>
+        <li><strong>Data Sources:</strong> Currently supporting Indian companies (jurisdiction: "in")</li>
+        <li><strong>Optional API Key:</strong> Add OPENCORPORATES_API_KEY env variable for 10,000 calls/day</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    let apiStatus = null;
+    
+    async function loadStatus() {
+      try {
+        const response = await fetch('/api/credibility/api/status');
+        apiStatus = await response.json();
+        
+        const statusHtml = `
+          <div class="status-row">
+            <span class="status-label">Enrichment Enabled</span>
+            <span class="status-value">
+              <span class="badge ${apiStatus.enabled ? 'enabled' : 'disabled'}">
+                ${apiStatus.enabled ? 'ENABLED' : 'DISABLED'}
+              </span>
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">OpenCorporates Available</span>
+            <span class="status-value">
+              <span class="badge ${apiStatus.openCorporates.available ? 'enabled' : 'disabled'}">
+                ${apiStatus.openCorporates.available ? 'YES' : 'NO'}
+              </span>
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">API Calls Remaining Today</span>
+            <span class="status-value">${apiStatus.openCorporates.remainingCalls} / ${apiStatus.openCorporates.dailyLimit}</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">API Key Status</span>
+            <span class="status-value">
+              ${apiStatus.openCorporates.hasApiKey ? '✅ Configured (10k/day)' : '⚠️ Not Set (500/day free tier)'}
+            </span>
+          </div>
+        `;
+        
+        document.getElementById('statusContent').innerHTML = statusHtml;
+        
+        if (!apiStatus.enabled) {
+          document.getElementById('liveBtn').disabled = true;
+          document.getElementById('liveBtn').textContent = 'Live Data (Disabled - set ENABLE_REAL_DATA=true)';
+        }
+      } catch (error) {
+        document.getElementById('statusContent').innerHTML = '<p style="color: red;">Failed to load status</p>';
+      }
+    }
+    
+    async function testSynthetic() {
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('comparison').style.display = 'none';
+      document.getElementById('resultsContent').textContent = 'Loading...';
+      
+      try {
+        const response = await fetch('/api/credibility/company/Tata%20Power%20Company%20Limited');
+        const data = await response.json();
+        document.getElementById('resultsContent').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('resultsContent').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function testLive() {
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('comparison').style.display = 'none';
+      document.getElementById('resultsContent').textContent = 'Fetching live data from OpenCorporates...';
+      
+      try {
+        const response = await fetch('/api/credibility/company/Tata%20Power%20Company%20Limited/live');
+        const data = await response.json();
+        document.getElementById('resultsContent').textContent = JSON.stringify(data, null, 2);
+        
+        // Reload status to show updated call count
+        setTimeout(loadStatus, 1000);
+      } catch (error) {
+        document.getElementById('resultsContent').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function compareMode() {
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('comparison').style.display = 'grid';
+      document.getElementById('syntheticData').textContent = 'Loading...';
+      document.getElementById('liveData').textContent = 'Loading...';
+      
+      try {
+        const [synthetic, live] = await Promise.all([
+          fetch('/api/credibility/company/Tata%20Power%20Company%20Limited').then(r => r.json()),
+          fetch('/api/credibility/company/Tata%20Power%20Company%20Limited/live').then(r => r.json())
+        ]);
+        
+        document.getElementById('syntheticData').textContent = JSON.stringify(synthetic, null, 2);
+        document.getElementById('liveData').textContent = JSON.stringify(live, null, 2);
+        
+        setTimeout(loadStatus, 1000);
+      } catch (error) {
+        document.getElementById('syntheticData').textContent = 'Error: ' + error.message;
+        document.getElementById('liveData').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    loadStatus();
+  </script>
+</body>
+</html>

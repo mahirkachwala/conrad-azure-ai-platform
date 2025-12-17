@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    body {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 11px;
+      margin: 25px 35px;
+      color: #000;
+    }
+    .banner {
+      background: #f39c12;
+      color: white;
+      padding: 15px 20px;
+      margin: -25px -35px 25px -35px;
+      text-align: center;
+    }
+    .banner h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .banner .sub {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .fact-box {
+      border: 2px solid #f39c12;
+      padding: 12px;
+      text-align: center;
+    }
+    .fact-label {
+      font-size: 9px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fact-value {
+      font-size: 13px;
+      font-weight: bold;
+      color: #f39c12;
+      margin-top: 4px;
+    }
+    .summary-section {
+      border-left: 4px solid #f39c12;
+      padding-left: 15px;
+      margin: 20px 0;
+    }
+    .summary-section h3 {
+      font-size: 13px;
+      margin: 0 0 8px 0;
+      color: #f39c12;
+    }
+    .summary-section p, .summary-section ul {
+      margin: 6px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin: 4px 0;
+    }
+    .contact-bar {
+      background: #ecf0f1;
+      padding: 12px 15px;
+      margin-top: 25px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <h1>TENDER SUMMARY BRIEF</h1>
+    <div class="sub">{{tender_id}} | {{organisation}}</div>
+  </div>
+
+  <div class="quick-facts">
+    <div class="fact-box">
+      <div class="fact-label">Tender Value</div>
+      <div class="fact-value">₹{{formatCurrency estimated_cost_inr}}</div>
+    </div>
+    <div class="fact-box">
+      <div class="fact-label">Last Date</div>
+      <div class="fact-value">{{due_date}}</div>
+    </div>
+    <div class="fact-box">
+      <div class="fact-label">Location</div>
+      <div class="fact-value">{{city}}</div>
+    </div>
+  </div>
+
+  <div class="summary-section">
+    <h3>What We Need</h3>
+    <p><strong>{{title}}</strong></p>
+    <p>Material: {{material}} ({{product_category}})</p>
+  </div>
+
+  <div class="summary-section">
+    <h3>Key Specifications</h3>
+    <ul>
+      <li>Conductor: Copper EC Grade, Class 2 stranded (IS 8130)</li>
+      <li>Insulation: XLPE thermosetting type</li>
+      <li>Voltage: 1.1 kV / 11 kV grade</li>
+      <li>Standards: IS 7098, IEC 60502, BIS certified</li>
+    </ul>
+  </div>
+
+  <div class="summary-section">
+    <h3>Who Can Apply</h3>
+    <ul>
+      <li>Valid BIS license holders for this cable type</li>
+      <li>3+ similar orders in last 5 years</li>
+      <li>ISO 9001:2015 certified</li>
+      <li>Turnover ≥ ₹10 Cr (annual average)</li>
+    </ul>
+  </div>
+
+  <div class="summary-section">
+    <h3>Financial Requirements</h3>
+    <p><strong>EMD:</strong> ₹{{calculateEMD estimated_cost_inr}} | <strong>Tender Fee:</strong> ₹2,000</p>
+    <p><strong>Payment:</strong> 80% on delivery, 20% after acceptance</p>
+    <p><strong>Delivery:</strong> 60 days from PO | <strong>Warranty:</strong> 24 months</p>
+  </div>
+
+  <div class="summary-section">
+    <h3>Important Dates</h3>
+    <ul>
+      <li>Published: {{publish_date}}</li>
+      <li>Bid Submission Deadline: {{due_date}}, 3:00 PM IST</li>
+      <li>Bid Opening: Same day, 4:00 PM IST</li>
+    </ul>
+  </div>
+
+  <div class="contact-bar">
+    <strong>Contact:</strong> {{contact_person}} | 
+    <strong>Email:</strong> {{contact_email}} | 
+    <strong>Phone:</strong> {{contact_phone}} | 
+    <strong>Office:</strong> {{organisation}}, {{city}}
+  </div>
+
+  <div style="margin-top: 20px; text-align: center; font-size: 9px; color: #95a5a6;">
+    This is a summary document. Full tender details available on request. | {{tender_id}}
+  </div>
+</body>
+</html>

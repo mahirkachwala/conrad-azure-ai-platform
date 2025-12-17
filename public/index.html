@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tender Search Portal - AI-Ready Tender Hub</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<header>
+  <h1>Tender Search Portal</h1>
+  <p class="sub">Search Active Tenders for Wires & Cables (Active and closing in 3 months)</p>
+  <nav class="tabs">
+    <a href="/about.html">About</a>
+    <a href="/chat.html">💬 AI Chat</a>
+    <a href="/companies.html">🏢 Companies</a>
+    <a href="/companies-advanced.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 12px; border-radius: 6px;">🔍 Advanced Credibility</a>
+    <a href="/api-demo.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 12px; border-radius: 6px;">🌐 API Demo</a>
+    <a href="/rfp-dashboard.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 12px; border-radius: 6px;">📊 RFP Dashboard</a>
+    <a href="/portals/gov.html">Gov Portal</a>
+    <a href="/portals/industrial.html">Industrial</a>
+    <a href="/portals/utilities.html">Utilities</a>
+  </nav>
+  <nav class="tabs" style="margin-top: 10px; background: #e3f2fd; border-left: 4px solid #1976d2;">
+    <strong style="color: #1976d2;">📊 Data Sources:</strong>
+    <a href="/portals/mca.html">MCA Registry</a>
+    <a href="/portals/zauba.html">Zauba Analytics</a>
+    <a href="/portals/tofler.html">Tofler Financials</a>
+    <a href="/portals/gem.html">GeM Marketplace</a>
+    <a href="/portals/tender247.html">Tender247</a>
+  </nav>
+</header>
+
+<main>
+  <section id="search-form">
+    <h2>Search Criteria</h2>
+    <form id="tender-search-form">
+      <div class="search-row">
+        <div class="search-section">
+          <label for="keyword">Tender Keyword (Optional)</label>
+          <input type="text" id="keyword" name="keyword" placeholder="e.g., cable, copper, wire">
+        </div>
+        
+        <div class="search-section">
+          <label for="product-category">Product Category</label>
+          <select id="product-category" name="product-category">
+            <option value="">All Categories</option>
+            <option value="wires-cables">Wires & Cables</option>
+            <option value="transformers">Transformers</option>
+            <option value="fmcg-packaging">FMCG Packaging</option>
+          </select>
+        </div>
+
+        <div class="search-section">
+          <label for="tender-id">Tender ID (Partial match)</label>
+          <input type="text" id="tender-id" name="tender-id" placeholder="e.g., 001 or RFP-001">
+        </div>
+      </div>
+
+      <div class="search-row">
+        <div class="search-section">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g., Nagpur, Mumbai">
+        </div>
+
+        <div class="search-section">
+          <label for="due-date">Due Date (Before)</label>
+          <input type="date" id="due-date" name="due-date" min="2025-10-10">
+        </div>
+
+        <div class="search-section">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="closing-soon">Closing Soon</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="search-actions">
+        <button type="submit" class="btn-search">Search Tenders</button>
+        <button type="button" id="reset-btn" class="btn-reset">Clear / Show All</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="results">
+    <h2>Search Results (<span id="result-count">0</span>)</h2>
+    <div class="tender-list" id="tender-list">
+      <p class="no-results">Use the search form above to find tenders</p>
+    </div>
+  </section>
+</main>
+
+<footer><small>© 2025 AI-Ready Tender Hub</small></footer>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent RFP Response System | AI-Ready Tender Hub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #2d3748;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #718096;
+      font-size: 16px;
+    }
+    
+    .hero {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero h2 {
+      color: #2d3748;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    
+    .hero p {
+      color: #4a5568;
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .start-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    .start-btn:disabled {
+      background: #cbd5e0;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .workflow-container {
+      display: none;
+    }
+    
+    .workflow-container.active {
+      display: block;
+    }
+    
+    .workflow-step {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid #e2e8f0;
+      transition: all 0.3s;
+    }
+    
+    .workflow-step.active {
+      border-left-color: #667eea;
+      box-shadow: 0 6px 25px rgba(102, 126, 234, 0.2);
+    }
+    
+    .workflow-step.completed {
+      border-left-color: #48bb78;
+    }
+    
+    .step-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .step-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 20px;
+    }
+    
+    .workflow-step.active .step-icon {
+      background: #667eea;
+      color: white;
+    }
+    
+    .workflow-step.completed .step-icon {
+      background: #48bb78;
+      color: white;
+    }
+    
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .step-content {
+      margin-left: 55px;
+      color: #4a5568;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .progress-bar-container {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 4px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+    
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: #718096;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    
+    .agent-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 4px;
+    }
+    
+    .agent-status.working {
+      background: #bee3f8;
+      color: #2c5282;
+    }
+    
+    .agent-status.completed {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+    
+    .agent-status.pending {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+    
+    .pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .results-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .results-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2d3748;
+    }
+    
+    .download-btn {
+      background: #48bb78;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    
+    .download-btn:hover {
+      background: #38a169;
+    }
+    
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .summary-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+    }
+    
+    .summary-card.green {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    }
+    
+    .summary-card.orange {
+      background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+    }
+    
+    .card-label {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 5px;
+    }
+    
+    .card-value {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    th {
+      background: #f7fafc;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    tr:hover {
+      background: #f7fafc;
+    }
+    
+    .spec-match {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .spec-match.high {
+      background: #c6f6d5;
+      color: #22543d;
+    }
+    
+    .spec-match.medium {
+      background: #feebc8;
+      color: #744210;
+    }
+    
+    .spec-match.low {
+      background: #fed7d7;
+      color: #742a2a;
+    }
+    
+    .section {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 2px solid #e2e8f0;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+    
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .info-list li {
+      padding: 8px 0;
+      color: #4a5568;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-list li:before {
+      content: "✓";
+      color: #48bb78;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🤖 Multi-Agent RFP Response System</h1>
+      <p class="subtitle">Automated RFP analysis and response generation using coordinated AI agents</p>
+    </header>
+    
+    <div class="hero" id="heroSection">
+      <h2>Intelligent RFP Response Automation</h2>
+      <p>
+        Our multi-agent system automatically scans tenders, analyzes requirements, matches OEM products, 
+        and generates comprehensive RFP responses with pricing and technical comparisons. 
+        Powered by Sales, Technical, and Pricing agents coordinated by a Master Agent.
+      </p>
+      <button class="start-btn" id="startBtn" onclick="startWorkflow()">
+        🚀 Start RFP Response Workflow
+      </button>
+    </div>
+    
+    <div class="workflow-container" id="workflowContainer">
+      <!-- Overall Progress -->
+      <div style="background: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="overallProgress"></div>
+        </div>
+        <div class="progress-text" id="progressText">Initializing workflow...</div>
+        <div style="margin-top: 15px; text-align: center;">
+          <span class="agent-status pending" id="salesStatus">
+            <span class="pulse"></span> Sales Agent
+          </span>
+          <span class="agent-status pending" id="techStatus">
+            <span class="pulse"></span> Technical Agent
+          </span>
+          <span class="agent-status pending" id="pricingStatus">
+            <span class="pulse"></span> Pricing Agent
+          </span>
+          <span class="agent-status pending" id="masterStatus">
+            <span class="pulse"></span> Master Agent
+          </span>
+        </div>
+      </div>
+      
+      <div class="workflow-step" id="step1">
+        <div class="step-header">
+          <div class="step-icon">1</div>
+          <div class="step-title">RFP Discovery & Selection</div>
+        </div>
+        <div class="step-content" id="step1Content">
+          Sales Agent scanning tenders...
+        </div>
+      </div>
+      
+      <div class="workflow-step" id="step2">
+        <div class="step-header">
+          <div class="step-icon">2</div>
+          <div class="step-title">Technical Analysis & Product Matching</div>
+        </div>
+        <div class="step-content" id="step2Content">
+          Waiting for RFP selection...
+        </div>
+      </div>
+      
+      <div class="workflow-step" id="step3">
+        <div class="step-header">
+          <div class="step-icon">3</div>
+          <div class="step-title">Pricing & Cost Consolidation</div>
+        </div>
+        <div class="step-content" id="step3Content">
+          Waiting for product matching...
+        </div>
+      </div>
+      
+      <div class="workflow-step" id="step4">
+        <div class="step-header">
+          <div class="step-icon">4</div>
+          <div class="step-title">Final Response Generation</div>
+        </div>
+        <div class="step-content" id="step4Content">
+          Waiting for pricing calculation...
+        </div>
+      </div>
+    </div>
+    
+    <div id="resultsSection"></div>
+    
+    <a href="/" class="back-link">← Back to Portals</a>
+  </div>
+  
+  <script>
+    let sessionId = null;
+    let pollInterval = null;
+    
+    async function startWorkflow() {
+      const startBtn = document.getElementById('startBtn');
+      const heroSection = document.getElementById('heroSection');
+      const workflowContainer = document.getElementById('workflowContainer');
+      
+      startBtn.disabled = true;
+      startBtn.innerHTML = '⏳ Starting workflow...';
+      
+      try {
+        const response = await fetch('/api/rfp-response/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          sessionId = data.session_id;
+          workflowContainer.classList.add('active');
+          document.getElementById('step1').classList.add('active');
+          
+          // Start polling for status
+          pollInterval = setInterval(checkWorkflowStatus, 1000);
+        } else {
+          alert('Failed to start workflow: ' + data.error);
+          startBtn.disabled = false;
+          startBtn.innerHTML = '🚀 Start RFP Response Workflow';
+        }
+      } catch (error) {
+        console.error('Error starting workflow:', error);
+        alert('Failed to start workflow. Please try again.');
+        startBtn.disabled = false;
+        startBtn.innerHTML = '🚀 Start RFP Response Workflow';
+      }
+    }
+    
+    async function checkWorkflowStatus() {
+      if (!sessionId) return;
+      
+      try {
+        const response = await fetch(`/api/rfp-response/status/${sessionId}`);
+        const data = await response.json();
+        
+        if (data.success && data.workflow) {
+          updateWorkflowUI(data.workflow);
+          
+          if (data.status === 'completed') {
+            clearInterval(pollInterval);
+            loadFinalResults();
+          } else if (data.status === 'failed') {
+            clearInterval(pollInterval);
+            alert('Workflow failed. Please try again.');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking status:', error);
+      }
+    }
+    
+    function updateWorkflowUI(workflow) {
+      if (!workflow.steps) return;
+      
+      const steps = workflow.steps;
+      const totalSteps = 5;
+      const progress = Math.min(100, (steps.length / totalSteps) * 100);
+      
+      // Update progress bar
+      document.getElementById('overallProgress').style.width = `${progress}%`;
+      document.getElementById('progressText').innerText = 
+        `Step ${steps.length} of ${totalSteps} - ${Math.round(progress)}% Complete`;
+      
+      // Update agent statuses
+      const salesStatus = document.getElementById('salesStatus');
+      const techStatus = document.getElementById('techStatus');
+      const pricingStatus = document.getElementById('pricingStatus');
+      const masterStatus = document.getElementById('masterStatus');
+      
+      // Update step 1 (RFP Scanning)
+      if (steps.length >= 1) {
+        const scanResult = steps[0].result;
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step1Content').innerHTML = `
+          ✅ Scanned ${scanResult.total_rfps_scanned} tenders<br>
+          📋 Found ${scanResult.rfps_due_3_months} RFPs due in next 3 months
+        `;
+        salesStatus.className = 'agent-status completed';
+        salesStatus.innerHTML = '✓ Sales Agent';
+      }
+      
+      // Update step 2 (RFP Selection)
+      if (steps.length >= 2) {
+        const selection = steps[1].result;
+        document.getElementById('step1Content').innerHTML += `<br>🎯 Selected: ${selection.rfp_details.tender_id} (Priority: ${selection.priority_score}/100)`;
+        document.getElementById('step2').classList.add('active');
+        techStatus.className = 'agent-status working';
+        techStatus.innerHTML = '<span class="pulse"></span> Technical Agent';
+      }
+      
+      // Update step 3 (Technical Analysis)
+      if (steps.length >= 3) {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step2').classList.add('completed');
+        const technical = steps[2].result;
+        document.getElementById('step2Content').innerHTML = `
+          ✅ Analyzed ${technical.total_items} product items<br>
+          📊 Average spec match: ${technical.summary.average_match_percentage}%
+        `;
+        document.getElementById('step3').classList.add('active');
+        techStatus.className = 'agent-status completed';
+        techStatus.innerHTML = '✓ Technical Agent';
+        pricingStatus.className = 'agent-status working';
+        pricingStatus.innerHTML = '<span class="pulse"></span> Pricing Agent';
+      }
+      
+      // Update step 4 (Pricing)
+      if (steps.length >= 4) {
+        document.getElementById('step3').classList.remove('active');
+        document.getElementById('step3').classList.add('completed');
+        const pricing = steps[3].result;
+        document.getElementById('step3Content').innerHTML = `
+          ✅ Priced ${pricing.summary.total_items} items<br>
+          💰 Total bid value: ₹${(pricing.summary.grand_total / 10000000).toFixed(2)} Crores
+        `;
+        document.getElementById('step4').classList.add('active');
+        pricingStatus.className = 'agent-status completed';
+        pricingStatus.innerHTML = '✓ Pricing Agent';
+        masterStatus.className = 'agent-status working';
+        masterStatus.innerHTML = '<span class="pulse"></span> Master Agent';
+      }
+      
+      // Update step 5 (Final consolidation)
+      if (steps.length >= 5) {
+        document.getElementById('step4').classList.remove('active');
+        document.getElementById('step4').classList.add('completed');
+        document.getElementById('step4Content').innerHTML = '✅ Final response generated successfully!';
+        masterStatus.className = 'agent-status completed';
+        masterStatus.innerHTML = '✓ Master Agent';
+      }
+    }
+    
+    async function loadFinalResults() {
+      try {
+        const response = await fetch(`/api/rfp-response/result/${sessionId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          displayResults(data.final_response);
+        }
+      } catch (error) {
+        console.error('Error loading results:', error);
+      }
+    }
+    
+    function displayResults(response) {
+      const resultsSection = document.getElementById('resultsSection');
+      
+      const matchClass = response.overall_spec_match >= 80 ? 'high' : 
+                         response.overall_spec_match >= 60 ? 'medium' : 'low';
+      
+      let html = `
+        <div class="results-container">
+          <div class="results-header">
+            <div class="results-title">📊 RFP Response: ${response.rfp_details.tender_id}</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="download-btn" onclick="window.open('/api/export/csv/spec/${sessionId}')">⬇️ Spec CSV</button>
+              <button class="download-btn" onclick="window.open('/api/export/csv/pricing/${sessionId}')">⬇️ Pricing CSV</button>
+              <button class="download-btn" onclick="window.open('/api/export/pdf/summary/${sessionId}')">📄 Summary PDF</button>
+              <button class="download-btn" onclick="window.open('/api/export/pdf/onepager/${sessionId}')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📋 Branded Proposal</button>
+              <button class="download-btn" onclick="downloadResults()">⬇️ Full JSON</button>
+            </div>
+          </div>
+          
+          <div class="summary-cards">
+            <div class="summary-card">
+              <div class="card-label">Total Bid Value</div>
+              <div class="card-value">₹${(response.total_bid_value / 10000000).toFixed(2)}Cr</div>
+            </div>
+            <div class="summary-card green">
+              <div class="card-label">Spec Match Score</div>
+              <div class="card-value">${response.overall_spec_match}%</div>
+            </div>
+            <div class="summary-card orange">
+              <div class="card-label">Delivery Timeline</div>
+              <div class="card-value">${response.delivery_timeline_days} days</div>
+            </div>
+            ${response.win_probability ? `
+            <div class="summary-card" style="background: ${response.win_probability.badge.color}; color: white;">
+              <div class="card-label" style="color: rgba(255,255,255,0.9);">Win Probability</div>
+              <div class="card-value" style="color: white;">${response.win_probability.badge.icon} ${response.win_probability.probability}%</div>
+            </div>
+            ` : ''}
+          </div>
+          
+          ${response.win_probability ? `
+          <div class="section" style="background: #f0f9ff; padding: 20px; border-radius: 12px; border-left: 4px solid ${response.win_probability.badge.color};">
+            <div class="section-title">🎯 Win Probability Analysis</div>
+            <p style="font-size: 16px; margin-bottom: 15px;"><strong>${response.win_probability.badge.label} Confidence:</strong> ${response.win_probability.recommendation}</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 14px;">
+              <div><strong>Spec Match:</strong> ${response.win_probability.breakdown.spec_match_contribution}% contribution</div>
+              <div><strong>Price Competitiveness:</strong> ${response.win_probability.breakdown.price_contribution}% contribution</div>
+              <div><strong>Credibility:</strong> ${response.win_probability.breakdown.credibility_contribution}% contribution</div>
+              <div><strong>Timeline:</strong> ${response.win_probability.breakdown.timeline_contribution}% contribution</div>
+            </div>
+          </div>
+          ` : ''}
+          
+          ${response.assumptions && response.assumptions.gaps_identified.length > 0 ? `
+          <div class="section" style="background: #fef3c7; padding: 20px; border-radius: 12px; border-left: 4px solid #f59e0b;">
+            <div class="section-title">⚠️ Assumptions & Clarifications</div>
+            <p style="margin-bottom: 12px;"><strong>Risk Level:</strong> <span style="background: ${response.assumptions.risk_level === 'HIGH' ? '#ef4444' : response.assumptions.risk_level === 'MEDIUM' ? '#f59e0b' : '#10b981'}; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">${response.assumptions.risk_level}</span></p>
+            
+            <div style="margin-bottom: 15px;">
+              <strong style="display: block; margin-bottom: 8px;">📋 Gaps Identified:</strong>
+              <ul style="margin: 0; padding-left: 20px;">
+                ${response.assumptions.gaps_identified.map(gap => `<li style="margin-bottom: 4px;">${gap}</li>`).join('')}
+              </ul>
+            </div>
+            
+            <div>
+              <strong style="display: block; margin-bottom: 8px;">✓ Assumptions Made:</strong>
+              <ul style="margin: 0; padding-left: 20px;">
+                ${response.assumptions.assumptions_made.map(assumption => `<li style="margin-bottom: 4px;">${assumption}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          ` : ''}
+          
+          ${response.risky_clauses && response.risky_clauses.risky_clauses.length > 0 ? `
+          <div class="section" style="background: #fee2e2; padding: 20px; border-radius: 12px; border-left: 4px solid #ef4444;">
+            <div class="section-title">🚨 Risky Clause Analysis</div>
+            <p style="margin-bottom: 12px;">
+              <strong>Overall Risk:</strong> <span style="background: ${response.risky_clauses.overall_risk === 'HIGH' ? '#ef4444' : response.risky_clauses.overall_risk === 'MEDIUM' ? '#f59e0b' : '#6b7280'}; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">${response.risky_clauses.overall_risk}</span>
+              <span style="margin-left: 12px;"><strong>High Risk Clauses:</strong> ${response.risky_clauses.high_risk_count}</span>
+            </p>
+            
+            <div style="margin-top: 15px;">
+              ${response.risky_clauses.risky_clauses.map(clause => `
+                <div style="margin-bottom: 16px; padding: 12px; background: white; border-radius: 8px; border-left: 3px solid ${clause.risk === 'HIGH' ? '#ef4444' : clause.risk === 'MEDIUM' ? '#f59e0b' : '#6b7280'};">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="color: #1a202c;">${clause.key}</strong>
+                    <span style="background: ${clause.risk === 'HIGH' ? '#ef4444' : clause.risk === 'MEDIUM' ? '#f59e0b' : '#6b7280'}; color: white; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 600;">${clause.risk}</span>
+                  </div>
+                  <p style="font-size: 13px; color: #4a5568; margin-bottom: 6px;">${clause.description}</p>
+                  <p style="font-size: 12px; color: #718096; font-style: italic;">"${clause.snippet}"</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          ` : ''}
+          
+          <div class="section">
+            <div class="section-title">📋 RFP Details</div>
+            <ul class="info-list">
+              <li><strong>Organization:</strong> ${response.rfp_details.organisation}</li>
+              <li><strong>Title:</strong> ${response.rfp_details.title}</li>
+              <li><strong>Due Date:</strong> ${new Date(response.rfp_details.due_date).toLocaleDateString()}</li>
+              <li><strong>Estimated Cost:</strong> ₹${(response.rfp_details.estimated_cost / 10000000).toFixed(2)} Crores</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">💰 Pricing Breakdown</div>
+            <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="download-btn" onclick="makeEditable()" id="editBtn">✏️ Edit Prices</button>
+              <button class="download-btn" onclick="saveEdits()" id="saveBtn" style="display: none; background: #10b981;">💾 Save Changes</button>
+              <button class="download-btn" onclick="approvePricing()" id="approveBtn" style="background: #3b82f6;">✅ Approve & Finalize</button>
+            </div>
+            <table id="pricingTable">
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Product</th>
+                  <th>Manufacturer</th>
+                  <th>Spec Match</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Tests Price</th>
+                  <th>Total Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+      
+      response.detailed_response.items.forEach(item => {
+        const matchClass = item.recommended_product.spec_match >= '80%' ? 'high' : 
+                          item.recommended_product.spec_match >= '60%' ? 'medium' : 'low';
+        
+        html += `
+          <tr data-sku="${item.recommended_product.sku}">
+            <td>${item.recommended_product.sku}</td>
+            <td>${item.recommended_product.name}</td>
+            <td>${item.recommended_product.manufacturer}</td>
+            <td><span class="spec-match ${matchClass}">${item.recommended_product.spec_match}</span></td>
+            <td class="editable-qty">${item.pricing.quantity}</td>
+            <td class="editable-unit-price">₹${item.pricing.unit_price.toLocaleString('en-IN')}</td>
+            <td class="editable-tests-price">₹${item.pricing.tests_cost.toLocaleString('en-IN')}</td>
+            <td class="total-cost">₹${(item.pricing.total_cost / 100000).toFixed(2)}L</td>
+          </tr>
+        `;
+      });
+      
+      html += `
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">📝 Terms & Conditions</div>
+            <ul class="info-list">
+              <li><strong>Validity:</strong> ${response.terms_and_conditions.validity}</li>
+              <li><strong>Payment:</strong> ${response.terms_and_conditions.payment_terms}</li>
+              <li><strong>Warranty:</strong> ${response.terms_and_conditions.warranty}</li>
+              <li><strong>Delivery:</strong> ${response.terms_and_conditions.delivery}</li>
+            </ul>
+          </div>
+        </div>
+      `;
+      
+      resultsSection.innerHTML = html;
+      
+      // Store results for download
+      window.currentResults = response;
+    }
+    
+    function downloadResults() {
+      const dataStr = JSON.stringify(window.currentResults, null, 2);
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `rfp-response-${window.currentResults.rfp_details.tender_id}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    function makeEditable() {
+      const rows = document.querySelectorAll('#pricingTable tbody tr');
+      rows.forEach(row => {
+        const qtyCell = row.querySelector('.editable-qty');
+        const unitPriceCell = row.querySelector('.editable-unit-price');
+        const testsPriceCell = row.querySelector('.editable-tests-price');
+        
+        const qty = qtyCell.textContent;
+        const unitPrice = unitPriceCell.textContent.replace(/[₹,]/g, '');
+        const testsPrice = testsPriceCell.textContent.replace(/[₹,]/g, '');
+        
+        qtyCell.innerHTML = `<input type="number" value="${qty}" style="width: 80px; padding: 4px;">`;
+        unitPriceCell.innerHTML = `<input type="number" value="${unitPrice}" style="width: 120px; padding: 4px;">`;
+        testsPriceCell.innerHTML = `<input type="number" value="${testsPrice}" style="width: 120px; padding: 4px;">`;
+      });
+      
+      document.getElementById('editBtn').style.display = 'none';
+      document.getElementById('saveBtn').style.display = 'inline-block';
+    }
+    
+    async function saveEdits() {
+      const rows = document.querySelectorAll('#pricingTable tbody tr');
+      const edits = [];
+      
+      rows.forEach(row => {
+        const sku = row.dataset.sku;
+        const qty = row.querySelector('.editable-qty input').value;
+        const unitPrice = row.querySelector('.editable-unit-price input').value;
+        const testsPrice = row.querySelector('.editable-tests-price input').value;
+        
+        edits.push({ oem_sku: sku, field: 'qty', value: qty });
+        edits.push({ oem_sku: sku, field: 'unit_price', value: unitPrice });
+        edits.push({ oem_sku: sku, field: 'tests_price', value: testsPrice });
+      });
+      
+      try {
+        const response = await fetch(`/api/approval/${sessionId}/edit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(edits)
+        });
+        
+        const result = await response.json();
+        if (result.ok) {
+          alert(`✅ Pricing updated! New total: ₹${(result.grand_total / 10000000).toFixed(2)} Crores`);
+          location.reload();
+        } else {
+          alert('❌ Failed to save changes');
+        }
+      } catch (error) {
+        alert('❌ Error: ' + error.message);
+      }
+    }
+    
+    async function approvePricing() {
+      if (!confirm('Are you sure you want to approve this pricing? This will finalize the RFP response.')) {
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/approval/${sessionId}/approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ approver: 'manager' })
+        });
+        
+        const result = await response.json();
+        if (result.ok) {
+          alert('✅ Pricing approved! RFP response is now finalized.');
+          document.getElementById('approveBtn').textContent = '✓ Approved';
+          document.getElementById('approveBtn').style.background = '#10b981';
+          document.getElementById('approveBtn').disabled = true;
+        } else {
+          alert('❌ Failed to approve');
+        }
+      } catch (error) {
+        alert('❌ Error: ' + error.message);
+      }
+    }
+  </script>
+</body>
+</html>

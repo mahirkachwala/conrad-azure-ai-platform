@@ -1,0 +1,1147 @@
+[
+  {
+    "tender_id": "GOV-100",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Maharashtra State Electricity Board (MSEB)",
+    "title": "11kV HT XLPE Cable 3C x 95mm² Al - Mumbai",
+    "material": "3 Core 95 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Mumbai",
+    "publish_date": "2025-11-21",
+    "due_date": "2026-01-06T12:00:00.000Z",
+    "estimated_cost_inr": 4815000,
+    "contact_email": "tenders@mseb.gov.in",
+    "contact_phone": "+91-22-22791234",
+    "documents": [
+      "/docs/100.pdf"
+    ],
+    "detail_url": "/rfp/GOV-100.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "tenders@mseb.gov.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/GOV-100.pdf"
+    },
+    "pdf_url": "/rfps/GOV-100.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "33kV",
+        "conductor": "Aluminium",
+        "size": "240 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Instrumentation Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "8",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 33kV Aluminium 240 sqmm 1C Instrumentation Cable 0.6kV Copper 1.5 sqmm 8C",
+    "combined_title": "33kV HT Cable 1C x 240 sqmm + 0.6kV Instrumentation Cable 8C x 1.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-101",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Power Grid Corporation of India (PGCIL)",
+    "title": "22kV HT XLPE Cable 3C x 185mm² Al - Mumbai",
+    "material": "3 Core 185 sqmm Aluminium XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Mumbai",
+    "publish_date": "2025-11-16",
+    "due_date": "2026-01-06T12:00:00.000Z",
+    "estimated_cost_inr": 3288000,
+    "contact_email": "procurement@powergrid.in",
+    "contact_phone": "+91-11-26569600",
+    "documents": [
+      "/docs/101.pdf"
+    ],
+    "detail_url": "/rfp/GOV-101.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_35",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "procurement@powergrid.in",
+      "meeting_subject": "Pre-bid Meeting Request - GOV-101 - [Your Company Name]",
+      "meeting_venue": "Power Grid Corporation of India (PGCIL), Mumbai",
+      "pdf_url": "/rfps/GOV-101.pdf"
+    },
+    "pdf_url": "/rfps/GOV-101.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "11kV",
+        "conductor": "Aluminium",
+        "size": "110 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 11kV Aluminium 110 sqmm 3C",
+    "combined_title": "11kV HT Cable 3C x 110 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-102",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "National Thermal Power Corporation (NTPC)",
+    "title": "EHV Cable 66kV 1C x 500mm² Al - Bangalore",
+    "material": "1 Core 500 sqmm Aluminium XLPE 66kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Bangalore",
+    "publish_date": "2025-12-04",
+    "due_date": "2026-02-01T12:00:00.000Z",
+    "estimated_cost_inr": 25757200,
+    "contact_email": "cables@ntpc.co.in",
+    "contact_phone": "+91-11-24387111",
+    "documents": [
+      "/docs/102.pdf"
+    ],
+    "detail_url": "/rfp/GOV-102.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 8,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nNational Thermal Power Corporation (NTPC),\nProcurement Department,\nBangalore, India - 400001",
+      "envelope_marking": "BID FOR GOV-102 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/GOV-102.pdf"
+    },
+    "pdf_url": "/rfps/GOV-102.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "66kV",
+        "conductor": "Aluminium",
+        "size": "400 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 8,
+        "standard": "IEC 60840"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "19",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "EHV Cable 66kV Aluminium 400 sqmm 1C Control Cable 0.6kV Copper 2.5 sqmm 19C",
+    "combined_title": "66kV EHV Cable 1C x 400 sqmm + 0.6kV Control Cable 19C x 2.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-103",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Bharat Heavy Electricals Ltd (BHEL)",
+    "title": "LT Power Cable 4C x 50mm² Cu XLPE - Chennai",
+    "material": "4 Core 50 sqmm Copper XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Chennai",
+    "publish_date": "2025-11-23",
+    "due_date": "2026-01-20T12:00:00.000Z",
+    "estimated_cost_inr": 680000,
+    "contact_email": "tenders@bhel.in",
+    "contact_phone": "+91-11-26584100",
+    "documents": [
+      "/docs/103.pdf"
+    ],
+    "detail_url": "/rfp/GOV-103.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/GOV-103",
+      "registration_opens": "06 December 2025",
+      "registration_closes": "13 January 2026",
+      "pdf_url": "/rfps/GOV-103.pdf"
+    },
+    "pdf_url": "/rfps/GOV-103.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 0.75kV Copper 70 sqmm 3C",
+    "combined_title": "0.75kV LT Cable 3C x 70 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-104",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Delhi Metro Rail Corporation (DMRC)",
+    "title": "Control Cable 12C x 1.5mm² Cu PVC - Kolkata",
+    "material": "12 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Kolkata",
+    "publish_date": "2025-12-05",
+    "due_date": "2026-02-02T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "procurement@delhimetro.gov.in",
+    "contact_phone": "+91-11-23417910",
+    "documents": [
+      "/docs/104.pdf"
+    ],
+    "detail_url": "/rfp/GOV-104.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "procurement@delhimetro.gov.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/GOV-104.pdf"
+    },
+    "pdf_url": "/rfps/GOV-104.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-105",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Indian Railways - Northern Region",
+    "title": "LT Power Cable 4C x 95mm² Al XLPE - Hyderabad",
+    "material": "4 Core 95 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Hyderabad",
+    "publish_date": "2026-01-23",
+    "due_date": "2026-02-27T12:00:00.000Z",
+    "estimated_cost_inr": 824800,
+    "contact_email": "ee.cables@nr.railnet.gov.in",
+    "contact_phone": "+91-11-23384000",
+    "documents": [
+      "/docs/105.pdf"
+    ],
+    "detail_url": "/rfp/GOV-105.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_30",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "ee.cables@nr.railnet.gov.in",
+      "meeting_subject": "Pre-bid Meeting Request - GOV-105 - [Your Company Name]",
+      "meeting_venue": "Indian Railways - Northern Region, Hyderabad",
+      "pdf_url": "/rfps/GOV-105.pdf"
+    },
+    "pdf_url": "/rfps/GOV-105.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "80 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "20",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 80 sqmm 4C Control Cable 1.1kV Copper 2.5 sqmm 20C",
+    "combined_title": "1.1kV LT Cable 4C x 80 sqmm + 1.1kV Control Cable 20C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-106",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Mumbai Metro Rail Corporation",
+    "title": "11kV HT XLPE Cable 3C x 185mm² Al - Pune",
+    "material": "3 Core 185 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Pune",
+    "publish_date": "2026-01-11",
+    "due_date": "2026-02-27T12:00:00.000Z",
+    "estimated_cost_inr": 4098000,
+    "contact_email": "cables@mmrcl.com",
+    "contact_phone": "+91-22-26511234",
+    "documents": [
+      "/docs/106.pdf"
+    ],
+    "detail_url": "/rfp/GOV-106.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nMumbai Metro Rail Corporation,\nProcurement Department,\nPune, India - 400001",
+      "envelope_marking": "BID FOR GOV-106 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/GOV-106.pdf"
+    },
+    "pdf_url": "/rfps/GOV-106.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "22kV",
+        "conductor": "Aluminium",
+        "size": "185 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 22kV Aluminium 185 sqmm 1C",
+    "combined_title": "22kV HT Cable 1C x 185 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-107",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Karnataka Power Transmission Corp Ltd (KPTCL)",
+    "title": "22kV HT XLPE Cable 3C x 300mm² Al - Ahmedabad",
+    "material": "3 Core 300 sqmm Aluminium XLPE 22kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Ahmedabad",
+    "publish_date": "2025-12-27",
+    "due_date": "2026-02-10T12:00:00.000Z",
+    "estimated_cost_inr": 7500000,
+    "contact_email": "se.cables@kptcl.com",
+    "contact_phone": "+91-80-22120901",
+    "documents": [
+      "/docs/107.pdf"
+    ],
+    "detail_url": "/rfp/GOV-107.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_20",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/GOV-107",
+      "registration_opens": "27 December 2025",
+      "registration_closes": "03 February 2026",
+      "pdf_url": "/rfps/GOV-107.pdf"
+    },
+    "pdf_url": "/rfps/GOV-107.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "33kV",
+        "conductor": "Aluminium",
+        "size": "500 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 33kV Aluminium 500 sqmm 3C",
+    "combined_title": "33kV HT Cable 3C x 500 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-108",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Tamil Nadu Generation & Distribution Corp (TANGEDCO)",
+    "title": "EHV Cable 110kV 1C x 630mm² Al - Jaipur",
+    "material": "1 Core 630 sqmm Aluminium XLPE 110kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Jaipur",
+    "publish_date": "2025-12-24",
+    "due_date": "2026-02-04T12:00:00.000Z",
+    "estimated_cost_inr": 53157200,
+    "contact_email": "cables@tangedco.gov.in",
+    "contact_phone": "+91-44-28525264",
+    "documents": [
+      "/docs/108.pdf"
+    ],
+    "detail_url": "/rfp/GOV-108.html",
+    "status": "active",
+    "pricing_tier": "SIGNIFICANTLY_OVERPRICED_50",
+    "market_qty_km": 10,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "cables@tangedco.gov.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/GOV-108.pdf"
+    },
+    "pdf_url": "/rfps/GOV-108.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "220kV",
+        "conductor": "Aluminium",
+        "size": "1000 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 10,
+        "standard": "IEC 60840"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "EHV Cable 220kV Aluminium 1000 sqmm 1C Control Cable 1.1kV Copper 2.5 sqmm 12C",
+    "combined_title": "220kV EHV Cable 1C x 1000 sqmm + 1.1kV Control Cable 12C x 2.5 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-109",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Gujarat Energy Transmission Corporation (GETCO)",
+    "title": "Control Cable 7C x 2.5mm² Cu PVC - Lucknow",
+    "material": "7 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Lucknow",
+    "publish_date": "2026-01-17",
+    "due_date": "2026-02-22T12:00:00.000Z",
+    "estimated_cost_inr": 157200,
+    "contact_email": "procurement@getco.in",
+    "contact_phone": "+91-79-23253200",
+    "documents": [
+      "/docs/109.pdf"
+    ],
+    "detail_url": "/rfp/GOV-109.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "procurement@getco.in",
+      "meeting_subject": "Pre-bid Meeting Request - GOV-109 - [Your Company Name]",
+      "meeting_venue": "Gujarat Energy Transmission Corporation (GETCO), Lucknow",
+      "pdf_url": "/rfps/GOV-109.pdf"
+    },
+    "pdf_url": "/rfps/GOV-109.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "2.5 sqmm",
+        "cores": "19",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 0.6kV Copper 2.5 sqmm 19C",
+    "combined_title": "0.6kV Control Cable 19C x 2.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-110",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Rajasthan Rajya Vidyut Prasaran Nigam Ltd (RRVPNL)",
+    "title": "LT Power Cable 4C x 120mm² Al XLPE - Nagpur",
+    "material": "4 Core 120 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Nagpur",
+    "publish_date": "2026-01-26",
+    "due_date": "2026-03-14T12:00:00.000Z",
+    "estimated_cost_inr": 400000,
+    "contact_email": "cables@rvpn.co.in",
+    "contact_phone": "+91-141-2744800",
+    "documents": [
+      "/docs/110.pdf"
+    ],
+    "detail_url": "/rfp/GOV-110.html",
+    "status": "active",
+    "pricing_tier": "GOOD_10",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nRajasthan Rajya Vidyut Prasaran Nigam Ltd (RRVPNL),\nProcurement Department,\nNagpur, India - 400001",
+      "envelope_marking": "BID FOR GOV-110 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/GOV-110.pdf"
+    },
+    "pdf_url": "/rfps/GOV-110.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "25 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 0.6kV Copper 25 sqmm 4C",
+    "combined_title": "0.6kV LT Cable 4C x 25 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Routine Test",
+      "standard": "IS 10810",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹50K-1.5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-111",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Uttar Pradesh Power Corporation Ltd (UPPCL)",
+    "title": "33kV HT XLPE Cable 3C x 400mm² Al - Coimbatore",
+    "material": "3 Core 400 sqmm Aluminium XLPE 33kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Coimbatore",
+    "publish_date": "2026-02-28",
+    "due_date": "2026-04-02T12:00:00.000Z",
+    "estimated_cost_inr": 5452400,
+    "contact_email": "cables@uppcl.org",
+    "contact_phone": "+91-522-2287827",
+    "documents": [
+      "/docs/111.pdf"
+    ],
+    "detail_url": "/rfp/GOV-111.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/GOV-111",
+      "registration_opens": "16 February 2026",
+      "registration_closes": "26 March 2026",
+      "pdf_url": "/rfps/GOV-111.pdf"
+    },
+    "pdf_url": "/rfps/GOV-111.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "45kV",
+        "conductor": "Aluminium",
+        "size": "400 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 45kV Aluminium 400 sqmm 1C Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "45kV HT Cable 1C x 400 sqmm + 1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-112",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "West Bengal State Electricity Distribution Corp (WBSEDCL)",
+    "title": "LT Power Cable 4C x 185mm² Al XLPE - Indore",
+    "material": "4 Core 185 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Indore",
+    "publish_date": "2026-02-10",
+    "due_date": "2026-03-15T12:00:00.000Z",
+    "estimated_cost_inr": 371200,
+    "contact_email": "se.cables@wbsedcl.in",
+    "contact_phone": "+91-33-22148400",
+    "documents": [
+      "/docs/112.pdf"
+    ],
+    "detail_url": "/rfp/GOV-112.html",
+    "status": "active",
+    "pricing_tier": "SUSPICIOUSLY_LOW_35",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "se.cables@wbsedcl.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/GOV-112.pdf"
+    },
+    "pdf_url": "/rfps/GOV-112.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "16 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Copper 16 sqmm 3C",
+    "combined_title": "1.1kV LT Cable 3C x 16 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-113",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Kerala State Electricity Board (KSEB)",
+    "title": "LT Power Cable 4C x 120mm² Al XLPE - Mumbai",
+    "material": "4 Core 120 sqmm Aluminium XLPE 1.1kV LT Power Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-02-11",
+    "due_date": "2026-03-19T12:00:00.000Z",
+    "estimated_cost_inr": 960000,
+    "contact_email": "procurement@kseb.in",
+    "contact_phone": "+91-471-2514685",
+    "documents": [
+      "/docs/113.pdf"
+    ],
+    "detail_url": "/rfp/GOV-113.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_10",
+    "market_qty_km": 4,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "procurement@kseb.in",
+      "meeting_subject": "Pre-bid Meeting Request - GOV-113 - [Your Company Name]",
+      "meeting_venue": "Kerala State Electricity Board (KSEB), Mumbai",
+      "pdf_url": "/rfps/GOV-113.pdf"
+    },
+    "pdf_url": "/rfps/GOV-113.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "1.1kV",
+        "conductor": "Aluminium",
+        "size": "200 sqmm",
+        "cores": "4",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 4,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 1.1kV Aluminium 200 sqmm 4C",
+    "combined_title": "1.1kV LT Cable 4C x 200 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-114",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Andhra Pradesh Transco",
+    "title": "Control Cable 12C x 1.5mm² Cu PVC - Mumbai",
+    "material": "12 Core 1.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-03-01",
+    "due_date": "2026-04-03T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "cables@aptransco.gov.in",
+    "contact_phone": "+91-866-2472385",
+    "documents": [
+      "/docs/114.pdf"
+    ],
+    "detail_url": "/rfp/GOV-114.html",
+    "status": "active",
+    "pricing_tier": "OVERPRICED_30",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nAndhra Pradesh Transco,\nProcurement Department,\nMumbai, India - 400001",
+      "envelope_marking": "BID FOR GOV-114 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/GOV-114.pdf"
+    },
+    "pdf_url": "/rfps/GOV-114.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-115",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Madhya Pradesh Power Transmission Co (MPPTCL)",
+    "title": "EHV Cable 66kV 1C x 500mm² Al - Mumbai",
+    "material": "1 Core 500 sqmm Aluminium XLPE 66kV EHV Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "EHV Cable",
+    "city": "Mumbai",
+    "publish_date": "2026-03-10",
+    "due_date": "2026-04-25T12:00:00.000Z",
+    "estimated_cost_inr": 42523000,
+    "contact_email": "cables@mpptcl.mp.gov.in",
+    "contact_phone": "+91-755-2554000",
+    "documents": [
+      "/docs/115.pdf"
+    ],
+    "detail_url": "/rfp/GOV-115.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 8,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/GOV-115",
+      "registration_opens": "11 March 2026",
+      "registration_closes": "18 April 2026",
+      "pdf_url": "/rfps/GOV-115.pdf"
+    },
+    "pdf_url": "/rfps/GOV-115.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "EHV Cable",
+        "voltage": "220kV",
+        "conductor": "Aluminium",
+        "size": "1000 sqmm",
+        "cores": "1",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 8,
+        "standard": "IEC 60840"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Instrumentation Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "6",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "EHV Cable 220kV Aluminium 1000 sqmm 1C Instrumentation Cable 0.6kV Copper 1.5 sqmm 6C",
+    "combined_title": "220kV EHV Cable 1C x 1000 sqmm + 0.6kV Instrumentation Cable 6C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-116",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Central Public Works Department (CPWD)",
+    "title": "11kV HT XLPE Cable 3C x 120mm² Al - Delhi",
+    "material": "3 Core 120 sqmm Aluminium XLPE 11kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Delhi",
+    "publish_date": "2026-03-14",
+    "due_date": "2026-04-23T12:00:00.000Z",
+    "estimated_cost_inr": 4260000,
+    "contact_email": "ee.elect@cpwd.gov.in",
+    "contact_phone": "+91-11-23062378",
+    "documents": [
+      "/docs/116.pdf"
+    ],
+    "detail_url": "/rfp/GOV-116.html",
+    "status": "active",
+    "pricing_tier": "EXCELLENT_15",
+    "market_qty_km": 6,
+    "submission": {
+      "mode": "PDF_FORM_FILL",
+      "submission_notes": "Complete the BID RESPONSE FORM in ANNEXURE-A of this PDF",
+      "submission_email": "ee.elect@cpwd.gov.in",
+      "form_location": "ANNEXURE-A (Page 6 of this document)",
+      "pdf_url": "/rfps/GOV-116.pdf"
+    },
+    "pdf_url": "/rfps/GOV-116.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "22kV",
+        "conductor": "Copper",
+        "size": "200 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 6,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "HT Cable 22kV Copper 200 sqmm 3C",
+    "combined_title": "22kV HT Cable 3C x 200 sqmm",
+    "external_testing_required": true,
+    "external_testing_info": {
+      "type": "Type Test",
+      "standard": "IEC 60840/IS 7098",
+      "labs": [
+        "CPRI Bangalore",
+        "ERDA Vadodara",
+        "ERTL Mumbai"
+      ],
+      "estimated_cost_range": "₹2-5 Lakhs",
+      "note": "Exact cost to be obtained from testing lab"
+    }
+  },
+  {
+    "tender_id": "GOV-117",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Public Works Department - Maharashtra",
+    "title": "33kV HT XLPE Cable 1C x 240mm² Cu - Delhi",
+    "material": "1 Core 240 sqmm Copper XLPE 33kV HT Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "HT Cable",
+    "city": "Delhi",
+    "publish_date": "2026-03-05",
+    "due_date": "2026-04-06T12:00:00.000Z",
+    "estimated_cost_inr": 2482400,
+    "contact_email": "se.elect@pwd.maharashtra.gov.in",
+    "contact_phone": "+91-22-22025432",
+    "documents": [
+      "/docs/117.pdf"
+    ],
+    "detail_url": "/rfp/GOV-117.html",
+    "status": "active",
+    "pricing_tier": "ABOVE_AVERAGE_18",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "MEETING_EMAIL",
+      "submission_notes": "Request a pre-bid meeting before formal submission",
+      "meeting_email": "se.elect@pwd.maharashtra.gov.in",
+      "meeting_subject": "Pre-bid Meeting Request - GOV-117 - [Your Company Name]",
+      "meeting_venue": "Public Works Department - Maharashtra, Delhi",
+      "pdf_url": "/rfps/GOV-117.pdf"
+    },
+    "pdf_url": "/rfps/GOV-117.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "HT Cable",
+        "voltage": "6.6kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      },
+      {
+        "item_no": 2,
+        "cable_type": "Control Cable",
+        "voltage": "0.6kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "12",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 2,
+        "standard": "IS 1554"
+      }
+    ],
+    "search_index": "HT Cable 6.6kV Copper 70 sqmm 3C Control Cable 0.6kV Copper 1.5 sqmm 12C",
+    "combined_title": "6.6kV HT Cable 3C x 70 sqmm + 0.6kV Control Cable 12C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-118",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Airports Authority of India (AAI)",
+    "title": "Control Cable 19C x 2.5mm² Cu PVC - Chennai",
+    "material": "19 Core 2.5 sqmm Copper PVC 1.1kV Control Cable Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "Control Cable",
+    "city": "Chennai",
+    "publish_date": "2026-04-02",
+    "due_date": "2026-05-15T12:00:00.000Z",
+    "estimated_cost_inr": 153600,
+    "contact_email": "cables@aai.aero",
+    "contact_phone": "+91-11-24632950",
+    "documents": [
+      "/docs/118.pdf"
+    ],
+    "detail_url": "/rfp/GOV-118.html",
+    "status": "active",
+    "pricing_tier": "COMPETITIVE",
+    "market_qty_km": 3,
+    "submission": {
+      "mode": "LETTER_COURIER",
+      "submission_notes": "Submit sealed bid documents via registered post or courier",
+      "submission_address": "Chief Procurement Officer,\nAirports Authority of India (AAI),\nProcurement Department,\nChennai, India - 400001",
+      "envelope_marking": "BID FOR GOV-118 - DO NOT OPEN BEFORE DUE DATE",
+      "pdf_url": "/rfps/GOV-118.pdf"
+    },
+    "pdf_url": "/rfps/GOV-118.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "Control Cable",
+        "voltage": "1.1kV",
+        "conductor": "Copper",
+        "size": "1.5 sqmm",
+        "cores": "11",
+        "insulation": "PVC",
+        "armoured": "Armoured",
+        "qty_km": 3,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "Control Cable 1.1kV Copper 1.5 sqmm 11C",
+    "combined_title": "1.1kV Control Cable 11C x 1.5 sqmm",
+    "external_testing_required": false
+  },
+  {
+    "tender_id": "GOV-119",
+    "source_type": "government",
+    "portal_name": "Government Procurement Portal",
+    "organisation": "Hindustan Petroleum Corporation Ltd (HPCL)",
+    "title": "LT Power Cable 4C x 70mm² Cu PVC - Bangalore",
+    "material": "4 Core 70 sqmm Copper PVC 1.1kV LT Power Cable Non-Armoured",
+    "product_category": "wires-cables",
+    "cable_type": "LT Cable",
+    "city": "Bangalore",
+    "publish_date": "2026-03-24",
+    "due_date": "2026-05-07T12:00:00.000Z",
+    "estimated_cost_inr": 680000,
+    "contact_email": "procurement@hpcl.in",
+    "contact_phone": "+91-22-22862000",
+    "documents": [
+      "/docs/119.pdf"
+    ],
+    "detail_url": "/rfp/GOV-119.html",
+    "status": "active",
+    "pricing_tier": "GOOD_10",
+    "market_qty_km": 5,
+    "submission": {
+      "mode": "EXTERNAL_PORTAL",
+      "submission_notes": "Register on e-procurement portal and submit bid online",
+      "portal_url": "https://eprocure.gov.in",
+      "tender_url": "https://eprocure.gov.in/tender/GOV-119",
+      "registration_opens": "23 March 2026",
+      "registration_closes": "30 April 2026",
+      "pdf_url": "/rfps/GOV-119.pdf"
+    },
+    "pdf_url": "/rfps/GOV-119.pdf",
+    "buyer_type": "Government/PSU",
+    "cable_requirements": [
+      {
+        "item_no": 1,
+        "cable_type": "LT Cable",
+        "voltage": "0.75kV",
+        "conductor": "Copper",
+        "size": "70 sqmm",
+        "cores": "3",
+        "insulation": "XLPE",
+        "armoured": "Armoured",
+        "qty_km": 5,
+        "standard": "IS 7098"
+      }
+    ],
+    "search_index": "LT Cable 0.75kV Copper 70 sqmm 3C",
+    "combined_title": "0.75kV LT Cable 3C x 70 sqmm",
+    "external_testing_required": false
+  }
+]

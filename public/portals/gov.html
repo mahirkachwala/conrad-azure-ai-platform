@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Procurement Portal - Official Tenders</title>
+  <link rel="stylesheet" href="/assets/portal-gov.css">
+</head>
+<body>
+<header class="gov-header">
+  <div class="header-emblem">🏛️</div>
+  <div class="header-content">
+    <h1>Government Procurement Portal</h1>
+    <p class="tagline">Official Public Sector Tender Platform</p>
+  </div>
+</header>
+
+<nav class="breadcrumb">
+  <a href="/">Main Search</a> &raquo;
+  <a href="/chat.html">AI Analysis</a> &raquo;
+  <span>Government Portal</span>
+</nav>
+
+<main class="container">
+  <section class="search-box">
+    <h2>🔍 Search Government Tenders</h2>
+    <form id="search-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="keyword">Search Keywords <span class="required">*</span></label>
+          <input type="text" id="keyword" name="keyword" placeholder="e.g., control cable, HT cable" required>
+        </div>
+        <div class="form-group">
+          <label for="category">Product Category <span class="required">*</span></label>
+          <select id="category" name="category" required>
+            <option value="">-- Select Category --</option>
+            <option value="wires-cables">Wires & Cables</option>
+            <option value="transformers">Transformers</option>
+            <option value="fmcg-packaging">FMCG Packaging</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Cable-Specific Filters (shown only when Wires & Cables selected) -->
+      <div class="form-row cable-filters" id="cable-filters" style="display: none;">
+        <div class="form-group">
+          <label for="cable-type">Cable Type <span class="required">*</span></label>
+          <select id="cable-type" name="cable-type">
+            <option value="">-- Any Cable Type --</option>
+            <option value="ht-cable">HT Cable (High Tension)</option>
+            <option value="lt-cable">LT Cable (Low Tension)</option>
+            <option value="control-cable">Control Cable</option>
+            <option value="ehv-cable">EHV Cable (Extra High Voltage)</option>
+            <option value="instrumentation-cable">Instrumentation Cable</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="voltage">Voltage Rating</label>
+          <select id="voltage" name="voltage">
+            <option value="">-- Any Voltage --</option>
+            <option value="1.1kv">1.1 kV (LT)</option>
+            <option value="3.3kv">3.3 kV</option>
+            <option value="6.6kv">6.6 kV</option>
+            <option value="11kv">11 kV</option>
+            <option value="22kv">22 kV</option>
+            <option value="33kv">33 kV</option>
+            <option value="66kv">66 kV (EHV)</option>
+            <option value="110kv">110 kV (EHV)</option>
+            <option value="132kv">132 kV (EHV)</option>
+            <option value="220kv">220 kV (EHV)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City/Location <span class="required">*</span></label>
+          <input type="text" id="city" name="city" placeholder="e.g., Mumbai, Delhi" required>
+        </div>
+        <div class="form-group">
+          <label for="due-date">Due Date (Before) <span class="required">*</span></label>
+          <input type="date" id="due-date" name="due-date" required>
+        </div>
+      </div>
+      <p class="required-note">* All fields are required</p>
+      <div class="form-row">
+        <div class="form-group">
+          <button type="submit" class="btn-search-gov">Search Tenders</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section id="results">
+    <h2 class="results-header">📋 Tender Results (<span id="result-count">0</span>)</h2>
+    <div class="tender-list" id="tender-list">
+      <p class="no-results">Use search form to find government tenders</p>
+    </div>
+  </section>
+</main>
+
+<footer class="gov-footer">
+  <p>Government of India | National e-Procurement System | © 2025</p>
+</footer>
+
+<script src="/assets/portal-gov.js"></script>
+</body>
+</html>
