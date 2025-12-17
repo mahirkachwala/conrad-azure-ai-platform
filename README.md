@@ -18,7 +18,7 @@ ConRad is a multi-agent AI system that helps cable manufacturing companies:
 ### The Problem It Solves
 
 **Before ConRad:**
-- Manual monitoring of 10+ portals daily
+- Manual monitoring of 3 portals daily (Government, Industrial, Utilities)
 - Downloading and reading 50+ PDFs weekly (30+ pages each)
 - Manual product matching and quotation calculation
 - 40+ hours per week spent on RFP processing
@@ -212,16 +212,55 @@ Generates:
 ```
 Quotation + RFP Details
     ↓
-Document Generator:
-    ├── Creates bid document (Word/PDF)
-    ├── Includes company credentials
-    ├── Adds technical specifications
-    └── Formats according to RFP requirements
+Submission Mode Detection:
+    ├── EMAIL_FORM (fill PDF form and email)
+    ├── LETTER_COURIER (print and courier)
+    ├── EXTERNAL_PORTAL (register on portal)
+    └── MEETING_EMAIL (schedule pre-bid meeting)
     ↓
-Calendar Integration:
-    ├── Creates reminder event
-    ├── Generates .ics file
-    └── Sends email notification (optional)
+Preview Generation:
+    ├── Email preview (to, subject, body)
+    ├── Letter preview (company details, content)
+    ├── Portal instructions preview
+    └── Calendar event preview
+    ↓
+User Review & Edit:
+    ├── Modify any field via chat
+    ├── AI-powered modifications
+    └── Visual preview of changes
+    ↓
+Final Generation:
+    ├── Generate PDF/Word documents
+    ├── Create calendar reminders (.ics)
+    ├── Open Gmail compose (for emails)
+    └── Download printable documents
+```
+
+### 5. Adaptive CSV Upload Process
+
+```
+User uploads CSV via chat interface
+    ↓
+File Preview:
+    ├── Shows file name and size
+    ├── Allows adding instructions
+    └── User can remove before sending
+    ↓
+CSV Analysis:
+    ├── HuggingFace embeddings detect CSV type
+    ├── Semantic column mapping
+    ├── Structure validation
+    └── Confidence scoring
+    ↓
+Session Storage:
+    ├── Overrides default data for session
+    ├── Applies to quotations immediately
+    └── Auto-clears on server restart
+    ↓
+Preview & Confirmation:
+    ├── Shows detected type and mappings
+    ├── Displays row count and changes
+    └── User confirms or modifies
 ```
 
 ---
@@ -283,7 +322,13 @@ ConRad_Final_Submission/
 - **Pricing Agent**: Calculates quotations
 - **Submission Agent**: Creates bid packages
 
-### 🧠 Adaptive Learning
+### 🧠 Adaptive Learning & CSV Upload System
+- **CSV Upload via Chat Interface**: Upload custom CSV files directly through the chat
+- **Intelligent CSV Detection**: Uses HuggingFace embeddings to automatically detect CSV type (testing, pricing, products)
+- **Semantic Column Mapping**: Automatically maps CSV columns to expected schemas using semantic similarity
+- **Session-Based Adaptation**: Uploaded CSVs override default data for the current session
+- **Preview Before Use**: Preview detected structure and mappings before applying
+- **Natural Language Instructions**: Add context like "use these prices for quotations" when uploading
 - Learns from user feedback
 - Improves product matching over time
 - Adapts to company-specific requirements
@@ -308,6 +353,107 @@ ConRad_Final_Submission/
 - GST and margin application
 - Location-based delivery charges
 - Professional quotation generation
+
+### 📋 Preview-Based Submission Modes
+ConRad supports 4 different submission modes, each with interactive preview:
+
+1. **EMAIL_FORM** - Fill form inside PDF and email
+   - Preview email with recipient, subject, and body
+   - Edit before sending
+   - Direct Gmail integration
+
+2. **LETTER_COURIER** - Physical letter/courier submission
+   - Preview cover letter with company details
+   - Generate printable PDF on letterhead
+   - Includes courier address and instructions
+
+3. **EXTERNAL_PORTAL** - Register on separate vendor portal
+   - Preview portal registration details
+   - Generate submission package
+   - Calendar reminders for registration deadlines
+
+4. **MEETING_EMAIL** - Pre-bid meeting request
+   - Preview meeting request email
+   - Schedule calendar event
+   - Generate meeting agenda
+
+**Preview Features:**
+- Edit all fields before finalizing
+- AI-powered modifications ("make it shorter", "add quality certifications")
+- Visual preview of generated content
+- One-click proceed to final action (Gmail, Calendar, PDF download)
+
+---
+
+## 🛠️ Complete Technology Stack
+
+### Backend Framework
+- **Node.js 18+** - Runtime environment
+- **Express.js 4.19** - Web server framework
+- **ES Modules** - Modern JavaScript module system
+
+### AI & Machine Learning
+- **Google Gemini 2.0 Flash** - Primary AI provider for analysis and generation
+- **OpenAI GPT-4o-mini** - Fallback AI provider
+- **LangChain** - AI orchestration framework
+- **LangGraph** - Multi-agent workflow management
+- **HuggingFace Transformers** - Local embeddings and model inference
+- **ChromaDB** - Vector database for semantic search
+- **Local Embeddings** - All-MiniLM-L6-v2 for CSV type detection
+
+### Document Processing
+- **pdf-parse** - PDF text extraction
+- **AWS Textract** - Advanced OCR for scanned PDFs and table extraction
+- **mammoth** - Word document (.docx) parsing
+- **pdfkit** - PDF generation
+- **docx/docxtemplater** - Word document generation from templates
+- **Puppeteer** - Web scraping and PDF rendering
+
+### Data Management
+- **better-sqlite3** - SQLite database for session storage
+- **csv-parse** - CSV file parsing and processing
+- **Cheerio** - HTML parsing and web scraping
+- **Axios** - HTTP client for API calls
+
+### Frontend Technologies
+- **Vanilla JavaScript** - No framework dependencies
+- **Chart.js** - Data visualization
+- **HTML5/CSS3** - Modern web standards
+
+### Utilities & Services
+- **dotenv** - Environment variable management
+- **helmet** - Security headers
+- **cookie-parser** - Session management
+- **express-session** - Session storage
+- **multer** - File upload handling
+- **node-cron** - Scheduled tasks
+- **dayjs** - Date manipulation
+- **uuid** - Unique ID generation
+- **qrcode** - QR code generation
+- **ics** - Calendar event generation (.ics files)
+- **fontkit** - Font handling for PDF generation
+
+### Voice Service (Optional)
+- **Python 3.10+** - Voice service runtime
+- **FastAPI** - Voice API server
+- **FasterWhisper** - Speech-to-text (local, no API costs)
+- **Uvicorn** - ASGI server
+
+### Development Tools
+- **Jest** - Testing framework
+- **Git** - Version control
+
+### Cloud Services (Optional)
+- **AWS Textract** - Document analysis and OCR
+- **Google AI Studio** - Gemini API access
+- **OpenAI Platform** - GPT API access
+
+### Data Formats
+- **JSON** - Configuration and API responses
+- **CSV** - Product catalogs and pricing data
+- **PDF** - RFP documents and generated bids
+- **DOCX** - Document templates
+- **ICS** - Calendar events
 
 ---
 
@@ -507,6 +653,22 @@ Upload RFP PDF → "Analyze this and tell me if we can bid"
 ```
 "Compare GOV-100, IND-200, and UTL-300"
 → Side-by-side comparison with recommendations
+```
+
+### 5. Upload Custom Pricing Data
+```
+Upload CSV file → "Use these testing prices for quotations"
+→ System detects CSV type, maps columns, applies to session
+→ All future quotations use new pricing
+```
+
+### 6. Preview Before Submission
+```
+"Generate submission for GOV-100"
+→ Shows preview of email/letter with all details
+→ "Change contact person to John Doe"
+→ AI modifies and shows updated preview
+→ "Proceed" → Opens Gmail or downloads PDF
 ```
 
 ---
