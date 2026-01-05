@@ -69,6 +69,11 @@ app.use(express.static(PUBLIC_DIR, {
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
+// Railway requires a root healthcheck that returns 200
+app.get("/", (_req, res) => {
+  res.status(200).send("✅ ConRad backend running on Railway");
+});
+
 // Serve dataset CSV files for download
 app.get("/data/:filename", (req, res) => {
   const filename = req.params.filename;
@@ -408,7 +413,9 @@ app.listen(PORT, "0.0.0.0", () => {
 ║  📊 Orchestration: http://localhost:${PORT}/agent-orchestration.html
 ╚════════════════════════════════════════════════════════════╝
   `);
-  
+
+
   // Voice input is powered by Azure Cognitive Services – Speech
   console.log('🎤 Voice input is powered by Azure Cognitive Services – Speech');
 });
+
