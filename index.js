@@ -12,83 +12,17 @@ import { spawn } from "child_process";
 import './db/index.js';
 import { sessionMemory, newSessionId } from './services/session-memory.js';
 
-// ============= VOICE SERVICE AUTO-START =============
+// ============= VOICE SERVICE (DISABLED - Using Azure Cognitive Services) =============
+// FasterWhisper local service is no longer required.
+// Voice input is now powered by Azure Cognitive Services – Speech.
+// The voice-service folder is kept for reference but not auto-started.
 let voiceServiceProcess = null;
 
 function startVoiceService() {
-  const __dir = path.dirname(fileURLToPath(import.meta.url));
-  const voiceServicePath = path.join(__dir, 'voice-service', 'voice_server.py');
-  
-  console.log('🎤 Starting Voice Service (FasterWhisper)...');
-  console.log(`   Path: ${voiceServicePath}`);
-  
-  // Use quoted path for Windows with spaces
-  voiceServiceProcess = spawn('python', [`"${voiceServicePath}"`], {
-    stdio: ['ignore', 'pipe', 'pipe'],
-    cwd: path.join(__dir, 'voice-service'),
-    shell: true,
-    windowsHide: true
-  });
-  
-  voiceServiceProcess.stdout.on('data', (data) => {
-    const output = data.toString().trim();
-    if (output) console.log(`[Voice] ${output}`);
-  });
-  
-  voiceServiceProcess.stderr.on('data', (data) => {
-    const output = data.toString().trim();
-    // Filter out INFO logs from uvicorn
-    if (output && !output.includes('INFO:') && !output.includes('Uvicorn')) {
-      console.error(`[Voice] ${output}`);
-    }
-  });
-  
-  voiceServiceProcess.on('error', (err) => {
-    console.error('❌ Failed to start voice service:', err.message);
-    console.log('   Install dependencies: pip install fastapi uvicorn python-multipart');
-  });
-  
-  voiceServiceProcess.on('exit', (code) => {
-    if (code !== 0 && code !== null) {
-      console.log(`⚠️ Voice service exited with code ${code}`);
-    }
-  });
-  
-  // Give it time to start and load the model
-  setTimeout(async () => {
-    try {
-      const response = await fetch('http://localhost:5001/health');
-      if (response.ok) {
-        const data = await response.json();
-        console.log(`✅ Voice Service ready (CUDA: ${data.cuda_available})`);
-      }
-    } catch (e) {
-      console.log('⚠️ Voice service not responding - may still be loading model...');
-      console.log('   If issues persist, start manually: cd voice-service && python voice_server.py');
-    }
-  }, 8000);
+  // DISABLED: Azure Cognitive Services – Speech is now used instead
+  console.log('🎤 Voice input is powered by Azure Cognitive Services – Speech');
+  // Original FasterWhisper service startup code disabled
 }
-
-// Cleanup on exit
-process.on('exit', () => {
-  if (voiceServiceProcess) {
-    voiceServiceProcess.kill();
-  }
-});
-
-process.on('SIGINT', () => {
-  if (voiceServiceProcess) {
-    voiceServiceProcess.kill();
-  }
-  process.exit();
-});
-
-process.on('SIGTERM', () => {
-  if (voiceServiceProcess) {
-    voiceServiceProcess.kill();
-  }
-  process.exit();
-});
 // ============= END VOICE SERVICE =============
 
 const __filename = fileURLToPath(import.meta.url);
@@ -200,6 +134,7 @@ import vectorStoreRouter from './routes/vector-store.js';
 import learningRouter from './routes/learning.js';
 import generatePdfRouter from './routes/generate-pdf.js';
 import adaptiveDataRouter from './routes/adaptive-data.js';
+import speechRouter from './routes/speech.js';
 
 app.post("/api/chat", handleChatMessage);
 app.post("/api/analyze", handleAnalyzeRequest);
@@ -226,6 +161,7 @@ app.use("/api/vector", vectorStoreRouter);
 app.use("/api/learning", learningRouter);
 app.use("/api/generate-pdf", generatePdfRouter);
 app.use("/api/adaptive", adaptiveDataRouter);
+app.use("/api/speech", speechRouter);
 
 // Context management endpoints
 app.post("/api/context/clear", (req, res) => {
@@ -473,9 +409,6 @@ app.listen(PORT, "0.0.0.0", () => {
 ╚════════════════════════════════════════════════════════════╝
   `);
   
-  // Voice service - start manually if needed
-  // To enable: pip install fastapi uvicorn python-multipart
-  // Then uncomment the line below:
-  // startVoiceService();
-  console.log('🎤 Voice service disabled. To enable, run: pip install fastapi uvicorn python-multipart');
+  // Voice input is powered by Azure Cognitive Services – Speech
+  console.log('🎤 Voice input is powered by Azure Cognitive Services – Speech');
 });

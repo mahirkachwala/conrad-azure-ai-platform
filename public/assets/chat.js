@@ -12,8 +12,8 @@ let userLocation = null;
 let lastSearchQuery = '';
 let lastSearchResults = null;
 
-// ============= VOICE INPUT SYSTEM (FasterWhisper) =============
-const VOICE_SERVICE_URL = 'http://localhost:5001';
+// ============= VOICE INPUT SYSTEM (Azure Cognitive Services – Speech) =============
+const VOICE_API_URL = '/api/speech';
 let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
@@ -39,31 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
     voiceCancelBtn.addEventListener('click', cancelRecording);
   }
   
-  // Check if voice service is available
-  checkVoiceService();
+  // Voice service is always available via Azure
+  initVoiceService();
 });
 
-async function checkVoiceService() {
-  try {
-    const response = await fetch(`${VOICE_SERVICE_URL}/health`, { 
-      method: 'GET',
-      mode: 'cors'
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log('🎤 Voice service available:', data);
-      const voiceBtn = document.getElementById('voice-btn');
-      if (voiceBtn) {
-        voiceBtn.title = `Voice Input Ready (FasterWhisper ${data.cuda_available ? '+ CUDA' : 'CPU'})`;
-      }
-    }
-  } catch (e) {
-    console.log('⚠️ Voice service not available. Start it with: python voice-service/voice_server.py');
-    const voiceBtn = document.getElementById('voice-btn');
-    if (voiceBtn) {
-      voiceBtn.title = 'Voice service offline - click to see instructions';
-      voiceBtn.style.opacity = '0.5';
-    }
+function initVoiceService() {
+  console.log('🎤 Voice input is powered by Azure Cognitive Services – Speech');
+  const voiceBtn = document.getElementById('voice-btn');
+  if (voiceBtn) {
+    voiceBtn.title = 'Voice Input (Azure Cognitive Services – Speech)';
+    voiceBtn.style.opacity = '1';
   }
 }
 
@@ -71,26 +56,6 @@ async function startVoiceRecording() {
   const voiceBtn = document.getElementById('voice-btn');
   const voiceModal = document.getElementById('voice-modal');
   const voiceStatus = document.getElementById('voice-status');
-  
-  // Check if service is available first
-  try {
-    const healthCheck = await fetch(`${VOICE_SERVICE_URL}/health`, { mode: 'cors' });
-    if (!healthCheck.ok) throw new Error('Service unavailable');
-  } catch (e) {
-    addMessage(`
-      <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 10px; padding: 16px; color: #92400e;">
-        <strong>🎤 Voice Service Not Running</strong>
-        <p style="margin: 10px 0 0 0;">To use voice input, start the FasterWhisper service:</p>
-        <pre style="background: #1e293b; color: #10b981; padding: 10px; border-radius: 6px; margin-top: 10px; overflow-x: auto;">
-cd voice-service
-python voice_server.py</pre>
-        <p style="margin: 10px 0 0 0; font-size: 13px; color: #b45309;">
-          The service runs on port 5001 and uses your local FasterWhisper large-v3 model.
-        </p>
-      </div>
-    `, false);
-    return;
-  }
   
   try {
     // Request microphone access
@@ -156,7 +121,7 @@ async function stopAndTranscribe() {
   voiceBtn.classList.remove('recording');
   
   // Show transcribing state
-  voiceStatus.textContent = '🔄 Transcribing with FasterWhisper...';
+  voiceStatus.textContent = '🔄 Transcribing with Azure Speech...';
   voiceModalContent.classList.add('transcribing');
   
   // Wait for all chunks
@@ -175,14 +140,10 @@ async function stopAndTranscribe() {
   }
   
   try {
-    // Send to FasterWhisper service
-    const formData = new FormData();
-    formData.append('file', audioBlob, 'recording.webm');
-    
-    const response = await fetch(`${VOICE_SERVICE_URL}/transcribe`, {
+    // Send to Azure Cognitive Services – Speech via backend API
+    const response = await fetch(`${VOICE_API_URL}/transcribe`, {
       method: 'POST',
-      body: formData,
-      mode: 'cors'
+      headers: { 'Content-Type': 'application/json' }
     });
     
     const result = await response.json();
@@ -221,8 +182,8 @@ async function stopAndTranscribe() {
     console.error('Transcription error:', error);
     addMessage(`
       <div style="background: #fef2f2; border: 1px solid #ef4444; border-radius: 8px; padding: 12px; color: #991b1b;">
-        <strong>❌ Transcription Failed</strong>
-        <p style="margin: 8px 0 0 0;">${error.message}</p>
+        <strong>❌ Azure Cognitive Services – Speech Error</strong>
+        <p style="margin: 8px 0 0 0;">${error.message || 'Voice input is powered by Azure Cognitive Services – Speech'}</p>
       </div>
     `, false);
   }
@@ -246,7 +207,7 @@ function cancelRecording() {
   console.log('🎤 Recording cancelled');
 }
 
-// ============= END VOICE INPUT SYSTEM =============
+// ============= END VOICE INPUT SYSTEM (Azure Cognitive Services – Speech) =============
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(

@@ -49,6 +49,7 @@
     "ics": "^3.8.1",
     "langchain": "^1.0.1",
     "mammoth": "^1.11.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.47.0",
     "multer": "^2.0.2",
     "node-cron": "^4.2.1",
     "openai": "^6.9.1",
