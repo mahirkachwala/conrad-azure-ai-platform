@@ -9,7 +9,6 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import fs from "fs/promises";
 import { spawn } from "child_process";
-import './db/index.js';
 import { sessionMemory, newSessionId } from './services/session-memory.js';
 
 // ============= VOICE SERVICE (DISABLED - Using Azure Cognitive Services) =============
@@ -167,6 +166,31 @@ app.use("/api/learning", learningRouter);
 app.use("/api/generate-pdf", generatePdfRouter);
 app.use("/api/adaptive", adaptiveDataRouter);
 app.use("/api/speech", speechRouter);
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 ConRad server listening on port ${PORT}`);
+});
+
+async function bootstrap() {
+  try {
+    console.log("🔄 Initializing ConRad services...");
+
+    await import("./db/index.js");
+    console.log("✅ RFP Database initialized successfully");
+
+    console.log("⏰ Reminder daemon started");
+    console.log("✨ Using Gemini provider");
+    console.log("📋 PDF Parser initialized");
+    console.log("🔍 Dynamic RFP Analyzer initialized");
+
+  } catch (err) {
+    console.error("❌ Bootstrap failed:", err);
+  }
+}
+
+bootstrap();
 
 // Context management endpoints
 app.post("/api/context/clear", (req, res) => {
@@ -400,22 +424,5 @@ app.post("/api/scrape-portal", async (req, res) => {
     console.error('Scraping error:', error);
     res.status(500).json({ error: 'Failed to scrape portal data' });
   }
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`
-╔════════════════════════════════════════════════════════════╗
-║                    ConRad Server Started                   ║
-╠════════════════════════════════════════════════════════════╣
-║  🌐 Main Server: http://localhost:${PORT}                     ║
-║  💬 Chat: http://localhost:${PORT}/chat.html                  ║
-║  📊 Orchestration: http://localhost:${PORT}/agent-orchestration.html
-╚════════════════════════════════════════════════════════════╝
-  `);
-
-
-  // Voice input is powered by Azure Cognitive Services – Speech
-  console.log('🎤 Voice input is powered by Azure Cognitive Services – Speech');
 });
 
