@@ -53,6 +53,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Railway requires a root healthcheck that returns 200
+app.get("/", (_req, res) => {
+  res.status(200).send("✅ ConRad backend running on Railway");
+});
+
 const PUBLIC_DIR = path.join(__dirname, "public");
 app.use(express.static(PUBLIC_DIR, {
   extensions: ["html"],
@@ -68,11 +73,6 @@ app.use(express.static(PUBLIC_DIR, {
 }));
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
-
-// Railway requires a root healthcheck that returns 200
-app.get("/", (_req, res) => {
-  res.status(200).send("✅ ConRad backend running on Railway");
-});
 
 // Serve dataset CSV files for download
 app.get("/data/:filename", (req, res) => {
