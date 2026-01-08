@@ -26,35 +26,40 @@ const providerStatus = {
 /**
  * Initialize AI providers
  */
+/**
+ * Initialize AI providers
+ */
 export function initializeProviders() {
   // Initialize Gemini
-  if (process.env.GEMINI_API_KEY) {
+  const geminiKey = process.env.GEMINI_API_KEY;
+  if (geminiKey && !geminiKey.includes('your_') && !geminiKey.includes('placeholder')) {
     try {
-      geminiAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      geminiAI = new GoogleGenAI({ apiKey: geminiKey });
       console.log('✅ Gemini AI initialized');
     } catch (error) {
       console.warn('⚠️ Gemini initialization failed:', error.message);
       providerStatus.gemini.available = false;
     }
   } else {
-    console.warn('⚠️ No GEMINI_API_KEY found');
+    // console.warn('⚠️ No valid GEMINI_API_KEY found (or is placeholder)');
     providerStatus.gemini.available = false;
   }
-  
+
   // Initialize OpenAI
-  if (process.env.OPENAI_API_KEY) {
+  const openaiKey = process.env.OPENAI_API_KEY;
+  if (openaiKey && !openaiKey.includes('your_') && !openaiKey.includes('placeholder')) {
     try {
-      openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+      openaiClient = new OpenAI({ apiKey: openaiKey });
       console.log('✅ OpenAI initialized');
     } catch (error) {
       console.warn('⚠️ OpenAI initialization failed:', error.message);
       providerStatus.openai.available = false;
     }
   } else {
-    console.warn('⚠️ No OPENAI_API_KEY found');
+    // console.warn('⚠️ No valid OPENAI_API_KEY found (or is placeholder)');
     providerStatus.openai.available = false;
   }
-  
+
   return { gemini: providerStatus.gemini.available, openai: providerStatus.openai.available };
 }
 
@@ -64,28 +69,28 @@ export function initializeProviders() {
  */
 export async function generateContent(prompt, options = {}) {
   const { preferredProvider = 'gemini', maxRetries = 2 } = options;
-  
-  const providers = preferredProvider === 'gemini' 
-    ? ['gemini', 'openai'] 
+
+  const providers = preferredProvider === 'gemini'
+    ? ['gemini', 'openai']
     : ['openai', 'gemini'];
-  
+
   let lastError = null;
-  
+
   for (const provider of providers) {
     if (!providerStatus[provider].available && providerStatus[provider].errorCount > 5) {
       console.log(`   ⏭️ Skipping ${provider} (too many errors)`);
       continue;
     }
-    
+
     try {
       console.log(`   🤖 Trying ${provider}...`);
-      
+
       if (provider === 'gemini' && geminiAI) {
         const result = await generateWithGemini(prompt);
         providerStatus.gemini.errorCount = 0; // Reset on success
         return { success: true, text: result, provider: 'gemini' };
       }
-      
+
       if (provider === 'openai' && openaiClient) {
         const result = await generateWithOpenAI(prompt);
         providerStatus.openai.errorCount = 0; // Reset on success
@@ -96,7 +101,7 @@ export async function generateContent(prompt, options = {}) {
       lastError = error;
       providerStatus[provider].errorCount++;
       providerStatus[provider].lastError = error.message;
-      
+
       // Check for quota exhaustion
       if (error.message?.includes('quota') || error.message?.includes('429') || error.message?.includes('503')) {
         console.log(`   🚫 ${provider} quota exhausted, trying next provider...`);
@@ -106,10 +111,10 @@ export async function generateContent(prompt, options = {}) {
       }
     }
   }
-  
-  return { 
-    success: false, 
-    error: lastError?.message || 'All AI providers failed',
+
+  return {
+    success: false,
+    error: lastError?.message || 'All AI providers failed. Please add a valid GEMINI_API_KEY or OPENAI_API_KEY to your .env file to enable intelligent analysis.',
     text: null,
     provider: null
   };
@@ -120,12 +125,12 @@ export async function generateContent(prompt, options = {}) {
  */
 async function generateWithGemini(prompt) {
   if (!geminiAI) throw new Error('Gemini not initialized');
-  
+
   const response = await geminiAI.models.generateContent({
     model: 'gemini-2.0-flash',
     contents: prompt
   });
-  
+
   return response.text || '';
 }
 
@@ -134,14 +139,14 @@ async function generateWithGemini(prompt) {
  */
 async function generateWithOpenAI(prompt) {
   if (!openaiClient) throw new Error('OpenAI not initialized');
-  
+
   const response = await openaiClient.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [{ role: 'user', content: prompt }],
     max_tokens: 4000,
     temperature: 0.3
   });
-  
+
   return response.choices[0]?.message?.content || '';
 }
 
@@ -163,11 +168,11 @@ ${text}
 Return ONLY the JSON object, no other text or explanation.`;
 
   const result = await generateContent(prompt, options);
-  
+
   if (!result.success) {
     return { success: false, error: result.error, data: null };
   }
-  
+
   try {
     // Extract JSON from response
     const jsonMatch = result.text.match(/\{[\s\S]*\}/);
@@ -217,13 +222,13 @@ export async function analyzeRFPDocument(pdfText) {
       warranty_months: "number"
     }
   };
-  
+
   const result = await extractStructuredData(pdfText, schema);
-  
+
   if (result.success) {
     console.log(`   ✅ RFP analyzed successfully using ${result.provider}`);
   }
-  
+
   return result;
 }
 

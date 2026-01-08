@@ -42,8 +42,8 @@ app.use((req, res, next) => {
   let sessionId = req.cookies.sessionId || req.headers['x-session-id'] || req.body.sessionId;
   if (!sessionId) {
     sessionId = newSessionId();
-    res.cookie('sessionId', sessionId, { 
-      httpOnly: true, 
+    res.cookie('sessionId', sessionId, {
+      httpOnly: true,
       sameSite: 'Lax',
       maxAge: 30 * 60 * 1000 // 30 minutes
     });
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 });
 
 // Railway requires a root healthcheck that returns 200
-app.get("/", (_req, res) => {
+app.get("/health", (_req, res) => {
   res.status(200).send("✅ ConRad backend running on Railway");
 });
 
@@ -77,11 +77,11 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 app.get("/data/:filename", (req, res) => {
   const filename = req.params.filename;
   const allowedFiles = ['products.csv', 'oem_specs.csv', 'pricing_rules.csv', 'testing.csv', 'rfp_requirements.csv'];
-  
+
   if (!allowedFiles.includes(filename)) {
     return res.status(404).send('File not found');
   }
-  
+
   const filePath = path.join(__dirname, 'data', filename);
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
@@ -97,11 +97,11 @@ app.get("/data/:filename", (req, res) => {
 app.get("/data/products/:filename", (req, res) => {
   const filename = req.params.filename;
   const allowedFiles = ['lt_cables.csv', 'ht_cables.csv', 'control_cables.csv', 'ehv_cables.csv', 'instrumentation_cables.csv'];
-  
+
   if (!allowedFiles.includes(filename)) {
     return res.status(404).send('File not found');
   }
-  
+
   const filePath = path.join(__dirname, 'data', 'products', filename);
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
@@ -200,26 +200,26 @@ app.post("/api/context/clear", (req, res) => {
 
 app.get("/api/context", (req, res) => {
   const context = sessionMemory.get(req.sessionId);
-  res.json({ 
+  res.json({
     hasContext: !!context.companyName,
-    context: context 
+    context: context
   });
 });
 
 // Self-test endpoint for context
 app.get("/api/selftest/context", async (req, res) => {
   const testSessionId = 'test-' + Date.now();
-  sessionMemory.set(testSessionId, { 
+  sessionMemory.set(testSessionId, {
     companyName: 'ABB India Limited',
-    lastActivity: 'test' 
+    lastActivity: 'test'
   });
-  
+
   const { resolveCompanyReference } = await import('./services/session-memory.js');
   const resolved = resolveCompanyReference(testSessionId, 'same company');
-  
+
   sessionMemory.clear(testSessionId);
-  
-  res.json({ 
+
+  res.json({
     test: 'context_resolution',
     expected: 'ABB India Limited',
     got: resolved.companyName,
@@ -234,13 +234,13 @@ app.get("/rfp/:tenderId.html", async (req, res) => {
     const dataPath = path.join(__dirname, 'public/data/all-portals.json');
     const dataContent = await fs.readFile(dataPath, 'utf-8');
     const allTenders = JSON.parse(dataContent);
-    
+
     const tender = allTenders.find(t => t.tender_id === tenderId);
-    
+
     if (!tender) {
       return res.status(404).send('<h1>Tender Not Found</h1><p>The requested tender does not exist.</p>');
     }
-    
+
     const html = generateTenderDetailHTML(tender);
     res.send(html);
   } catch (error) {
@@ -255,14 +255,14 @@ function generateTenderDetailHTML(tender) {
   const formattedDueDate = dueDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
   const formattedPublishDate = publishDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
   const formattedCost = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(tender.estimated_cost_inr);
-  
+
   const portalColors = {
     'government': '#2e7d32',
     'private': '#1976d2',
     'utility': '#d84315'
   };
   const primaryColor = portalColors[tender.source_type] || '#1976d2';
-  
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -382,7 +382,7 @@ function generateTenderDetailHTML(tender) {
 app.post("/api/scrape-portal", async (req, res) => {
   try {
     const { url } = req.body;
-    
+
     const baseUrl = `http://localhost:${process.env.PORT || 5000}`;
     const targetUrl = url || `${baseUrl}/`;
 

@@ -18,6 +18,7 @@ import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import OpenAI from 'openai';
 import { searchCompany, verifyAndEnhanceCompany } from './opencorporates.js';
+import { analyzePdf as analyzePdfAzure } from './azure-document-intelligence.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,7 +43,7 @@ const AI_PROVIDER = process.env.PDF_AI_PROVIDER || 'auto';
  */
 async function generateWithFallback(prompt) {
   const errors = [];
-  
+
   // Try Gemini first (unless OpenAI is preferred)
   if (ai && AI_PROVIDER !== 'openai') {
     try {
@@ -58,7 +59,7 @@ async function generateWithFallback(prompt) {
       errors.push(`Gemini: ${error.message}`);
     }
   }
-  
+
   // Try OpenAI fallback
   if (openai) {
     try {
@@ -76,7 +77,7 @@ async function generateWithFallback(prompt) {
       errors.push(`OpenAI: ${error.message}`);
     }
   }
-  
+
   // If Gemini was skipped due to preference, try it now
   if (ai && AI_PROVIDER === 'openai') {
     try {
@@ -92,7 +93,7 @@ async function generateWithFallback(prompt) {
       errors.push(`Gemini: ${error.message}`);
     }
   }
-  
+
   throw new Error(`All AI providers failed: ${errors.join('; ')}`);
 }
 
@@ -123,14 +124,13 @@ export const SUBMISSION_MODES = {
  * @returns {Promise<Object>} Extracted text and metadata
  */
 export async function parsePDF(pdfSource) {
+  let dataBuffer;
+
+  // Prepare buffer
   try {
-    const pdf = await loadPdfParse();
-    let dataBuffer;
-    
     if (Buffer.isBuffer(pdfSource)) {
       dataBuffer = pdfSource;
     } else if (typeof pdfSource === 'string') {
-      // It's a file path
       if (!fs.existsSync(pdfSource)) {
         throw new Error(`PDF file not found: ${pdfSource}`);
       }
@@ -138,15 +138,42 @@ export async function parsePDF(pdfSource) {
     } else {
       throw new Error('Invalid PDF source: must be file path or Buffer');
     }
-    
+  } catch (error) {
+    return { success: false, error: error.message, text: '', numPages: 0 };
+  }
+
+  // 1. Try Azure Document Intelligence FIRST
+  try {
+    const azureResult = await analyzePdfAzure(dataBuffer);
+    if (azureResult.success) {
+      return {
+        success: true,
+        text: azureResult.text,
+        numPages: azureResult.pages?.length || 1,
+        source: 'azure-document-intelligence',
+        metadata: {
+          tables: azureResult.tables,
+          keyValuePairs: azureResult.keyValuePairs
+        }
+      };
+    }
+  } catch (azureError) {
+    // Just log and continue to fallback
+    // console.log('Azure Document Intelligence skipped/failed, falling back to local parser.');
+  }
+
+  // 2. Fallback to local PDF Parse
+  try {
+    const pdf = await loadPdfParse();
     const data = await pdf(dataBuffer);
-    
+
     return {
       success: true,
       text: data.text,
       numPages: data.numpages,
       info: data.info,
-      metadata: data.metadata
+      metadata: data.metadata,
+      source: 'local-pdf-parse'
     };
   } catch (error) {
     console.error('PDF parsing error:', error.message);
@@ -188,9 +215,9 @@ export function extractRFPSummary(text) {
     },
     raw_text: text
   };
-  
+
   const textLower = text.toLowerCase();
-  
+
   // Extract RFP/Tender ID
   const idPatterns = [
     /(?:tender|rfp|nit|enquiry)[\s\-_]*(?:no|number|id|ref)[.:\s]*([A-Z0-9\-\/]+)/i,
@@ -204,7 +231,7 @@ export function extractRFPSummary(text) {
       break;
     }
   }
-  
+
   // Extract organization/buyer name
   const orgPatterns = [
     /(?:issued by|buyer|organization|company|authority)[:\s]+([A-Za-z\s&.,()]+?)(?:\n|$)/i,
@@ -217,7 +244,7 @@ export function extractRFPSummary(text) {
       break;
     }
   }
-  
+
   // Extract due date
   const datePatterns = [
     /(?:due|deadline|submission|last)[:\s]*(?:date)?[:\s]*(\d{1,2}[\-\/]\d{1,2}[\-\/]\d{2,4})/i,
@@ -231,7 +258,7 @@ export function extractRFPSummary(text) {
       break;
     }
   }
-  
+
   // Extract estimated value
   const valuePatterns = [
     /(?:estimated|approx|approximate|tender)?[\s]*(?:value|cost|amount)[:\s]*(?:rs\.?|inr|₹)?[\s]*([0-9,]+(?:\.[0-9]+)?)\s*(?:lakhs?|lacs?|crores?|cr)?/i,
@@ -251,7 +278,7 @@ export function extractRFPSummary(text) {
       break;
     }
   }
-  
+
   // Extract location/city
   const locationPatterns = [
     /(?:delivery|location|site|place)[:\s]+([A-Za-z\s,]+?)(?:\n|$)/i,
@@ -264,19 +291,19 @@ export function extractRFPSummary(text) {
       break;
     }
   }
-  
+
   // Detect submission mode
   summary.submission = detectSubmissionMode(text);
-  
+
   // Extract cable/wire specifications
   summary.technical_specs = extractTechnicalSpecs(text);
-  
+
   // Extract required tests
   summary.tests_required = extractRequiredTests(text);
-  
+
   // Extract scope items
   summary.scope = extractScopeItems(text);
-  
+
   return summary;
 }
 
@@ -297,7 +324,7 @@ export function detectSubmissionMode(text) {
     form_annexure: null,
     additional_notes: null
   };
-  
+
   // Check for EMAIL_FORM mode (fill form and email)
   if (
     (textLower.includes('annexure') || textLower.includes('form')) &&
@@ -305,35 +332,35 @@ export function detectSubmissionMode(text) {
     (textLower.includes('fill') || textLower.includes('complete'))
   ) {
     submission.mode = SUBMISSION_MODES.EMAIL_FORM;
-    
+
     // Extract email address
     const emailMatch = text.match(/(?:email|e-mail|send)\s*(?:to|at)?[:\s]*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i);
     if (emailMatch) {
       submission.email_to = emailMatch[1].toLowerCase();
     }
-    
+
     // Extract subject template
     const subjectMatch = text.match(/(?:subject|sub)[:\s]*["']?([^"'\n]+?)["']?\s*(?:before|by|$)/i);
     if (subjectMatch) {
       submission.email_subject_template = subjectMatch[1].trim();
     }
-    
+
     // Extract annexure reference
     const annexureMatch = text.match(/(?:annexure|form)[\s\-]*([A-Z0-9]+)/i);
     if (annexureMatch) {
       submission.form_annexure = `Annexure-${annexureMatch[1]}`;
     }
-    
+
     return submission;
   }
-  
+
   // Check for LETTER_COURIER mode (physical submission)
   if (
     (textLower.includes('physical') || textLower.includes('courier') || textLower.includes('post')) &&
     (textLower.includes('address') || textLower.includes('submit'))
   ) {
     submission.mode = SUBMISSION_MODES.LETTER_COURIER;
-    
+
     // Extract postal address
     const addressPatterns = [
       /(?:address|submit\s+(?:to|at)|courier\s+to)[:\s]*\n?([\s\S]{20,200}?)(?:\n\n|before|by|\d{1,2}[\-\/])/i,
@@ -346,18 +373,18 @@ export function detectSubmissionMode(text) {
         break;
       }
     }
-    
+
     submission.additional_notes = 'Document must be printed and couriered physically';
     return submission;
   }
-  
+
   // Check for EXTERNAL_PORTAL mode (register on portal)
   if (
     (textLower.includes('portal') || textLower.includes('register') || textLower.includes('website')) &&
     (textLower.includes('vendor') || textLower.includes('bidder') || textLower.includes('online'))
   ) {
     submission.mode = SUBMISSION_MODES.EXTERNAL_PORTAL;
-    
+
     // Extract portal URL
     const urlMatch = text.match(/(?:portal|register|website|url)[:\s]*(https?:\/\/[^\s]+)/i);
     if (urlMatch) {
@@ -369,28 +396,28 @@ export function detectSubmissionMode(text) {
         submission.portal_url = anyUrlMatch[1];
       }
     }
-    
+
     submission.additional_notes = 'Register on vendor portal and submit bid online';
     return submission;
   }
-  
+
   // Check for MEETING_EMAIL mode (schedule meeting)
   if (
     (textLower.includes('meeting') || textLower.includes('pre-bid') || textLower.includes('prebid')) &&
     (textLower.includes('email') || textLower.includes('request') || textLower.includes('slot'))
   ) {
     submission.mode = SUBMISSION_MODES.MEETING_EMAIL;
-    
+
     // Extract meeting email
     const emailMatch = text.match(/(?:email|e-mail|contact)[:\s]*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i);
     if (emailMatch) {
       submission.meeting_email = emailMatch[1].toLowerCase();
     }
-    
+
     submission.additional_notes = 'Request pre-bid meeting slot before formal submission';
     return submission;
   }
-  
+
   // Default: Try to detect any email for generic submission
   const emailMatch = text.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i);
   if (emailMatch) {
@@ -398,7 +425,7 @@ export function detectSubmissionMode(text) {
     submission.email_to = emailMatch[1].toLowerCase();
     submission.additional_notes = 'Submit bid via email';
   }
-  
+
   return submission;
 }
 
@@ -419,9 +446,9 @@ export function extractTechnicalSpecs(text) {
     standard: null,
     quantity_km: null
   };
-  
+
   const textLower = text.toLowerCase();
-  
+
   // Cable type
   if (textLower.includes('ehv') || textLower.includes('extra high voltage') || textLower.includes('66kv') || textLower.includes('110kv')) {
     specs.cable_type = 'EHV Cable';
@@ -434,32 +461,32 @@ export function extractTechnicalSpecs(text) {
   } else if (textLower.includes('instrumentation')) {
     specs.cable_type = 'Instrumentation Cable';
   }
-  
+
   // Voltage
   const voltageMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:kv|kilo\s*volt)/i);
   if (voltageMatch) {
     specs.voltage_kv = parseFloat(voltageMatch[1]);
   }
-  
+
   // Conductor material
   if (textLower.includes('copper') || textLower.includes(' cu ')) {
     specs.conductor_material = 'Copper';
   } else if (textLower.includes('aluminium') || textLower.includes('aluminum') || textLower.includes(' al ')) {
     specs.conductor_material = 'Aluminium';
   }
-  
+
   // Cross section
   const areaMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:sq\.?\s*mm|sqmm|mm²|mm2)/i);
   if (areaMatch) {
     specs.cross_section_sqmm = parseFloat(areaMatch[1]);
   }
-  
+
   // Cores
   const coresMatch = text.match(/(\d+)\s*(?:core|c\s*x)/i);
   if (coresMatch) {
     specs.cores = parseInt(coresMatch[1]);
   }
-  
+
   // Insulation
   if (textLower.includes('xlpe') || textLower.includes('cross.?linked')) {
     specs.insulation = 'XLPE';
@@ -468,16 +495,16 @@ export function extractTechnicalSpecs(text) {
   } else if (textLower.includes('rubber') || textLower.includes('epr')) {
     specs.insulation = 'EPR';
   }
-  
+
   // Armoured
   specs.armoured = textLower.includes('armoured') || textLower.includes('armored');
-  
+
   // Standard
   const standardMatch = text.match(/(IS\s*\d+|IEC\s*\d+|BIS\s*\d+)/i);
   if (standardMatch) {
     specs.standard = standardMatch[1].toUpperCase();
   }
-  
+
   // Quantity
   const qtyMatch = text.match(/(?:quantity|qty)[:\s]*(\d+(?:\.\d+)?)\s*(?:km|kilometer|metre|meter|m\b)/i);
   if (qtyMatch) {
@@ -488,7 +515,7 @@ export function extractTechnicalSpecs(text) {
     }
     specs.quantity_km = qty;
   }
-  
+
   return specs;
 }
 
@@ -500,7 +527,7 @@ export function extractTechnicalSpecs(text) {
 export function extractRequiredTests(text) {
   const tests = [];
   const textLower = text.toLowerCase();
-  
+
   const testPatterns = [
     { pattern: /high\s*voltage\s*test/i, name: 'High Voltage Test', type: 'ROUTINE' },
     { pattern: /insulation\s*resistance/i, name: 'Insulation Resistance Test', type: 'ROUTINE' },
@@ -519,13 +546,13 @@ export function extractRequiredTests(text) {
     { pattern: /acceptance\s*test/i, name: 'Acceptance Test', type: 'ACCEPTANCE' },
     { pattern: /site\s*test/i, name: 'Site Test', type: 'SITE' }
   ];
-  
+
   for (const { pattern, name, type } of testPatterns) {
     if (pattern.test(text)) {
       tests.push({ name, type });
     }
   }
-  
+
   // If IS/IEC standard mentioned, add standard compliance
   const standardMatch = text.match(/(IS\s*7098|IS\s*8130|IEC\s*60502|IEC\s*60840)/gi);
   if (standardMatch) {
@@ -534,7 +561,7 @@ export function extractRequiredTests(text) {
       tests.push({ name: `Compliance to ${std}`, type: 'COMPLIANCE' });
     }
   }
-  
+
   return tests;
 }
 
@@ -545,12 +572,12 @@ export function extractRequiredTests(text) {
  */
 export function extractScopeItems(text) {
   const items = [];
-  
+
   // Look for line items in tables or lists
   const lineItemPattern = /(?:item|s\.?\s*no|sr\.?\s*no)[.\s:]*(\d+)[.\s:]*([^\n]+)/gi;
   let match;
   let itemId = 1;
-  
+
   while ((match = lineItemPattern.exec(text)) !== null) {
     const description = match[2].trim();
     if (description.length > 10 && description.length < 200) {
@@ -561,7 +588,7 @@ export function extractScopeItems(text) {
       });
     }
   }
-  
+
   // If no line items found, create one from general specs
   if (items.length === 0) {
     const specs = extractTechnicalSpecs(text);
@@ -573,7 +600,7 @@ export function extractScopeItems(text) {
       });
     }
   }
-  
+
   return items;
 }
 
@@ -586,7 +613,7 @@ export function extractScopeItems(text) {
 export async function parseRFPDocument(pdfSource, aiParser = null) {
   // First, extract raw text
   const pdfResult = await parsePDF(pdfSource);
-  
+
   if (!pdfResult.success) {
     return {
       success: false,
@@ -594,10 +621,10 @@ export async function parseRFPDocument(pdfSource, aiParser = null) {
       summary: null
     };
   }
-  
+
   // Extract summary using pattern matching
   const summary = extractRFPSummary(pdfResult.text);
-  
+
   // If AI parser is provided, enhance the extraction
   if (aiParser && typeof aiParser === 'function') {
     try {
@@ -616,7 +643,7 @@ export async function parseRFPDocument(pdfSource, aiParser = null) {
       console.error('AI parsing failed, using pattern matching:', error.message);
     }
   }
-  
+
   return {
     success: true,
     summary,
@@ -723,17 +750,17 @@ export async function parseWithGeminiAI(pdfText) {
     }
 
     const prompt = generateExtractionPrompt(pdfText);
-    
+
     // Use multi-provider fallback (Gemini -> OpenAI)
     const responseText = await generateWithFallback(prompt);
-    
+
     // Extract JSON from response
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]);
       return parsed;
     }
-    
+
     return null;
   } catch (error) {
     console.error('AI parsing error:', error.message);
@@ -755,7 +782,7 @@ export async function parseWithOpenAI(pdfText) {
     }
 
     const prompt = generateExtractionPrompt(pdfText);
-    
+
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',  // Cost-effective model for document parsing
       messages: [
@@ -774,7 +801,7 @@ export async function parseWithOpenAI(pdfText) {
     });
 
     const responseText = response.choices?.[0]?.message?.content || '';
-    
+
     // Parse JSON response
     try {
       const parsed = JSON.parse(responseText);
@@ -786,7 +813,7 @@ export async function parseWithOpenAI(pdfText) {
         return JSON.parse(jsonMatch[0]);
       }
     }
-    
+
     return null;
   } catch (error) {
     console.error('OpenAI parsing error:', error.message);
@@ -802,7 +829,7 @@ export async function parseWithOpenAI(pdfText) {
  */
 export async function parseWithBestAI(pdfText) {
   const providers = [];
-  
+
   // Determine order based on preference
   if (AI_PROVIDER === 'openai') {
     providers.push({ fn: parseWithOpenAI, name: 'OPENAI_GPT' });
@@ -815,7 +842,7 @@ export async function parseWithBestAI(pdfText) {
     providers.push({ fn: parseWithGeminiAI, name: 'GEMINI_AI' });
     providers.push({ fn: parseWithOpenAI, name: 'OPENAI_GPT' });
   }
-  
+
   for (const provider of providers) {
     try {
       console.log(`🤖 Trying PDF parsing with ${provider.name}...`);
@@ -827,7 +854,7 @@ export async function parseWithBestAI(pdfText) {
       console.log(`${provider.name} failed:`, error.message);
     }
   }
-  
+
   return { result: null, provider: 'NONE' };
 }
 
@@ -840,7 +867,7 @@ export async function parseWithBestAI(pdfText) {
 export async function parseRFPWithAI(pdfSource) {
   // First extract raw text
   const pdfResult = await parsePDF(pdfSource);
-  
+
   if (!pdfResult.success) {
     return {
       success: false,
@@ -849,11 +876,11 @@ export async function parseRFPWithAI(pdfSource) {
       extraction_method: 'FAILED'
     };
   }
-  
+
   // Try AI parsing first with best available provider
   let summary = null;
   let extractionMethod = 'PATTERN_MATCHING';
-  
+
   try {
     const { result: aiResult, provider } = await parseWithBestAI(pdfResult.text);
     if (aiResult && (aiResult.rfp_id || aiResult.buyer_name)) {
@@ -864,18 +891,18 @@ export async function parseRFPWithAI(pdfSource) {
   } catch (error) {
     console.log('AI parsing failed, using pattern matching:', error.message);
   }
-  
+
   // Fallback to pattern matching
   if (!summary) {
     summary = extractRFPSummary(pdfResult.text);
     console.log('📋 PDF parsed using pattern matching');
   }
-  
+
   // Ensure submission mode is set
   if (!summary.submission || !summary.submission.mode) {
     summary.submission = detectSubmissionMode(pdfResult.text);
   }
-  
+
   return {
     success: true,
     summary,
@@ -898,11 +925,11 @@ export async function verifyBuyerCompany(companyName) {
       reason: 'No company name or API key'
     };
   }
-  
+
   try {
     // Use the existing OpenCorporates service
     const result = await verifyAndEnhanceCompany(companyName);
-    
+
     if (result && result.verified) {
       return {
         verified: true,
@@ -918,7 +945,7 @@ export async function verifyBuyerCompany(companyName) {
         risk_flags: result.risk_flags || []
       };
     }
-    
+
     // Try direct search if verification failed
     const searchResult = await searchCompany(companyName);
     if (searchResult.success && searchResult.companies?.length > 0) {
@@ -935,13 +962,13 @@ export async function verifyBuyerCompany(companyName) {
         match_confidence: 'PARTIAL'
       };
     }
-    
+
     return {
       verified: false,
       company_name: companyName,
       reason: 'Company not found in OpenCorporates'
     };
-    
+
   } catch (error) {
     console.error('Company verification error:', error.message);
     return {
@@ -961,22 +988,22 @@ export async function verifyBuyerCompany(companyName) {
 export async function parseRFPComplete(pdfSource, verifyCompany = true) {
   // First do the AI/pattern-based extraction
   const parseResult = await parseRFPWithAI(pdfSource);
-  
+
   if (!parseResult.success) {
     return parseResult;
   }
-  
+
   // Optionally verify the buyer company
   if (verifyCompany && parseResult.summary?.buyer_name) {
     const companyVerification = await verifyBuyerCompany(parseResult.summary.buyer_name);
     parseResult.summary.buyer_verification = companyVerification;
-    
+
     // Update buyer name if we got a verified match
     if (companyVerification.verified && companyVerification.company_name) {
       parseResult.summary.buyer_name_verified = companyVerification.company_name;
     }
   }
-  
+
   return parseResult;
 }
 
@@ -988,17 +1015,17 @@ export async function parseRFPComplete(pdfSource, verifyCompany = true) {
  */
 export async function analyzeDocument(pdfSource) {
   const pdfResult = await parsePDF(pdfSource);
-  
+
   if (!pdfResult.success) {
     return {
       success: false,
       error: pdfResult.error
     };
   }
-  
+
   const text = pdfResult.text;
   const textLower = text.toLowerCase();
-  
+
   // Detect document type
   let documentType = 'UNKNOWN';
   if (textLower.includes('tender') || textLower.includes('rfp') || textLower.includes('nit') || textLower.includes('enquiry')) {
@@ -1014,7 +1041,7 @@ export async function analyzeDocument(pdfSource) {
   } else if (textLower.includes('contract') || textLower.includes('agreement')) {
     documentType = 'CONTRACT';
   }
-  
+
   // Extract key information based on document type
   let analysis = {
     document_type: documentType,
@@ -1026,29 +1053,29 @@ export async function analyzeDocument(pdfSource) {
     emails: [],
     phone_numbers: []
   };
-  
+
   // Extract dates
   const dateMatches = text.match(/\d{1,2}[\-\/]\d{1,2}[\-\/]\d{2,4}/g) || [];
   analysis.key_dates = [...new Set(dateMatches)].slice(0, 5);
-  
+
   // Extract monetary values
   const valueMatches = text.match(/(?:rs\.?|inr|₹)\s*[\d,]+(?:\.\d+)?/gi) || [];
   analysis.key_values = [...new Set(valueMatches)].slice(0, 5);
-  
+
   // Extract emails
   const emailMatches = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
   analysis.emails = [...new Set(emailMatches)];
-  
+
   // Extract phone numbers
   const phoneMatches = text.match(/(?:\+91|0)?[\s\-]?\d{10}/g) || [];
   analysis.phone_numbers = [...new Set(phoneMatches)].slice(0, 3);
-  
+
   // If it's an RFP, do full extraction
   if (documentType === 'RFP_TENDER') {
     const rfpSummary = extractRFPSummary(text);
     analysis.rfp_summary = rfpSummary;
   }
-  
+
   return {
     success: true,
     analysis,
