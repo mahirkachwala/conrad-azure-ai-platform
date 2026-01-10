@@ -148,6 +148,68 @@ npm start
 
 ---
 
+## ⚙️ Azure services (recommended for PDF OCR & Speech)
+
+ConRad can use Microsoft Azure for high-quality PDF extraction (Document Intelligence) and Speech-to-Text (Cognitive Services - Speech). These services are optional but recommended for reliable OCR and live voice input.
+
+Required environment variables
+
+Add the following to your `.env` file (or ensure they exist in your deployment environment):
+
+```env
+# Azure Document Intelligence (formerly Form Recognizer)
+AZURE_DOC_ENDPOINT=https://<your-resource-name>.cognitiveservices.azure.com
+AZURE_DOC_KEY=<your_document_intelligence_key>
+
+# Azure Cognitive Services - Speech
+AZURE_SPEECH_KEY=<your_speech_key>
+AZURE_SPEECH_REGION=<your_speech_region> # e.g. eastus, westus2
+```
+
+Notes:
+- Keep these keys secret. Do NOT commit your `.env` to source control. Use `.env.example` as a template.
+- The project already attempts Azure first for PDF analysis and falls back to local parsing if Azure is not configured or fails.
+
+Quick test: Azure Document Intelligence
+
+There is a small test harness at `scripts/test-azure-doc.js` that calls the Document Intelligence wrapper directly. To run it locally:
+
+```powershell
+# Windows PowerShell (from project root)
+node scripts/test-azure-doc.js path\to\sample.pdf
+```
+
+If the call succeeds you will see a structured JSON result printed to the console. If it fails, copy the console output (including full error object) and paste it here for debugging.
+
+Quick test: API endpoint
+
+You can also POST a PDF to the running server's analyze endpoint:
+
+```powershell
+# Upload a PDF to the server (PowerShell)
+$resp = Invoke-RestMethod -Uri http://localhost:5000/api/pdf/analyze -Method Post -Form @{ pdf = Get-Item 'path\to\sample.pdf' }
+Write-Output $resp
+```
+
+Or using curl (if you prefer):
+
+```bash
+curl -X POST "http://localhost:5000/api/pdf/analyze" -F "pdf=@path/to/sample.pdf"
+```
+
+Quick test: Speech-to-Text
+
+The backend exposes a speech route used by the frontend. To test the speech route (it uses Azure's speech SDK which expects audio input via microphone by default), use the UI at `/chat.html` and the built-in voice button. The frontend now uses the backend route `/api/speech/transcribe` which in turn calls Azure.
+
+If you want to run an automated speech test, ensure your environment has microphone access and the server has `AZURE_SPEECH_KEY` and `AZURE_SPEECH_REGION` set. The route will return `{ success: true, text: "..." }` on success.
+
+Troubleshooting
+
+- If Azure calls fail with authentication errors, verify the endpoint URL and key in `.env`.
+- For Document Intelligence, ensure the resource region matches the endpoint (endpoint host contains region information).
+- If you see SDK response shape differences, check server logs — the Document Intelligence wrapper now logs the raw SDK result and error objects for debugging.
+
+
 ## 📋 How ConRad Works
 
 ### 1. RFP Discovery Process
