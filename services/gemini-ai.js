@@ -157,7 +157,7 @@ Available companies: ${companiesData.map(c => c.name).join(', ')}`;
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-2.0-flash',
       config: {
         systemInstruction: systemPrompt,
         responseMimeType: 'application/json',
@@ -397,7 +397,7 @@ Response JSON format:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-pro',
+      model: 'gemini-1.5-pro',
       config: {
         responseMimeType: 'application/json',
         responseSchema: {

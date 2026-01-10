@@ -65,182 +65,203 @@ function parseCableRequirementsFromAnalysis(analysisText, rawData) {
       while ((match = pattern.exec(analysisText)) !== null) {
         if (match.length >= 3) {
           const itemNo = match.length === 4 ? parseInt(match[1]) : cables.length + 1;
-          const desc = match.length === 4 ? match[2].trim() : match[1].trim();
-          const qty = match.length === 4 ? parseFloat(match[3]) : parseFloat(match[2]);
-          
-          cables.push({
-            item_no: itemNo,
-            description: desc,
-            qty_km: qty
+          async function handleAnalyzeRequest(req, res) {
+            try {
+              const { tenderId, rfpData, useDynamicParsing = true } = req.body || {};
+
+              console.log(`\n🚀 [RFP Proceed] Analyzing tender: ${tenderId}`);
+
+              // STEP 1: Load base tender data from JSON (always needed for fallback fields)
+              let tender = rfpData;
+              if (tenderId && !rfpData) {
+                tender = loadTenderById(tenderId);
+              }
+
+              if (!tender && !tenderId) {
+                return res.status(400).json({
+                  success: false,
+                  error: 'Either tenderId or rfpData is required'
+                });
+              }
+
+              // STEP 2: If dynamic parsing is enabled and a tenderId is provided,
+              // analyze the actual PDF (uploaded or original) to ensure ANY PDF is parsed.
+              if (tenderId && useDynamicParsing) {
+                console.log(`   📄 Dynamic parsing enabled for ${tenderId} - analyzing actual PDF`);
+                const pdfAnalysis = await analyzeRFPById(tenderId);
+
+                if (pdfAnalysis && pdfAnalysis.success) {
+                  return res.json({
+                    success: true,
+                    analysis_method: 'DYNAMIC_PDF',
+                    source: pdfAnalysis.pdf_source || 'PDF',
+                    ...pdfAnalysis
+                  });
+                } else {
+                  // If dynamic parsing failed, fall back to stored uploaded data or JSON
+                  console.warn(`   ⚠️ Dynamic PDF analysis failed for ${tenderId}:`, pdfAnalysis?.error || 'unknown');
+                  // continue to check stored uploaded data or JSON below
+                }
+              }
+
+              // STEP 2: Check if there's an UPLOADED PDF for this tender
+              // If user uploaded an edited PDF, use that data instead!
+              const uploadedData = tenderId ? getExtractedData(tenderId) : null;
+
+              if (uploadedData) {
+                console.log(`\n   ════════════════════════════════════════════════════`);
+                console.log(`   📥 FOUND UPLOADED PDF DATA for ${tenderId}!`);
+                console.log(`   📊 Using data from user's uploaded PDF instead of JSON`);
+                console.log(`   ════════════════════════════════════════════════════`);
+
+                // Parse the uploaded PDF's analysis
+                const analysisText = uploadedData.analysis_text || '';
+                const rawData = uploadedData.raw_data || {};
+
+                // DEBUG: Log what we have from extraction
+                console.log(`\n   🔍 DEBUG: raw_data.cable_requirements =`, JSON.stringify(rawData?.cable_requirements, null, 2));
+                console.log(`   🔍 DEBUG: raw_data.testing_requirements =`, JSON.stringify(rawData?.testing_requirements, null, 2));
+                console.log(`   🔍 DEBUG: raw_data.external_testing_required =`, rawData?.external_testing_required);
+
+                // Build cable requirements from uploaded data
+                const parsedCables = parseCableRequirementsFromAnalysis(analysisText, rawData);
+                console.log(`   📦 Parsed ${parsedCables.length} cables from uploaded PDF`);
+
+                // Build testing requirements
+                const parsedTests = parseTestingFromAnalysis(analysisText, rawData);
+                console.log(`   🧪 Parsed ${parsedTests.length} tests from uploaded PDF`);
+
+                // Check for external testing
+                const externalTesting = parseExternalTestingFromAnalysis(analysisText, rawData);
+                console.log(`   🔬 External testing required: ${externalTesting}`);
+
+                // Get submission mode
+                const submissionMode = parseSubmissionModeFromAnalysis(analysisText, rawData);
+                console.log(`   📤 Submission mode: ${submissionMode}`);
+
+                // Parse additional fields
+                const parsedTerms = parseTermsFromAnalysis(rawData);
+                const parsedDueDate = parseDueDateFromAnalysis(rawData);
+
+                // Merge with base tender data (UPLOADED PDF data takes PRIORITY)
+                const mergedTender = {
+                  ...(tender || {}),
+                  tender_id: tenderId,
+                  organisation: uploadedData.organisation || rawData?.organisation || tender?.organisation,
+                  title: uploadedData.title || rawData?.title || tender?.title,
+                  // Due date from uploaded PDF takes priority!
+                  due_date: parsedDueDate || uploadedData.due_date || tender?.due_date,
+                  city: uploadedData.city || rawData?.city || tender?.city,
+                  estimated_cost: uploadedData.estimated_cost || rawData?.estimated_cost_inr || tender?.estimated_cost,
+                  // Cable requirements from uploaded PDF (with correct quantities!)
+                  cable_requirements: parsedCables.length > 0 ? parsedCables : (tender?.cable_requirements || []),
+                  // Testing from uploaded PDF
+                  tests_required: parsedTests.length > 0 ? parsedTests : (tender?.tests_required || []),
+                  external_testing_required: externalTesting,
+                  // Submission mode from uploaded PDF
+                  submission: {
+                    mode: submissionMode,
+                    email: rawData?.submission_email || rawData?.contact_email || tender?.submission?.email,
+                    ...(tender?.submission || {})
+                  },
+                  // Terms from uploaded PDF
+                  terms: {
+                    delivery: parsedTerms.delivery || tender?.terms?.delivery,
+                    payment: parsedTerms.payment || tender?.terms?.payment,
+                    warranty: parsedTerms.warranty || tender?.terms?.warranty,
+                    ...(tender?.terms || {})
+                  }
+                };
+
+                // Normalise common field names to avoid undefined lookups in other modules
+                // Provide multiple aliases used across the codebase so UI and routes don't see undefined
+                mergedTender.submission = mergedTender.submission || {};
+                // ensure both .mode and .submission_mode are available
+                mergedTender.submission.mode = mergedTender.submission.mode || submissionMode;
+                mergedTender.submission.submission_mode = mergedTender.submission.submission_mode || mergedTender.submission.mode;
+                // email variants
+                mergedTender.submission.email = mergedTender.submission.email || mergedTender.submission.submission_email || mergedTender.submission.email || mergedTender.submission.submissionEmail || mergedTender.submission_email || rawData?.submission_email || rawData?.contact_email || tender?.submission?.email;
+                mergedTender.submission.submission_email = mergedTender.submission.submission_email || mergedTender.submission.email;
+                // address variants
+                mergedTender.submission.submission_address = mergedTender.submission.submission_address || mergedTender.submission.submissionAddress || tender?.submission?.submission_address || tender?.submission_address || rawData?.submission_address;
+                // external testing flags - ensure consistent boolean
+                mergedTender.external_testing_required = !!mergedTender.external_testing_required || !!rawData?.external_testing_required || false;
+                mergedTender.tests_required = mergedTender.tests_required || mergedTender.testing_requirements || tender?.tests_required || tender?.testing_requirements || [];
+
+                console.log(`\n   ═══════════════════════════════════════`);
+                console.log(`   📊 MERGED TENDER DATA (from uploaded PDF):`);
+                console.log(`   ═══════════════════════════════════════`);
+                console.log(`   📋 Tender ID: ${mergedTender.tender_id}`);
+                console.log(`   🏢 Organisation: ${mergedTender.organisation}`);
+                console.log(`   📅 Due Date: ${mergedTender.due_date}`);
+                console.log(`   📦 Cable Requirements: ${mergedTender.cable_requirements.length} items`);
+                mergedTender.cable_requirements.forEach((c, i) => {
+                  console.log(`      Item ${i+1}: ${c.description || c.cable_type} - ${c.qty_km} km`);
+                });
+                console.log(`   🧪 Tests Required: ${mergedTender.tests_required.length}`);
+                console.log(`   🔬 External Testing: ${mergedTender.external_testing_required}`);
+                console.log(`   📤 Submission Mode: ${mergedTender.submission.mode}`);
+                console.log(`   ═══════════════════════════════════════\n`);
+
+                // Analyze using merged data
+                const analysis = analyzeRFP(mergedTender);
+
+                return res.json({
+                  success: true,
+                  analysis_method: 'UPLOADED_PDF',
+                  source: 'User uploaded PDF',
+                  ...analysis
+                });
+              }
+
+              // STEP 3: No uploaded PDF data used - use original JSON-based analysis
+              console.log(`   📋 No uploaded PDF data used, using JSON data (if provided)`);
+
+              if (!tender) {
+                return res.status(404).json({
+                  success: false,
+                  error: `Tender ${tenderId} not found`
+                });
+              }
+
+              // Analyze RFP using original method (JSON-based analysis)
+              const analysis = analyzeRFP(tender);
+
+              res.json({
+                success: true,
+                analysis_method: 'JSON_BASED',
+                ...analysis
+              });
+
+            } catch (error) {
+              console.error('[RFP Proceed] Error:', error);
+              res.status(500).json({
+                success: false,
+                error: error.message
+              });
+            }
+          }
+
+          // POST handler
+          router.post('/analyze', handleAnalyzeRequest);
+
+          // Allow GET for convenience (e.g., browser) — maps query params to body
+          router.get('/analyze', async (req, res) => {
+            // Map query parameters to expected POST body
+            const { tenderId, useDynamicParsing = 'true', rfpData } = req.query;
+            try {
+              req.body = {
+                tenderId,
+                useDynamicParsing: useDynamicParsing === 'true' || useDynamicParsing === '1',
+                rfpData: rfpData ? JSON.parse(rfpData) : undefined
+              };
+            } catch (e) {
+              // if parsing fails, ignore rfpData
+              req.body = { tenderId, useDynamicParsing: useDynamicParsing === 'true' || useDynamicParsing === '1' };
+            }
+            return handleAnalyzeRequest(req, res);
           });
-        }
-      }
-      if (cables.length > 0) break;
-    }
-    
-    console.log(`   📦 Parsed ${cables.length} cables from text`);
-  }
-  
-  return cables;
-}
-
-/**
- * Parse testing requirements from extracted data
- */
-function parseTestingFromAnalysis(analysisText, rawData) {
-  console.log(`   🧪 Parsing testing requirements...`);
-  const tests = [];
-  
-  // PRIORITY 1: Use structured testing_requirements
-  if (rawData?.testing_requirements) {
-    if (rawData.testing_requirements.routine_tests && Array.isArray(rawData.testing_requirements.routine_tests)) {
-      tests.push(...rawData.testing_requirements.routine_tests);
-    }
-    if (rawData.testing_requirements.type_tests && Array.isArray(rawData.testing_requirements.type_tests)) {
-      tests.push(...rawData.testing_requirements.type_tests);
-    }
-    console.log(`   ✅ Found ${tests.length} tests in structured data`);
-    return tests;
-  }
-  
-  // PRIORITY 2: Parse from analysis text
-  if (analysisText) {
-    const testNames = [
-      'Insulation Resistance Test', 'High Voltage Test', 'Water Immersion Test',
-      'Spark Test', 'Bending Test', 'Tensile Strength Test', 'Voltage Drop Test',
-      'Conductor Resistance Test', 'Partial Discharge Test', 'Impulse Test',
-      'Hot Set Test', 'Aging Test', 'Fire Resistance Test'
-    ];
-    
-    for (const test of testNames) {
-      if (analysisText.toLowerCase().includes(test.toLowerCase())) {
-        tests.push(test);
-      }
-    }
-    console.log(`   📋 Parsed ${tests.length} tests from text`);
-  }
-  
-  return tests;
-}
-
-/**
- * Parse external testing requirement from extracted data
- */
-function parseExternalTestingFromAnalysis(analysisText, rawData) {
-  console.log(`   🔬 Checking external testing requirement...`);
-  
-  // PRIORITY 1: Check structured data - EXPLICIT values take precedence
-  if (rawData?.external_testing_required === false) {
-    console.log(`   ✅ External testing: NO (explicitly false in structured data)`);
-    return false;
-  }
-  if (rawData?.testing_requirements?.third_party_required === false) {
-    console.log(`   ✅ External testing: NO (explicitly false in testing_requirements)`);
-    return false;
-  }
-  if (rawData?.external_testing_required === true) {
-    console.log(`   ✅ External testing: YES (from structured data)`);
-    return true;
-  }
-  if (rawData?.testing_requirements?.third_party_required === true) {
-    console.log(`   ✅ External testing: YES (from testing_requirements)`);
-    return true;
-  }
-  
-  // PRIORITY 2: Check analysis text - but look for NEGATIONS first
-  if (analysisText) {
-    const lower = analysisText.toLowerCase();
-    
-    // Check for explicit "NOT required" patterns first
-    const notRequiredPatterns = [
-      /external\s*testing[:\s]*(?:not|no)\s*required/i,
-      /third[- ]?party\s*(?:testing|inspection)?[:\s]*(?:not|no)\s*required/i,
-      /(?:not|no)\s*(?:external|third[- ]?party)\s*(?:testing|inspection)\s*required/i,
-      /external\s*testing\s*(?:is\s*)?not\s*mandatory/i,
-      /third[- ]?party\s*(?:testing|inspection)\s*(?:is\s*)?not\s*(?:required|mandatory)/i,
-      /no\s*third[- ]?party/i,
-      /not\s*require[ds]?\s*(?:external|third)/i
-    ];
-    
-    for (const pattern of notRequiredPatterns) {
-      if (pattern.test(analysisText)) {
-        console.log(`   ✅ External testing: NO (text explicitly says not required)`);
-        return false;
-      }
-    }
-    
-    // Then check for "required" patterns
-    const externalKeywords = [
-      /(?:external|third[- ]?party)\s*(?:lab|laboratory|testing|inspection)\s*(?:is\s*)?(?:required|mandatory)/i,
-      /mandatory\s*(?:external|third[- ]?party)\s*(?:testing|inspection)/i,
-      /NABL\s*(?:accredited|approved|lab)\s*(?:required|mandatory)/i,
-      /CPRI\s*(?:test|certification)\s*(?:required|mandatory)/i,
-      /(?:required|mandatory)\s*(?:external|third[- ]?party)\s*(?:testing|inspection)/i
-    ];
-    
-    for (const pattern of externalKeywords) {
-      if (pattern.test(analysisText)) {
-        console.log(`   ✅ External testing: YES (from text pattern)`);
-        return true;
-      }
-    }
-  }
-  
-  console.log(`   ℹ️ External testing: NO (default)`);
-  return false;
-}
-
-/**
- * Parse submission mode from extracted data
- */
-function parseSubmissionModeFromAnalysis(analysisText, rawData) {
-  console.log(`   📤 Parsing submission mode...`);
-  
-  // PRIORITY 1: Use structured submission_mode
-  if (rawData?.submission_mode) {
-    console.log(`   ✅ Submission mode: ${rawData.submission_mode} (from structured data)`);
-    return rawData.submission_mode;
-  }
-  
-  // PRIORITY 2: Parse from text
-  if (analysisText) {
-    const lower = analysisText.toLowerCase();
-    if (lower.includes('pre-bid meeting') || lower.includes('prebid meeting') || 
-        lower.includes('mandatory meeting') || lower.includes('schedule meeting')) {
-      console.log(`   ✅ Submission mode: MEETING_EMAIL (from text)`);
-      return 'MEETING_EMAIL';
-    }
-    if (lower.includes('courier') || lower.includes('physical') || lower.includes('post')) {
-      console.log(`   ✅ Submission mode: LETTER_COURIER (from text)`);
-      return 'LETTER_COURIER';
-    }
-    if (lower.includes('portal') || lower.includes('online submission') || lower.includes('e-tender')) {
-      console.log(`   ✅ Submission mode: EXTERNAL_PORTAL (from text)`);
-      return 'EXTERNAL_PORTAL';
-    }
-  }
-  
-  console.log(`   ℹ️ Submission mode: EMAIL_FORM (default)`);
-  return 'EMAIL_FORM';
-}
-
-/**
- * Parse terms and conditions from extracted data
- */
-function parseTermsFromAnalysis(rawData) {
-  console.log(`   📜 Parsing terms & conditions...`);
-  
-  const terms = {
-    delivery: rawData?.delivery_period || null,
-    payment: rawData?.payment_terms || null,
-    warranty: rawData?.warranty || null
-  };
-  
-  console.log(`   📋 Terms: Delivery=${terms.delivery}, Payment=${terms.payment}, Warranty=${terms.warranty}`);
-  return terms;
-}
-
-/**
+  /**
  * Parse due date from extracted data
  */
 function parseDueDateFromAnalysis(rawData) {
@@ -299,10 +320,30 @@ router.post('/analyze', async (req, res) => {
       });
     }
     
+    // STEP 2: If dynamic parsing is enabled and a tenderId is provided,
+    // analyze the actual PDF (uploaded or original) to ensure ANY PDF is parsed.
+    if (tenderId && useDynamicParsing) {
+      console.log(`   📄 Dynamic parsing enabled for ${tenderId} - analyzing actual PDF`);
+      const pdfAnalysis = await analyzeRFPById(tenderId);
+
+      if (pdfAnalysis && pdfAnalysis.success) {
+        return res.json({
+          success: true,
+          analysis_method: 'DYNAMIC_PDF',
+          source: pdfAnalysis.pdf_source || 'PDF',
+          ...pdfAnalysis
+        });
+      } else {
+        // If dynamic parsing failed, fall back to stored uploaded data or JSON
+        console.warn(`   ⚠️ Dynamic PDF analysis failed for ${tenderId}:`, pdfAnalysis?.error || 'unknown');
+        // continue to check stored uploaded data or JSON below
+      }
+    }
+
     // STEP 2: Check if there's an UPLOADED PDF for this tender
     // If user uploaded an edited PDF, use that data instead!
     const uploadedData = tenderId ? getExtractedData(tenderId) : null;
-    
+
     if (uploadedData) {
       console.log(`\n   ════════════════════════════════════════════════════`);
       console.log(`   📥 FOUND UPLOADED PDF DATA for ${tenderId}!`);
@@ -367,6 +408,22 @@ router.post('/analyze', async (req, res) => {
           ...(tender?.terms || {})
         }
       };
+
+      // Normalise common field names to avoid undefined lookups in other modules
+      // Provide multiple aliases used across the codebase so UI and routes don't see undefined
+      mergedTender.submission = mergedTender.submission || {};
+      // ensure both .mode and .submission_mode are available
+      mergedTender.submission.mode = mergedTender.submission.mode || submissionMode;
+      mergedTender.submission.submission_mode = mergedTender.submission.submission_mode || mergedTender.submission.mode;
+      // email variants
+      mergedTender.submission.email = mergedTender.submission.email || mergedTender.submission.submission_email || mergedTender.submission.email || mergedTender.submission.submissionEmail || mergedTender.submission_email || rawData?.submission_email || rawData?.contact_email || tender?.submission?.email;
+      mergedTender.submission.submission_email = mergedTender.submission.submission_email || mergedTender.submission.email;
+      // address variants
+      mergedTender.submission.submission_address = mergedTender.submission.submission_address || mergedTender.submission.submissionAddress || tender?.submission?.submission_address || tender?.submission_address || rawData?.submission_address;
+      // external testing flags - ensure consistent boolean
+      mergedTender.external_testing_required = !!mergedTender.external_testing_required || !!rawData?.external_testing_required || false;
+      mergedTender.tests_required = mergedTender.tests_required || mergedTender.testing_requirements || tender?.tests_required || tender?.testing_requirements || [];
+
       
       console.log(`\n   ═══════════════════════════════════════`);
       console.log(`   📊 MERGED TENDER DATA (from uploaded PDF):`);
@@ -394,19 +451,19 @@ router.post('/analyze', async (req, res) => {
       });
     }
     
-    // STEP 3: No uploaded PDF - use original JSON-based analysis
-    console.log(`   📋 No uploaded PDF found, using JSON data`);
-    
+    // STEP 3: No uploaded PDF data used - use original JSON-based analysis
+    console.log(`   📋 No uploaded PDF data used, using JSON data (if provided)`);
+
     if (!tender) {
       return res.status(404).json({
         success: false,
         error: `Tender ${tenderId} not found`
       });
     }
-    
-    // Analyze RFP using original method
+
+    // Analyze RFP using original method (JSON-based analysis)
     const analysis = analyzeRFP(tender);
-    
+
     res.json({
       success: true,
       analysis_method: 'JSON_BASED',

@@ -45,8 +45,9 @@ export async function analyzePdf(buffer, modelId = "prebuilt-document") {
 
   try {
     console.log(`📄 Azure Doc Init: Utilizing ${modelId}...`);
-    
-    const pollOperation = await analyzer.beginAnalyzeDocument(modelId, buffer);
+    // Ensure buffer is passed as Uint8Array/Stream and set contentType for PDFs
+    const documentData = (buffer instanceof Uint8Array) ? buffer : new Uint8Array(buffer);
+    const pollOperation = await analyzer.beginAnalyzeDocument(modelId, documentData, { contentType: 'application/pdf' });
     const result = await pollOperation.pollUntilDone();
 
     if (!result) {
@@ -55,9 +56,17 @@ export async function analyzePdf(buffer, modelId = "prebuilt-document") {
 
     // Format output to be useful for our parser
     // We combine page content to mimic simple text extraction, but we can also use tables/kv pairs
-    const fullText = result.pages.map(page => 
-      page.lines.map(line => line.content).join(' ')
-    ).join('\n\n');
+    // Some SDK responses provide `pages` with `lines`, some provide `content` directly.
+    let fullText = '';
+    if (result.pages && result.pages.length) {
+      fullText = result.pages.map(page =>
+        (page.lines || []).map(line => line.content).join(' ')
+      ).join('\n\n');
+    } else if (result.content) {
+      fullText = result.content;
+    } else if (result.paragraphs && result.paragraphs.length) {
+      fullText = result.paragraphs.map(p => p.content).join('\n\n');
+    }
 
     console.log('📄 Azure Document Intelligence: ACTIVE - Successfully extracted content');
     
@@ -67,11 +76,13 @@ export async function analyzePdf(buffer, modelId = "prebuilt-document") {
       tables: result.tables || [],
       keyValuePairs: result.keyValuePairs || [], // Available if using prebuilt-document
       pages: result.pages || [],
+      raw: result,
       source: 'azure-document-intelligence'
     };
 
   } catch (error) {
-    console.error('⚠️ Azure Document Intelligence failed, using fallback:', error.message);
+    // Log full error for easier debugging (includes statusCode, code, details)
+    console.error('⚠️ Azure Document Intelligence failed, using fallback:', error);
     throw error;
   }
 }

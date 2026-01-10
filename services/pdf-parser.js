@@ -662,11 +662,25 @@ export async function parseRFPDocument(pdfSource, aiParser = null) {
  * @param {string} pdfText - Raw text from PDF
  * @returns {string} Prompt for AI
  */
-export function generateExtractionPrompt(pdfText) {
+export function generateExtractionPrompt(pdfText, metadata = null) {
+  // Include short metadata (tables/key-value pairs) when available to improve AI accuracy
+  let metaSection = '';
+  try {
+    if (metadata) {
+      const smallMeta = {
+        tables: (metadata.tables || []).slice(0, 3),
+        keyValuePairs: metadata.keyValuePairs || metadata.key_value_pairs || []
+      };
+      metaSection = `\n\nMETADATA (extracted via Azure Document Intelligence):\n${JSON.stringify(smallMeta, null, 2)}\n\n`;
+    }
+  } catch (e) {
+    metaSection = '';
+  }
+
   return `You are an expert at reading tender/RFP documents for electrical cables and wires.
 
-CONTEXT: This is a BUYER'S RFP document. The BUYER (usually a PSU, Government body, or Industry) 
-is publishing requirements for cables they NEED TO PURCHASE. We are an OEM vendor who wants to 
+CONTEXT: This is a BUYER'S RFP document. The BUYER (usually a PSU, Government body, or Industry)
+is publishing requirements for cables they NEED TO PURCHASE. We are an OEM vendor who wants to
 analyze this RFP and submit our bid.
 
 Extract the BUYER'S REQUIREMENTS from this PDF text.
@@ -731,6 +745,7 @@ For submission.mode, choose based on:
 - EXTERNAL_PORTAL: If bidder must register/submit on a separate website/portal
 - MEETING_EMAIL: If bidder must email to schedule a pre-bid meeting first
 
+${metaSection}
 PDF TEXT:
 ${pdfText.substring(0, 10000)}
 
@@ -742,14 +757,14 @@ Return ONLY the JSON object, no other text.`;
  * @param {string} pdfText - Raw text extracted from PDF
  * @returns {Promise<Object>} AI-extracted RFP summary
  */
-export async function parseWithGeminiAI(pdfText) {
+export async function parseWithGeminiAI(pdfText, metadata = null) {
   try {
     if (!process.env.GEMINI_API_KEY && !process.env.OPENAI_API_KEY) {
       console.log('No AI API keys found');
       return null;
     }
 
-    const prompt = generateExtractionPrompt(pdfText);
+    const prompt = generateExtractionPrompt(pdfText, metadata);
 
     // Use multi-provider fallback (Gemini -> OpenAI)
     const responseText = await generateWithFallback(prompt);
@@ -774,14 +789,14 @@ export async function parseWithGeminiAI(pdfText) {
  * @param {string} pdfText - Raw text extracted from PDF
  * @returns {Promise<Object>} AI-extracted RFP summary
  */
-export async function parseWithOpenAI(pdfText) {
+export async function parseWithOpenAI(pdfText, metadata = null) {
   try {
     if (!process.env.OPENAI_API_KEY) {
       console.log('OpenAI API key not found');
       return null;
     }
 
-    const prompt = generateExtractionPrompt(pdfText);
+    const prompt = generateExtractionPrompt(pdfText, metadata);
 
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',  // Cost-effective model for document parsing
@@ -827,7 +842,7 @@ export async function parseWithOpenAI(pdfText) {
  * @param {string} pdfText - Raw text extracted from PDF
  * @returns {Promise<{result: Object|null, provider: string}>} AI-extracted RFP summary with provider info
  */
-export async function parseWithBestAI(pdfText) {
+export async function parseWithBestAI(pdfText, metadata = null) {
   const providers = [];
 
   // Determine order based on preference
@@ -846,7 +861,8 @@ export async function parseWithBestAI(pdfText) {
   for (const provider of providers) {
     try {
       console.log(`🤖 Trying PDF parsing with ${provider.name}...`);
-      const result = await provider.fn(pdfText);
+      // pass metadata through to provider functions
+      const result = await provider.fn(pdfText, metadata);
       if (result && (result.rfp_id || result.buyer_name || result.project_name)) {
         return { result, provider: provider.name };
       }
@@ -882,7 +898,7 @@ export async function parseRFPWithAI(pdfSource) {
   let extractionMethod = 'PATTERN_MATCHING';
 
   try {
-    const { result: aiResult, provider } = await parseWithBestAI(pdfResult.text);
+  const { result: aiResult, provider } = await parseWithBestAI(pdfResult.text, pdfResult.metadata || null);
     if (aiResult && (aiResult.rfp_id || aiResult.buyer_name)) {
       summary = aiResult;
       extractionMethod = provider;

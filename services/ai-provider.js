@@ -69,7 +69,7 @@ class GeminiProvider extends AIProvider {
   async generateStructuredJSON(systemPrompt, userMessage, schema) {
     return await this.retryWithBackoff(async () => {
       const response = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: userMessage,
         config: {
           systemInstruction: systemPrompt,
@@ -85,7 +85,7 @@ class GeminiProvider extends AIProvider {
   async generateText(systemPrompt, userMessage) {
     return await this.retryWithBackoff(async () => {
       const result = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: userMessage,
         config: {
           systemInstruction: systemPrompt

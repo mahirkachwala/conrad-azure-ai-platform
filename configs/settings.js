@@ -24,8 +24,8 @@ export const AI_CONFIG = {
   
   gemini: {
     apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '',
-    model: 'gemini-2.5-flash',
-    proModel: 'gemini-2.5-pro'
+    model: 'gemini-2.0-flash',
+    proModel: 'gemini-1.5-pro'
   },
   
   openai: {

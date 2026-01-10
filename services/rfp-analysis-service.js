@@ -784,7 +784,14 @@ ${COMPANY_PRESET.name}`,
 export function analyzeRFP(rfpData) {
   const cableRequirements = rfpData.cable_requirements || [];
   const testsRequired = rfpData.tests_required || [];
-  const externalTestingRequired = rfpData.external_testing_required || false;
+  // Accept multiple possible field names for external testing flag
+  const externalTestingRequired = !!(
+    rfpData.external_testing_required ||
+    rfpData.externalTestingRequired ||
+    rfpData.testing_requirements?.third_party_required ||
+    rfpData.external_test_required ||
+    false
+  );
   
   // Calculate quotation (pass external testing flag)
   const quotation = calculateQuotation(cableRequirements, testsRequired, externalTestingRequired);
@@ -792,8 +799,14 @@ export function analyzeRFP(rfpData) {
   // Extract terms
   const terms = extractTermsConditions(rfpData);
   
-  // Get submission mode
-  const submissionMode = rfpData.submission?.mode || 'UNKNOWN';
+  // Get submission mode - accept multiple naming variants
+  const submissionMode = (
+    rfpData.submission?.mode ||
+    rfpData.submission?.submission_mode ||
+    rfpData.submissionMode ||
+    rfpData.submission_mode ||
+    'UNKNOWN'
+  );
   
   // Generate submission package
   const submissionPackage = generateSubmissionPackage(rfpData, quotation, submissionMode);
